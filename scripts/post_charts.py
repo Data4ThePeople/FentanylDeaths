@@ -26,7 +26,7 @@ Y = D["years"]
 ix = Y.index
 
 SURFACE, INK, INK_DIM, MUTED, GRID = "#181A1B", "#BBBDC0", "#8A9098", "#6B7178", "#2A2D2F"
-BLUE, YELLOW = "#3987e5", "#c98500"
+BLUE, YELLOW, MAGENTA = "#3987e5", "#c98500", "#d55181"  # the validated dark trio (GwinnettCounty plot_style)
 CREDIT = "Built by Data 4 The People"
 SRC = "Source: CDC WONDER, Multiple Cause of Death, 1999-2020 and 2018-2024 Single Race."
 FEN_NOTE = "Fentanyl deaths: overdose deaths involving synthetic opioids other than methadone (T40.4)."
@@ -228,9 +228,71 @@ def chart_rose():
     save(fig, "05-counties-rose-2024.png")
 
 
+# ---- 06: CDC's three waves, drawn on death rates by opioid type
+def chart_waves():
+    """Crude death rates per 100,000 for overdose deaths involving each opioid type (multiple cause), same
+    year split as chart 1: 1999-2020 export through 2017, 2018-2024 export after. Fentanyl comes from the map's
+    own U.S. series so it matches the post. Wave start years are CDC's (understanding-the-opioid-overdose-epidemic)."""
+    kinds = {"T40.2": ("Prescription opioids", YELLOW), "T40.1": ("Heroin", MAGENTA)}
+    R = {k: {} for k in kinds}
+    for p, lo, hi in ((SUD / "mcd_1999_2020_year_drugtype.csv", 1999, 2017),
+                      (SUD / "mcd_2018_2024_year_drugtype.csv", 2018, 2024)):
+        for r in rows(p):
+            code = r["Multiple Cause of death Code"]
+            if code in kinds and lo <= int(r["Year"]) <= hi:
+                assert int(r["Year"]) not in R[code], "duplicate year"
+                R[code][int(r["Year"])] = float(r["Crude Rate"])
+    fen = {y: r for y, r in zip(Y, D["us"]["r"])}
+    yrs = sorted(R["T40.2"])
+    assert all(sorted(R[k]) == yrs for k in R) and yrs == list(range(2001, Y[-1] + 1))
+    series = [(R["T40.2"], *kinds["T40.2"]), (R["T40.1"], *kinds["T40.1"]), (fen, "Fentanyl", BLUE)]
+
+    fig = plt.figure(figsize=(10, 7.6))
+    band = fig.add_axes([0.07, 0.68, 0.78, 0.15], sharex=None)
+    ax = fig.add_axes([0.07, 0.11, 0.78, 0.54])
+    x0, x1 = yrs[0] - 0.5, yrs[-1] + 0.5
+    waves = [(x0, 2010, YELLOW), (2010, 2013, MAGENTA), (2013, x1, BLUE)]
+    for a, b, c in waves:
+        band.fill_between([a + 0.06, b - 0.06], 0, 0.08, color=c, lw=0)
+    band.text(x0 + 0.1, 0.42, "Wave 1: prescription opioids", color=INK, fontsize=11.5, fontweight="bold")
+    band.text(x0 + 0.1, 0.36, "Began in the 1990s with more prescribing", color=INK_DIM, fontsize=9.5, va="top")
+    band.text(2013.1, 0.42, "Wave 3: synthetic opioids", color=INK, fontsize=11.5, fontweight="bold")
+    band.text(2013.1, 0.36, "Began in 2013, \"particularly\" illegally made fentanyl", color=INK_DIM, fontsize=9.5,
+              va="top")
+    band.text(2011.5, 0.86, "Wave 2: heroin", color=INK, fontsize=11.5, fontweight="bold", ha="center")
+    band.text(2011.5, 0.80, "Began in 2010", color=INK_DIM, fontsize=9.5, ha="center", va="top")
+    band.plot([2011.5, 2011.5], [0.1, 0.6], color=INK_DIM, lw=0.8)
+    band.set_xlim(x0, x1); band.set_ylim(0, 1); band.axis("off")
+
+    for yv in (2010, 2013):
+        ax.axvline(yv, color=INK_DIM, lw=0.8, ls=(0, (3, 3)))
+    for S, name, c in series:
+        ax.plot(yrs, [S[y] for y in yrs], color=c, lw=2.2)
+        ax.text(yrs[-1] + 0.4, S[yrs[-1]], name, color=c, fontsize=10.5, fontweight="bold", va="center")
+    for y in (2013, 2022):
+        ax.plot(y, fen[y], "o", ms=6, color=INK, mec=SURFACE, mew=2)
+        ax.annotate(f"{fen[y]:.1f}", (y, fen[y]), xytext=(-8, 6), textcoords="offset points", ha="right",
+                    fontsize=10, color=INK)
+    ax.annotate("2014 to 2015: up 72%, \"likely driven primarily\nby illicitly manufactured fentanyl\" (CDC)",
+                ((2014 + 2015) / 2, (fen[2014] + fen[2015]) / 2), xytext=(2002.5, 8), fontsize=9.5, color=INK,
+                arrowprops=dict(arrowstyle="-", color=INK_DIM, lw=0.8))
+    ax.set_xlim(x0, x1)
+    ax.set_ylim(0, max(fen.values()) * 1.1)
+    ax.grid(axis="y"); ax.set_axisbelow(True); ax.tick_params(length=0); ax.spines["left"].set_visible(False)
+    ax.set_xticks(range(yrs[0], yrs[-1] + 1, 3))
+    ax.set_ylabel("Deaths per 100,000 people", color=INK_DIM, fontsize=10)
+    titleblock(fig, "The three waves of the opioid crisis",
+               f"U.S. overdose death rate by type of opioid involved, {yrs[0]} to {yrs[-1]}. Waves as CDC describes them.",
+               y=0.975)
+    credit(fig, SRC + "\nPrescription opioids: natural and semisynthetic opioids (T40.2), such as oxycodone. Heroin: T40.1. "
+                "Fentanyl: T40.4.\nA death can involve more than one type. The 72% is CDC's figure (age-adjusted rate, MMWR 2016).")
+    save(fig, "06-three-waves.png")
+
+
 if __name__ == "__main__":
     chart_overdose()
     chart_2006()
     chart_peaks()
     chart_states()
     chart_rose()
+    chart_waves()
