@@ -35,7 +35,7 @@ for lvl, key in (("county", "County Code"), ("state", "State Code"), ("us", None
                 code = RENAME.get(r[key], r[key]) if key else "US"
                 raw[(lvl, code, int(r["Year"]))] = r
 
-checked, bad = 0, []
+checked, bad, withheld = 0, [], []
 
 
 def expect(label, got, want):
@@ -68,6 +68,14 @@ for lvl, src in (("county", D["counties"]), ("state", D["states"])):
                 expect(f"{lvl} {code} {y} status", g["s"][i], "M")
                 continue
             s, n, rate = want_for(r)
+            if lvl == "state" and n is not None:
+                # disclosure rule: withhold the state where its total minus published counties is under 10
+                cs = [w for (l, c, yy), w in raw.items() if l == "county" and yy == y and c[:2] == code]
+                gray = [w for w in cs if want_for(w)[0] == "L"]
+                rest = n - sum(want_for(w)[1] or 0 for w in cs)
+                if gray and rest < 10:
+                    s, n, rate = "X", None, None
+                    withheld.append((code, y))
             expect(f"{lvl} {code} {y} status", g["s"][i], s)
             expect(f"{lvl} {code} {y} deaths", g["d"][i], n)
             expect(f"{lvl} {code} {y} rate", g["r"][i], rate)
@@ -86,6 +94,18 @@ for i, y in enumerate(YEARS):
     rank = sum(1 for c, w in pub if w[0] == "P" and w[1] >= 20 and c in D["paths"])
     hatched = sum(1 for c, w in pub if w[0] == "P" and 10 <= w[1] < 20 and c in D["paths"])
     lines.append(f"| {y} | {tot:,} | {D['us']['r'][i]} | {n} | {round(share * 100)}% | {round((1 - share) * 100)}% | {hatched} | {rank} |")
+
+# disclosure: no state total shown on the page lets a reader derive a county count under 10
+for code, g in D["states"].items():
+    for i, y in enumerate(YEARS):
+        if g["d"][i] is None:
+            continue
+        cs = [g2 for c, g2 in D["counties"].items() if c[:2] == code]
+        gray = [c for c in cs if c["s"][i] == "L"]
+        rest = g["d"][i] - sum(c["d"][i] or 0 for c in cs)
+        checked += 1
+        if gray and rest < 10:
+            bad.append(f"disclosure: {g['n']} {y} total minus counties = {rest} with {len(gray)} gray counties")
 
 # shapes: every county with 10+ deaths in any year must have a shape
 for (l, c, y), r in raw.items():
@@ -109,7 +129,7 @@ md = f"""# Tie-out: dist/index.html against the raw CDC WONDER exports
 
 Run `python3 scripts/tieout.py`. Recomputes from `data/raw/wonder/*.txt` directly, not from `data/clean/`.
 
-**Result: {checked:,} values checked, {len(bad)} mismatches.**
+**Result: {checked:,} values checked, {len(bad)} mismatches.** {len(withheld)} state-years are withheld under the disclosure rule (state total minus published counties under 10 with at least one gray county), and the check confirms no shown state total allows a county count under 10 to be derived.
 
 Checked for every county (3,147 codes), state and U.S. year, 1999-2024: status class (0 to 9 / published / missing / no rate), deaths, crude rate (WONDER's, or deaths / population x 100,000 for D77 counties with 10 to 19 deaths); the banner, the national explanation and the ranking, recomputed from raw county rows; every county with 10+ deaths has a map shape; the page's fixed thresholds match its wording.
 

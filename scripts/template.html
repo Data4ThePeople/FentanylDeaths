@@ -54,6 +54,13 @@ input[type=range]{flex:1;accent-color:var(--accent)}
 #map .sl{fill:none;stroke:#13161b;stroke-width:.9;pointer-events:none}
 #map .nl{fill:none;stroke:#5b626d;stroke-width:.6;pointer-events:none}
 #map .hl{fill:none;stroke:#fff;stroke-width:1.6;pointer-events:none}
+#map .sl,#map .nl,#map .hl{vector-effect:non-scaling-stroke}
+#map.zoom .c{stroke:#13161b;stroke-width:.6;vector-effect:non-scaling-stroke}
+#map .c.out{opacity:.12;cursor:default}
+.seg{display:inline-flex;border:1px solid var(--line2);border-radius:3px;overflow:hidden}
+.seg button{font-family:var(--mono);font-size:12px;padding:7px 10px;background:transparent;border:0;color:var(--muted);cursor:pointer}
+.seg button[aria-pressed=true]{background:var(--accent);color:#111}
+.stsel{font-family:var(--mono);font-size:13px;background:var(--panel2);color:var(--ink);border:1px solid var(--line2);border-radius:3px;padding:7px 8px}
 .tip{position:fixed;pointer-events:none;background:#0d0f12;border:1px solid var(--line2);padding:8px 10px;font-family:var(--mono);font-size:12px;border-radius:4px;display:none;z-index:9;max-width:300px;line-height:1.45}
 .trend h3{font-family:var(--mono);font-size:12px;letter-spacing:.14em;color:var(--muted);font-weight:400;margin:10px 0 4px;text-transform:uppercase}
 #natl{width:100%;height:200px;display:block}
@@ -143,6 +150,8 @@ footer{padding:18px 48px 40px;font-family:var(--mono);font-size:12px;color:var(-
   <button class="play" id="play" aria-label="Play years 1999 to 2024"><svg width="14" height="16" viewBox="0 0 14 16"><path id="playicon" d="M0 0L14 8L0 16Z"/></svg></button>
   <div class="yr" id="yr"></div>
   <div class="slider"><span>1999</span><input type="range" id="year" min="1999" max="2024" step="1" aria-label="Year"><span>2024</span></div>
+  <div class="seg" id="speed" role="group" aria-label="Play speed"><button data-x="1" aria-pressed="true">1x</button><button data-x="2" aria-pressed="false">2x</button><button data-x="5" aria-pressed="false">5x</button></div>
+  <select class="stsel" id="stsel" aria-label="Show one state"></select>
 </section>
 
 <div class="legend" id="legend"></div>
@@ -202,6 +211,7 @@ const fmtR = v => v.toFixed(1);
 const pct = v => Math.round(v * 100) + "%";
 const st = (g, y) => g.s[ix(y)];
 const LOWTXT = "0 to 9 deaths. CDC does not publish counts this small for a county.";
+const WHELD = "Not shown: with the county numbers it would reveal a count under 10";
 
 // ---------- national figures, recomputed from the county rows ----------
 const NAT = YEARS.map(y => {
@@ -211,7 +221,8 @@ const NAT = YEARS.map(y => {
   return {n, sum, tot, share: sum / tot};
 });
 
-const S = {year: 2024, sel: null, hover: null, playing: null};
+const S = {year: 2024, sel: null, state: null, hover: null, playing: null, speed: 1};
+const STEP_MS = 900;                     // one year per 0.9 seconds at 1x
 
 // ---------- map ----------
 const NS = "http://www.w3.org/2000/svg";
@@ -237,13 +248,31 @@ function fillFor(g, y) {
   if (s === "P") return rampColor((g.r[ix(y)] - DOM[0]) / (DOM[1] - DOM[0]));
   return css("--nodata");
 }
+const inState = f => !S.state || f.slice(0, 2) === S.state;
+const BOX = {};
+function stateBox(sfips) {
+  if (BOX[sfips]) return BOX[sfips];
+  let x0 = Infinity, y0 = Infinity, x1 = -Infinity, y1 = -Infinity;
+  for (const f in shapes) if (f.slice(0, 2) === sfips) { const b = shapes[f].getBBox();
+    x0 = Math.min(x0, b.x); y0 = Math.min(y0, b.y); x1 = Math.max(x1, b.x + b.width); y1 = Math.max(y1, b.y + b.height); }
+  // pad, then widen to the map's 975:610 shape so the frame does not change height
+  let w = x1 - x0, h = y1 - y0, cx = x0 + w / 2, cy = y0 + h / 2;
+  w *= 1.08; h *= 1.08; if (w / h > 975 / 610) h = w * 610 / 975; else w = h * 975 / 610;
+  return BOX[sfips] = [cx - w / 2, cy - h / 2, w, h].map(v => v.toFixed(1)).join(" ");
+}
 function renderMap() {
   const y = S.year;
+  map.setAttribute("viewBox", S.state ? stateBox(S.state) : "0 0 975 610");
+  const k = S.state ? +stateBox(S.state).split(" ")[2] / 975 : 1;   // keep hatch lines the same size on screen
+  pat.setAttribute("width", 4 * k); pat.setAttribute("height", 4 * k);
+  pat.firstChild.setAttribute("y2", 4 * k); pat.firstChild.setAttribute("stroke-width", 1.5 * k);
+  map.classList.toggle("zoom", !!S.state);
   for (const f in shapes) {
-    const g = D.counties[f];
+    const g = D.counties[f], on = inState(f);
     shapes[f].setAttribute("fill", fillFor(g, y));
+    shapes[f].classList.toggle("out", !on);
     const d = g ? g.d[ix(y)] : null;
-    overlays[f].setAttribute("display", d != null && d >= SMALL[0] && d < SMALL[1] && st(g, y) === "P" ? "inline" : "none");
+    overlays[f].setAttribute("display", on && d != null && d >= SMALL[0] && d < SMALL[1] && st(g, y) === "P" ? "inline" : "none");
   }
   hl.setAttribute("d", S.sel && D.paths[S.sel] ? D.paths[S.sel] : "");
 }
@@ -260,7 +289,7 @@ function countyLines(g, y) {
   return out;
 }
 map.addEventListener("mousemove", e => {
-  const f = e.target.dataset && e.target.dataset.f; if (!f) { tip.style.display = "none"; return; }
+  const f = e.target.dataset && e.target.dataset.f; if (!f || !inState(f)) { tip.style.display = "none"; return; }
   const g = D.counties[f];
   tip.innerHTML = "<b>" + (g ? g.n : f) + "</b> · " + S.year + "<br>" + (g ? countyLines(g, S.year) : ["No data"]).join("<br>");
   tip.style.display = "block";
@@ -268,7 +297,7 @@ map.addEventListener("mousemove", e => {
   tip.style.left = x + "px"; tip.style.top = yy + "px";
 });
 map.addEventListener("mouseleave", () => tip.style.display = "none");
-map.addEventListener("click", e => { const f = e.target.dataset && e.target.dataset.f; if (f && D.counties[f]) { S.sel = S.sel === f ? null : f; render(); } });
+map.addEventListener("click", e => { const f = e.target.dataset && e.target.dataset.f; if (f && D.counties[f] && inState(f)) { S.sel = S.sel === f ? null : f; render(); } });
 
 // ---------- legend + explanation ----------
 function renderLegend() {
@@ -286,7 +315,15 @@ function renderExplain() {
   const rest = 1 - N.share;
   document.getElementById("explain").innerHTML =
     `<b>${y}: ${fmtN(N.tot)} deaths in the U.S.</b> ${fmtN(N.n)} ${N.n === 1 ? "county" : "counties"} had 10 or more deaths, and together they account for ${pct(N.share)} of the U.S. total. ` +
-    `The other ${pct(rest)} happened in counties with fewer than 10 deaths each. CDC does not publish counts that small for any county, so those counties are gray.`;
+    `The other ${pct(rest)} happened in counties with fewer than 10 deaths each. CDC does not publish counts that small for any county, so those counties are gray.` +
+    (S.state ? "<br>" + stateLine(S.state, y) : "");
+}
+function stateCounties(sf) { return Object.keys(D.counties).filter(f => f.slice(0, 2) === sf && D.paths[f]); }
+function stateLine(sf, y) {
+  const g = D.states[sf], i = ix(y), cs = stateCounties(sf);
+  const k = cs.filter(f => D.counties[f].d[i] != null).length;
+  const deaths = g.s[i] === "X" ? "total not shown, to protect county counts under 10" : g.d[i] != null ? `${fmtN(g.d[i])} deaths` + (g.r[i] != null ? `, ${fmtR(g.r[i])} per 100,000` : "") : "fewer than 10 deaths";
+  return `<b>${g.n}, ${y}: ${deaths}.</b> ${k} of its ${cs.length} ${cs.length === 1 ? "county" : "counties"} had 10 or more deaths.`;
 }
 function renderBanner() {
   const y = S.year, i = ix(y), N = NAT[i];
@@ -328,18 +365,26 @@ function card(lab, v, d) { return `<div class="card"><div class="lab">${lab}</di
 function renderPanel() {
   const y = S.year, i = ix(y);
   const g = S.sel ? D.counties[S.sel] : null;
-  const stt = g ? D.states[S.sel.slice(0, 2)] : null;
-  document.getElementById("p-name").textContent = g ? g.n : "United States";
-  document.getElementById("p-sub").innerHTML = g ? y + ' · <a id="unpin">show United States</a>' : y + " · hover or click a county";
+  const stt = g ? D.states[S.sel.slice(0, 2)] : S.state ? D.states[S.state] : null;
+  const back = S.state ? stt.n : "United States";
+  document.getElementById("p-name").textContent = g ? g.n : S.state ? stt.n : "United States";
+  document.getElementById("p-sub").innerHTML = g ? y + ` · <a id="unpin">show ${back}</a>` : S.state ? y + ' · click a county · <a id="allst">show all states</a>' : y + " · hover or click a county";
   const u = document.getElementById("unpin"); if (u) u.onclick = () => { S.sel = null; render(); };
+  const a = document.getElementById("allst"); if (a) a.onclick = () => setState(null);
   let h = "";
-  if (g) {
+  if (!g && S.state) {
+    const sd = stt.d[i], sr = stt.r[i], cs = stateCounties(S.state);
+    h += card("Deaths", sd != null ? fmtN(sd) : "–", sd != null ? "statewide, " + y : stt.s[i] === "X" ? WHELD : "Fewer than 10 statewide");
+    h += card("Death rate", sr != null ? fmtR(sr) : "–", sr != null ? "per 100,000 residents" : stt.s[i] === "X" ? "Not shown, same reason" : "Not published");
+    h += card("Counties with 10+ deaths", cs.filter(f => D.counties[f].d[i] != null).length + " of " + cs.length, "the rest had 0 to 9");
+    h += card("U.S. death rate", fmtR(D.us.r[i]), "per 100,000 residents");
+  } else if (g) {
     const s = st(g, y), d = g.d[i], r = g.r[i];
     h += card("Deaths", s === "P" || s === "N" ? fmtN(d) : "–", s === "L" ? LOWTXT : s === "M" ? "No data this year" : d < SMALL[1] ? "Small count" : "");
     h += card("Death rate", s === "P" ? fmtR(r) : "–", s === "P" ? "per 100,000 residents" + (d < SMALL[1] ? " · can swing a lot" : "") : "Not published");
     if (stt) { const sd = stt.d[i], sr = stt.r[i];
-      h += card(stt.n + " deaths", sd != null ? fmtN(sd) : "–", sd != null ? "statewide" : "Fewer than 10 statewide");
-      h += card(stt.n + " rate", sr != null ? fmtR(sr) : "–", sr != null ? "per 100,000 residents" : "Not published"); }
+      h += card(stt.n + " deaths", sd != null ? fmtN(sd) : "–", sd != null ? "statewide" : stt.s[i] === "X" ? WHELD : "Fewer than 10 statewide");
+      h += card(stt.n + " rate", sr != null ? fmtR(sr) : "–", sr != null ? "per 100,000 residents" : stt.s[i] === "X" ? "Not shown, same reason" : "Not published"); }
   } else {
     const N = NAT[i];
     h += card("Deaths", fmtN(D.us.d[i]), "U.S. total, " + y);
@@ -376,13 +421,13 @@ function renderPTrend(g, stt) {
 }
 function rankList(y) {
   const i = ix(y);
-  return Object.entries(D.counties).filter(([f, g]) => D.paths[f] && st(g, y) === "P" && g.d[i] >= RANK_MIN)
+  return Object.entries(D.counties).filter(([f, g]) => D.paths[f] && inState(f) && st(g, y) === "P" && g.d[i] >= RANK_MIN)
     .sort((a, b) => b[1].r[i] - a[1].r[i]);
 }
 function renderRank() {
   const y = S.year, i = ix(y), list = rankList(y);
-  document.getElementById("r-title").textContent = "Highest death rates · " + y;
-  document.getElementById("r-cov").textContent = list.length ? `${list.length} ${list.length === 1 ? "county" : "counties"} with ${RANK_MIN} or more deaths, highest rate first` : `No county had ${RANK_MIN} or more deaths in ${y}`;
+  document.getElementById("r-title").textContent = "Highest death rates" + (S.state ? " in " + D.states[S.state].n : "") + " · " + y;
+  document.getElementById("r-cov").textContent = list.length ? `${list.length} ${list.length === 1 ? "county" : "counties"} with ${RANK_MIN} or more deaths, highest rate first` : `No county${S.state ? " in " + D.states[S.state].n : ""} had ${RANK_MIN} or more deaths in ${y}`;
   const max = list.length ? list[0][1].r[i] : 1;
   document.getElementById("rank").innerHTML = list.map(([f, g], k) =>
     `<li data-f="${f}" class="${f === S.sel ? "sel" : ""}"><span class="n">${k + 1}</span><span>${g.n}</span><span class="bar" style="width:${Math.max(4, g.r[i] / max * 100)}%"></span><span class="val">${fmtR(g.r[i])}</span></li>`).join("");
@@ -396,6 +441,7 @@ function renderNotes() {
   <li><b>What is counted.</b> Deaths of U.S. residents whose underlying cause was a drug overdose (ICD-10 X40-X44, X60-X64, X85, Y10-Y14) and whose death certificate lists synthetic opioids other than methadone (T40.4) among the causes. CDC uses this group to track fentanyl deaths. Most are illegally made fentanyl, but it also includes tramadol and other synthetic opioids. One death can involve several drugs; each death is counted once.</li>
   <li><b>Where.</b> Deaths are counted in the county where the person lived, not where they died.</li>
   <li><b>Counties with 0 to 9 deaths are gray.</b> CDC does not publish county counts of 1 to 9, and its data use rules bar publishing any count of 9 or fewer, including zero. So the map cannot tell a county with no deaths from one with a few. We never estimate these counts.</li>
+  <li><b>Some state totals are not shown.</b> Where a state's total, minus its published counties, would reveal that its gray counties had fewer than 10 deaths combined, that state's total and rate are left out for that year.</li>
   <li><b>Counties with 10 to 19 deaths are hatched.</b> Rates based on few deaths can swing a lot from one year to the next by chance. For 1999-2017, CDC's database does not show rates for 10 to 19 deaths; we calculate them the way CDC does, deaths divided by population times 100,000. CDC's 2018-2024 database shows these rates itself. The ranking lists only counties with ${RANK_MIN} or more deaths.</li>
   <li><b>Crude rates, not age-adjusted.</b> CDC does not provide age-adjusted rates for counties in its 2018-2024 database, so the map uses crude rates in every year. Counties with older populations may show lower rates partly because fewer residents are in the ages most affected.</li>
   <li><b>Early counts are likely low.</b> Some overdose death certificates do not name the drug involved. This was more common in earlier years and in some states, so fentanyl deaths were undercounted more in those places and years.</li>
@@ -408,28 +454,41 @@ function renderNotes() {
 }
 
 // ---------- controls ----------
+const stsel = document.getElementById("stsel");
+stsel.innerHTML = '<option value="">All states</option>' + Object.entries(D.states).sort((a, b) => a[1].n.localeCompare(b[1].n))
+  .map(([f, g]) => `<option value="${f}">${g.n}</option>`).join("");
+function setState(sf) { S.state = sf || null; if (S.sel && !inState(S.sel)) S.sel = null; stsel.value = S.state || ""; render(); }
+stsel.onchange = () => setState(stsel.value);
 const slider = document.getElementById("year");
 slider.oninput = () => { S.year = +slider.value; render(); };
+const playIcon = document.getElementById("playicon");
+function stop() { clearInterval(S.playing); S.playing = null; playIcon.setAttribute("d", "M0 0L14 8L0 16Z"); }
+function tick() {
+  if (S.year >= YEARS.at(-1)) { stop(); return; }
+  S.year++; render();
+}
+function start() { clearInterval(S.playing); S.playing = setInterval(tick, STEP_MS / S.speed); playIcon.setAttribute("d", "M0 0H5V16H0ZM9 0H14V16H9Z"); }
 document.getElementById("play").onclick = () => {
-  if (S.playing) { clearInterval(S.playing); S.playing = null; document.getElementById("playicon").setAttribute("d", "M0 0L14 8L0 16Z"); return; }
+  if (S.playing) { stop(); return; }
   if (S.year === YEARS.at(-1)) S.year = Y0;
-  document.getElementById("playicon").setAttribute("d", "M0 0H5V16H0ZM9 0H14V16H9Z");
-  render();
-  S.playing = setInterval(() => {
-    if (S.year >= YEARS.at(-1)) { clearInterval(S.playing); S.playing = null; document.getElementById("playicon").setAttribute("d", "M0 0L14 8L0 16Z"); return; }
-    S.year++; render();
-  }, 900);
+  render(); start();
 };
+document.querySelectorAll("#speed button").forEach(b => b.onclick = () => {
+  S.speed = +b.dataset.x;
+  document.querySelectorAll("#speed button").forEach(x => x.setAttribute("aria-pressed", String(x === b)));
+  if (S.playing) start();
+});
 addEventListener("resize", () => { renderNatl(); renderPanel(); });
 
 function render() {
   document.getElementById("yr").textContent = S.year; slider.value = S.year;
   renderBanner(); renderExplain(); renderMap(); renderNatl(); renderPanel(); renderRank();
 }
-// optional starting view from the URL, e.g. #y=2016&c=39035
+// optional starting view from the URL, e.g. #y=2016&s=39&c=39035
 {
   const h = new URLSearchParams(location.hash.slice(1));
   if (+h.get("y") >= Y0 && +h.get("y") <= YEARS.at(-1)) S.year = +h.get("y");
+  if (D.states[h.get("s")]) { S.state = h.get("s"); stsel.value = S.state; }
   if (D.counties[h.get("c")] && D.paths[h.get("c")]) S.sel = h.get("c");
 }
 renderLegend(); renderNotes(); render();
