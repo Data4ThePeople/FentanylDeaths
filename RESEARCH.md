@@ -64,7 +64,7 @@ unless the source does, and then the source is named.
 ## Could not verify
 
 - Janssen synthesis in 1959: only one secondary site gives 1959; the review above says 1960. Use 1960, or "about 1960."
-- Fentanyl potency relative to heroin (DEA's often-cited "50 times"): dea.gov pages returned 403 errors; the CDC and DEA pages read do not compare it to heroin.
+- Fentanyl potency relative to heroin: now checked in Chrome. DEA's fact sheet says fentanyl "is approximately 100 times more potent than morphine and 50 times more potent than heroin as an analgesic." https://www.dea.gov/factsheets/fentanyl
 - That the 1979 California "China White" was alpha-methylfentanyl specifically: the Henderson abstract says only "the fentanyls"; the name comes from secondary sources.
-- DEA National Drug Threat Assessments 2015, 2016 and 2025 (full text) and the dea.gov "One Pill Can Kill" page: blocked (403). The "7 out of 10 pills" figure for 2023 appears only in search snippets of a dea.gov page, so it is not used. The 76% in the FY 2027 budget is the verified figure.
+- DEA National Drug Threat Assessments 2015, 2016 and 2025 (full text) and the dea.gov "One Pill Can Kill" page: blocked (403). The "7 out of 10 pills" figure for 2023 is not on DEA's current One Pill Can Kill page (checked in Chrome), so it is not used. That page now says DEA seized "more than 47 million fentanyl-laced counterfeit pills and nearly 10,000 pounds of fentanyl powder" in 2025, and that "2 mg of fentanyl equates to a potentially deadly dose." https://www.dea.gov/onepill The 76% in the FY 2027 budget is the verified figure.
 - A CDC/NCHS figure for the share of T40.4 deaths that are fentanyl: none found.
