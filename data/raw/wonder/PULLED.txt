@@ -1,0 +1,6 @@
+2026-11-05 CDC WONDER Multiple Cause of Death exports, run by Claude in Eric's Chrome after Eric accepted the data use restrictions.
+Databases: D77 Multiple Cause of Death, 1999-2020 (files mcd9920_*); D157 Multiple Cause of Death, 2018-2024, Single Race (files mcd1824_*).
+All queries: underlying cause UCD - Drug/Alcohol Induced Causes D1-D4 (X40-X44, X60-X64, X85, Y10-Y14); multiple cause MCD - ICD-10 codes T40.4 (files without _t509) or T50.9 (files with _t509); residence location; all ages, sexes, races, Hispanic origins; show zeros, show suppressed, precision 1, rates per 100,000; tab-separated export with CDC footnotes.
+Measures: deaths, population, crude rate with 95% CI; age-adjusted rate (2000 U.S. standard) with 95% CI where WONDER allows it (D157 does not allow age-adjusted rates for county groupings, so mcd1824_county_* have crude rates only).
+Grouping: *_us_year = year; *_state_year = state, year; *_county_year_<from>_<to> = county, year, split into year ranges because a single county query exceeded WONDER's 2-minute gateway limit.
+Files are unchanged from WONDER except that each was carried through one bundled browser download and split back into separate files byte for byte (trailing newline normalized).
