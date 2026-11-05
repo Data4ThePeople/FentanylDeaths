@@ -60,6 +60,12 @@ Only counties with 20 or more deaths in a year count here, the same rule as the 
 
 **Every state fell.** All 49 states (counting DC) with numbers shown for both years had fewer deaths in 2024. Hawaii (2024) and New Hampshire (2023) have totals withheld to protect small county counts. The biggest drops were West Virginia (-48.4%), Arkansas (-46.6%), North Dakota (-46.1%), Virginia (-45.8%) and Wisconsin (-45.7%). The smallest were in the West: Nevada (-4.9%), Alaska (-6.9%), Utah (-9.8%), Washington (-13.5%) and Arizona (-16.5%).
 
+**Nearly every county fell too.** Of 435 counties with 20 or more deaths in both 2023 and 2024, 411 (94.5%) had fewer deaths in 2024, 5 were unchanged and 19 rose. With a lower bar, 10 or more deaths in both years, 639 of 706 counties (90.5%) fell.
+
+**It was not a change in how deaths were recorded.** All overdose deaths fell 26%, whatever drug was named. Overdose deaths where the drug was not named also fell, from 39,160 to 29,771, so fentanyl deaths were not moved into "unspecified."
+
+**The drop was almost all in fentanyl.** Deaths involving fentanyl fell 34.4% (72,776 to 47,735). Overdose deaths without fentanyl fell 1.8% (32,231 to 31,649).
+
 **The counties that went the other way.** Of 435 counties with 20 or more deaths in both 2023 and 2024, 19 had more deaths in 2024. Nine of them are in Western states, three in Washington.
 - Spokane County, WA: 176 to 249 deaths (31.9 to 44.8 per 100,000), the largest increase.
 - Yakima County, WA: 87 to 111. Cowlitz County, WA: 35 to 40.
@@ -74,9 +80,26 @@ Only counties with 20 or more deaths in a year count here, the same rule as the 
 - A *JAMA Health Forum* study tied about 9% of the drop to fentanyl's falling share of drug seizures ([study](https://pmc.ncbi.nlm.nih.gov/articles/PMC12811803/)).
 - A *JAMA* study found naloxone was given at about the same rate per overdose as before the drop ([Brown](https://www.brown.edu/news/2026-10-21/naloxone-overdose-deaths-trend)).
 - DEA reports lower fentanyl purity and fewer pills with a deadly dose: 29% in fiscal 2025, down from 76% two years earlier ([DEA budget](https://www.justice.gov/jmd/media/1434526/dl)).
+- A preprint using the same WONDER data found the same split: fentanyl deaths fell sharply while other drug deaths barely moved. The author says this fits a change in the fentanyl supply better than broad program effects ([Busch, medRxiv, not peer-reviewed](https://www.medrxiv.org/content/10.64898/2025.12.04.25341579.full.pdf)).
+- A peer-reviewed paper pushes back: national fentanyl purity "did not track fatal fentanyl overdose rates in most United States regions," so purity alone does not explain the drop ([Science Advances, via USC Schaeffer](https://schaeffer.usc.edu/research/fentanyl-purity-and-overdose-decline-a-reexamination-of-geographic-trends/)).
+- Where this leaves us: the evidence leans toward the drug supply, and no study measures how much programs added. The cause is not settled.
 - Possible tie-in to the West: DEA's warning about fentanyl mixed with other drugs. No source here explains why the West fell less, so this would be a question, not a claim.
 
 ## Beat 6. Looking ahead: funding and the next data
+
+**Eric's angle: the unknown is the risk.** Deaths fell fast, and the people who study it do not agree on why. If the drop came mostly from the drug supply, it could reverse if the supply changes. Cutting programs on the belief that the problem is solved would remove support at the moment no one can say what is holding deaths down. (Eric's argument. The sources below support the pieces of it; none of them predicts a rebound.)
+
+What backs each piece:
+- The cause is not settled: see beat 5 (*Science*, preprint, *Science Advances*, CDC's unranked list).
+- The decline may not last: the *Science* authors write "How long the decline will last is uncertain" and that "Treatment, prevention and harm-reduction efforts remain essential" ([UMD summary](https://today.umd.edu/study-global-fentanyl-supply-disruption-led-to-drop-in-opioid-overdose-deaths)).
+- The supply is still changing: DEA warns that medetomidine, "a more powerful veterinary anesthetic," has emerged in the fentanyl supply, and that mixing fentanyl with animal tranquilizers is "on the rise" ([DEA, May 2025](https://www.dea.gov/press-releases/2025/05/15/dea-releases-2025-national-drug-threat-assessment)).
+- Deaths are still high: the provisional count is 67,798 overdose deaths in the 12 months ending March 2026 ([CDC, Aug 2026](https://www.cdc.gov/media/releases/2026/cdc-launches-new-overdose-prevention-data-channel.html)).
+- Funding is in play: the proposed and enacted changes below.
+
+Wording guardrails for this beat:
+- "Could come back" is fine. "Will come back" or "easily" goes past what the sources show.
+- Stick to what is proposed or enacted. The argument is about how the system decides funding, not about a party or a person.
+- "No study measures what the programs added" is accurate. "The programs did nothing" is not shown either.
 
 **What Congress has done (enacted):**
 - FY2026 funding held. State Opioid Response is $1.595 billion and the substance use block grant is $2.013 billion. Congress did not adopt the plan to merge them ([GHAI table](https://assets.advocacyincubator.org/uploads/2026/FY-2027-Appropriations-Crosswalk-SAMHSA-Funding-1.pdf)).
@@ -100,4 +123,5 @@ Only counties with 20 or more deaths in a year count here, the same rule as the 
 ## Open items
 
 - Beat 5's West pattern is a description of where the 19 counties are. Nothing in the sources explains it.
+- Beat 6's angle is Eric's argument; the guardrails above keep it to what the sources support.
 - Beat 6's "early 2027" is an estimate from one year's timing, so it is worded as "if."
