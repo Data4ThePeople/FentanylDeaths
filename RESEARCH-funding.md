@@ -1,0 +1,93 @@
+# Research: what is credited with the fentanyl death drop, and what is happening to the funding
+
+Compiled 2026-11-05. Research notes only, not post copy. Every number below appears in the source linked on its line. Budget figures say whether they are proposed, passed by one chamber or committee, or enacted.
+
+## 0. The baseline number
+
+- CDC/NCHS final data: 79,384 overdose deaths in 2024; age-adjusted rate fell 26.2% (31.3 to 23.1 per 100,000). Deaths involving synthetic opioids other than methadone "decreased the most (35.6%)," from 22.2 to 14.3 per 100,000. NCHS Data Brief No. 549, January 2026. https://www.cdc.gov/nchs/products/databriefs/db549.htm
+
+## 1. What explains the decline, and how strong is the evidence
+
+### 1a. What agencies say (attributed claims)
+
+- CDC (press release, February 25, 2025) listed possible contributors: "widespread, data-driven distribution of naloxone," "better access to evidence-based treatment for substance use disorders," "shifts in the illegal drug supply," "a resumption of prevention and response after pandemic-related disruptions," and "continued investments in prevention and response programs," naming Overdose Data to Action (OD2A). CDC listed these together and did not rank them or measure each one. https://www.cdc.gov/media/releases/2025/2025-cdc-reports-decline-in-us-drug-overdose-deaths.html
+- SAMHSA's September 22, 2025 grant release says State Opioid Response (SOR) grantees reported distributing "more than 10 million opioid overdose reversal kits" and that reversal drugs were used in more than 550,000 overdose reversals. These are grantee-reported counts. The release does not tie them to the national decline. https://www.samhsa.gov/newsroom/press-announcements/20250922/hhs-state-tribal-opioid-response-grants-2025
+- DEA's 2025 National Drug Threat Assessment (May 15, 2025) reported falling fentanyl purity. dea.gov blocked the fetch, so the wording is not checked here (see "Could not verify"). https://www.dea.gov/press-releases/2025/05/15/dea-releases-2025-national-drug-threat-assessment
+- ONDCP released the 2026 National Drug Control Strategy on May 4, 2026. The White House release frames it as a roadmap "to continue dismantling the drug supply." It does not say what caused the decline. https://www.whitehouse.gov/releases/2026/05/2026-national-drug-control-strategy-released/
+
+### 1b. Peer-reviewed evidence
+
+- Drug supply shock: Vangelov, Reuter, Caulkins, Humphreys, Pollack and Pardo, *Science* Policy Forum, January 2026 (DOI 10.1126/science.aea6130). They argue a global fentanyl supply disruption in 2023, most likely tied to precursor chemical limits in China, was the likely driver. They also write that "How long the decline will last is uncertain" and that "Treatment, prevention and harm-reduction efforts remain essential." Summary from the University of Maryland: https://today.umd.edu/study-global-fentanyl-supply-disruption-led-to-drop-in-opioid-overdose-deaths
+- Fentanyl in drug seizures: Dahlen et al., *JAMA Health Forum*, January 16, 2026. Fentanyl's share of seizure reports fell from 28.8% to 23.2%, which was associated with about 9.2% of the drop in opioid deaths. The authors say "other factors are likely contributing," including supply changes the seizure data miss, changes in how people use drugs, and "the effect of public health programs, interventions, and policies." https://pmc.ncbi.nlm.nih.gov/articles/PMC12811803/
+- Naloxone: Barnett et al., *JAMA* research letter (Brown University release, October 21, 2026). EMS data from 5,324 agencies, May 2020 to December 2025. Naloxone was given at about the same rate per overdose as before the decline; bystander use was 28.6% lower than expected. The authors say more naloxone use "may not be a major reason" for the drop, and that they did not test other explanations directly. https://www.brown.edu/news/2026-10-21/naloxone-overdose-deaths-trend
+
+### 1c. Competing explanations researchers raise (evidence is mixed)
+
+- Drug supply changes (supply shock, lower purity, more xylazine, more consistent pills): supported by the *Science* paper above. Midgette and Reuter (Brookings, August 6, 2026, not peer-reviewed) say supply changes "may have been important contributing factors" and call some of that evidence qualitative or circumstantial. https://www.brookings.edu/articles/exploring-the-sources-of-the-decline-in-us-drug-overdoses/
+- Buprenorphine: the same Brookings essay says prescribers rose "from about 42,000 to nearly 54,000 per month" after the X-waiver ended, but "the total number of patients receiving buprenorphine changed little," which makes it "an unlikely driver." I found no peer-reviewed study that measures how much treatment expansion contributed. https://www.brookings.edu/articles/exploring-the-sources-of-the-decline-in-us-drug-overdoses/
+- Naloxone: the FDA approved the first over-the-counter naloxone nasal spray on March 29, 2023. https://www.fda.gov/news-events/press-announcements/fda-approves-first-over-counter-naloxone-nasal-spray . Brookings says naloxone "may well have saved lives" but "it is not clear that it made a large contribution to the observed decline." https://www.brookings.edu/articles/exploring-the-sources-of-the-decline-in-us-drug-overdoses/
+- Fewer people at risk: Brookings says this idea "also lack[s] supporting evidence." Brookings is not peer-reviewed. https://www.brookings.edu/articles/exploring-the-sources-of-the-decline-in-us-drug-overdoses/
+- Test strips: I found no study that measures their effect on the national decline.
+- Bottom line from the sources: the supply explanation has the most direct support. Naloxone and treatment are named by CDC, but the studies above do not show they explain most of the drop. None of these sources rules out a role for public health programs.
+
+## 2. The main funding streams
+
+- SOR and Tribal Opioid Response (TOR), run by SAMHSA. Formula grants to states and tribes for prevention, overdose reversal drugs, treatment including medications for opioid use disorder, and recovery. FY25 continuation awards: $1,480,500,000 for SOR and $63,000,000 for TOR (September 22, 2025). https://www.samhsa.gov/newsroom/press-announcements/20250922/hhs-state-tribal-opioid-response-grants-2025
+- Substance Use Prevention, Treatment, and Recovery Services (SUPTRS) Block Grant, run by SAMHSA, formula grant to states: $2,008,079,000 in final FY2025 and $2,013,079,000 in final FY2026, per an advocacy group's crosswalk of budget documents. https://assets.advocacyincubator.org/uploads/2026/FY-2027-Appropriations-Crosswalk-SAMHSA-Funding-1.pdf
+- CDC Overdose Data to Action (OD2A). Run by CDC's Injury Center; funds 49 states and 41 local health departments to track overdoses and act on the data (CDC, February 2025). https://www.cdc.gov/media/releases/2025/2025-cdc-reports-decline-in-us-drug-overdose-deaths.html . The first round of the current cycle was $279 million (August 31, 2023). https://www.cdc.gov/media/releases/2023/p0831-health-department-awards.html . The larger CDC budget line, Opioid Overdose Prevention and Surveillance, was $505.6 M in FY2025 and FY2026 (Safe States Alliance table). https://cdn.ymaws.com/www.safestates.org/resource/resmgr/policy/CDC_Injury_Center_Funding_Bu.pdf
+- Naloxone programs (SAMHSA). Final FY2026: First Responder Training (FR-CARA) $59,000,000; Grants to Prevent Prescription Drug/Opioid Overdose-Related Death $16,000,000. SOR money also buys naloxone (see SOR above). https://assets.advocacyincubator.org/uploads/2026/FY-2027-Appropriations-Crosswalk-SAMHSA-Funding-1.pdf
+- HRSA Rural Communities Opioid Response Program (RCORP), run by HRSA's rural health office: $145,000,000 in the FY2026 law, per the National Rural Health Association. https://nrha-prod-eastus-be.azure.silvertech.net/NationalRuralHealth/media/Documents/Advocacy/2026/CAA-2026-rural-health-summary.pdf
+- Opioid settlements. Payouts are expected to total "about $50 billion" over nearly two decades. States and localities got more than $6 billion in 2022 and 2023. About a third was spent or committed, about a third set aside, and a third could not be tracked. More than $416 million went to treatment; on average about 11% went to harm reduction such as overdose reversal drugs (KFF Health News, December 16, 2024). https://kffhealthnews.org/news/article/opioid-settlement-funds-detailed-database-state-county-city-spending/ . Spending is decided by each state and local government under settlement terms, and KFF says differences in reporting make comparisons "nearly impossible."
+- Medicaid, a federal-state program run by states with CMS oversight. Medicaid covers about one-fifth of adults with substance use disorders; 61% of Medicaid adults with opioid use disorder qualify through the ACA expansion (KFF, June 23, 2025). https://www.kff.org/medicaid/implications-of-medicaid-work-and-reporting-requirements-for-adults-with-mental-health-or-substance-use-disorders
+
+## 3. Funding changes, FY2025 to FY2027
+
+### FY2025 (enacted)
+- Full-year continuing resolution, P.L. 119-4, signed March 15, 2025; it carried forward FY2024 funding levels with limited exceptions. https://www.govinfo.gov/content/pkg/PLAW-119publ4/pdf/PLAW-119publ4.pdf
+- Final FY2025: SAMHSA total $7,374,306,000; SOR $1,575,000,000. https://assets.advocacyincubator.org/uploads/2026/FY-2027-Appropriations-Crosswalk-SAMHSA-Funding-1.pdf
+
+### FY2026 (proposed, then enacted)
+- President's FY2026 request (proposed): SAMHSA total $5,693,278,000. It would have combined SUPTRS, the mental health block grant and SOR into a "Behavioral Health Innovation Block Grant" at $4,125,650,000, which the crosswalk calls "a decrease of $465,000,000" from the FY2025 total for all three. https://assets.advocacyincubator.org/uploads/2026/FY-2027-Appropriations-Crosswalk-SAMHSA-Funding-1.pdf
+- Enacted: Consolidated Appropriations Act, 2026 (H.R. 7148), signed February 3, 2026. https://www.whitehouse.gov/briefings-statements/2026/02/congressional-bill-h-r-7148-signed-into-law
+- Final FY2026: SAMHSA total $7,439,617,000; SOR $1,595,000,000; SUPTRS $2,013,079,000. Congress did not adopt the consolidation. https://assets.advocacyincubator.org/uploads/2026/FY-2027-Appropriations-Crosswalk-SAMHSA-Funding-1.pdf . ASAM reports at least 4.25% of SOR goes to tribes. https://www.asam.org/publications-resources/the-asam-weekly/detail/2026/02/03/congress-passes-key-addiction-related-policy-and-funding-provisions-in-the-consolidated-appropriations-act--2026
+
+### FY2027 (proposed; not enacted)
+- President's request released April 3, 2026 (CRS). https://www.everycrsreport.com/reports/R49344.html
+- SAMHSA: request $6,686,710,000, down $752,907,000 from final FY2026. SOR, SUPTRS and the mental health block grant would again be combined into one block grant, this time "level funded" at $4,620,650,000. The request would eliminate "more than 25" SAMHSA competitive grant programs worth $591.4 million. https://assets.advocacyincubator.org/uploads/2026/FY-2027-Appropriations-Crosswalk-SAMHSA-Funding-1.pdf and https://www.advocacyincubator.org/news/2026-05-20-executive-summary-the-fy-2027-presidents-budget-request-whats-at-stake-for-federal-substance-use-disorder-and-overdose-prevention-funding
+- CDC opioid line: request moves it into the proposed Administration for a Healthy America (AHA) at $505.5 million. RCORP: $145M in the request, per NRHA. https://cdn.ymaws.com/www.safestates.org/resource/resmgr/policy/CDC_Injury_Center_Funding_Bu.pdf and https://www.ruralhealth.us/NationalRuralHealth/media/Documents/Advocacy/2026/FY-2027-Approps-Table-4-23-26.pdf
+- House Appropriations Committee approved its FY2027 Labor-HHS bill 34 to 28 on June 9, 2026, at $189.3 billion, "$5.6 billion (3%) below" FY2026 enacted. Its release says the bill raises mental health and substance use block grant funding by $61 million and bars funds for harm reduction that "encourage[s] continued use." https://appropriations.house.gov/news/press-releases/committee-approves-fy27-labor-health-and-human-services-and-education . House bill line for CDC opioids: $505.6 M. https://cdn.ymaws.com/www.safestates.org/resource/resmgr/policy/CDC_Injury_Center_Funding_Bu.pdf
+- Current status: a continuing resolution, P.L. 119-103, signed September 2, 2026, funds Labor-HHS programs at FY2026 rates through December 11, 2026. As of CRS's September 8, 2026 report, the Senate committee had not marked up its bill. https://www.everycrsreport.com/reports/R49344.html
+
+### Reorganization (proposed)
+- HHS announced on March 27, 2025 a plan to fold SAMHSA, HRSA and other offices into a new AHA and cut about 10,000 full-time jobs. https://www.hhs.gov/press-room/hhs-restructuring-doge.html . The FY2027 request proposes AHA again; the GHAI crosswalk notes the FY2026 version was not adopted by Congress. https://assets.advocacyincubator.org/uploads/2026/FY-2027-Appropriations-Crosswalk-SAMHSA-Funding-1.pdf
+
+### Grant terminations, delays and clawbacks (reported)
+- March 24, 2025: HHS ended about $11 billion in COVID-era public health grants to states. A court order of May 16, 2025 blocked the terminations for the 23 plaintiff states and DC. https://oag.ca.gov/news/press-releases/attorney-general-bonta-secures-preliminary-injunction-trump-administration . News coverage put the total at about $11.4 billion and tied part of it to SAMHSA addiction and mental health grants. https://www.ctpublic.org/2025-03-27/trump-team-revokes-11-billion-in-funding-for-addiction-mental-health-care
+- July to August 2025: NPR reported $140 million in OD2A money held back and grantees told they would get half their funding; by August 19, 2025, CDC staff told NPR full funding was expected. OMB and HHS did not comment. https://www.kaxe.org/news/2025-08-05/cdc-to-disburse-delayed-funds-for-fighting-fentanyl-and-more-staffers-say
+- September 10, 2025: a coalition letter raised concern that SAMHSA "redirected or withheld unspent funds" for FY2025, mostly mental health programs. https://aahd.us/wp-content/uploads/2025/09/MHLG-Letter-to-SAMHSA-09102025-redirected-unspent-funds.pdf
+- January 13, 2026: SAMHSA sent letters ending about $2 billion in discretionary grants for "non-alignment" with its priorities; HHS reversed the decision the next evening. https://www.counties.org/news-and-media-article/samhsa-terminates-2-billion-grant-funding-quickly-rescinds-terminations/
+
+### Medicaid changes in the 2025 reconciliation law (enacted July 4, 2025)
+- Work requirements for expansion adults (80 hours a month). KFF gives the start as "Not later than December 31, 2026, or earlier at state option" on one page and January 1, 2027 on another; HHS may give good-faith states until December 31, 2028. CBO: $326 billion in federal savings over 10 years. https://www.kff.org/medicaid/a-closer-look-at-the-work-requirement-provisions-in-the-2025-federal-budget-reconciliation-law/
+- Exemptions include people "participating in a substance use disorder treatment program," and the "medically frail" group includes people with a substance use disorder. KFF notes these exemptions may be hard to verify with existing data. https://www.kff.org/medicaid/health-provisions-in-the-2025-federal-budget-reconciliation-law/
+- Eligibility checks every six months for expansion adults, for renewals on or after December 31, 2026; CBO: $63 billion saved, 700,000 more uninsured in 2034. Substance use services are exempt from new cost sharing. CBO projects the law raises the uninsured by 10 million. https://www.kff.org/medicaid/health-provisions-in-the-2025-federal-budget-reconciliation-law/
+
+## 4. What we can and cannot say
+
+- We can say: synthetic-opioid deaths fell 35.6% in 2024 (rate basis, final data). CDC named naloxone, treatment access, supply shifts and prevention programs as possible contributors.
+- We can say: peer-reviewed work points most strongly to changes in the drug supply. A *JAMA* study found naloxone use did not rise relative to overdoses. No study we found measures how much SOR, OD2A, block grants or settlements each contributed.
+- We cannot say any one program "caused" the decline, or that funding changes will raise deaths. The sources do not show either.
+- We can say: Congress kept SOR, SUPTRS and CDC opioid funding level or slightly higher in FY2026. The President's FY2026 and FY2027 requests proposed consolidating SOR, and FY2027 proposes a lower SAMHSA total. FY2027 is not enacted; programs are on a CR through December 11, 2026.
+- We can say: some grants were ended or delayed in 2025 and January 2026, and several were restored by court order or reversal. Medicaid work requirements and six-month checks start around the end of 2026, with substance use exemptions whose use in practice is not yet known.
+
+## Could not verify
+
+- DEA 2025 NDTA wording on purity and the decline (dea.gov returned 403).
+- HHS FY2027 Budget in Brief and AHA budget justification (hhs.gov returned 403). FY2027 SAMHSA and CDC numbers above come from advocacy-group tables (GHAI, Safe States, NRHA) built from those documents.
+- The exact SAMHSA share of the March 2025 $11.4 billion clawback, and whether the HHS appeal of the May 16, 2025 injunction has been decided.
+- CDC OD2A award totals for FY2025 and FY2026, and FY2026 TOR awards.
+- RCORP figures from HRSA itself (hrsa.gov returned 403); the $145M figure is from NRHA.
+- A peer-reviewed estimate of how much buprenorphine, methadone or test strips added to the decline. A Burke and Jalal commentary in the *International Journal of Drug Policy* is cited by Cato as forthcoming; I did not read it.
+- Any SAMHSA or ONDCP statement that names what caused the decline.
+- Medicaid's dollar share of opioid use disorder treatment spending nationally. The CMS interim final rule on work requirements, including how it treats people with a substance use disorder, was seen only in trade press.
+- Whether anything changed after CRS's September 8, 2026 report (for example, a new CR or FY2027 bill).

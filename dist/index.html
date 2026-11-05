@@ -7,10 +7,10 @@
 <meta name="description" content="Deaths involving synthetic opioids, mostly fentanyl, in every U.S. county from 1999 to 2024, from CDC WONDER.">
 <style>
 :root{
-  --bg:#2b2d31; --panel:#323539; --panel2:#383b40; --line:#43464c; --line2:#4d5158;
-  --ink:#eef0f3; --ink2:#b9bec6; --muted:#7f8792;
-  --salmon:#f0a29a; --death:#e8605e; --accent:#5aa9ff;
-  --low:#55595f; --nodata:#202225;
+  --bg:#f7f5f0; --panel:#efece5; --panel2:#e6e2d9; --line:#dcd7cc; --line2:#c9c3b6;
+  --ink:#1f2328; --ink2:#454b53; --muted:#6b7078;
+  --salmon:#b8433d; --death:#c0392f; --accent:#2563eb;
+  --low:#cfcbc2; --nodata:#ffffff;
   --serif: Georgia, "Times New Roman", serif;
   --mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
 }
@@ -42,7 +42,7 @@ input[type=range]{flex:1;accent-color:var(--accent)}
 .ramp{flex:1;height:10px;border-radius:2px}
 .keys{display:flex;flex-direction:column;gap:5px;font-family:var(--mono);font-size:11px;color:var(--ink2)}
 .sw{display:inline-block;width:14px;height:14px;border-radius:2px;vertical-align:middle;margin-right:7px}
-.sw.h{background:repeating-linear-gradient(135deg,#ee8380 0 2px,#2b2d31 2px 4px)}
+.sw.h{background:repeating-linear-gradient(135deg,#e5736a 0 2px,#f7f5f0 2px 4px)}
 .explain{padding:6px 48px 14px;font-size:15px;line-height:1.55;color:var(--ink2);max-width:1100px}
 .explain b{color:var(--ink)}
 .main{display:grid;grid-template-columns:minmax(0,1fr) 420px;border-top:1px solid var(--line)}
@@ -51,17 +51,17 @@ input[type=range]{flex:1;accent-color:var(--accent)}
 #map{width:100%;height:auto;display:block}
 #map .c{stroke:none;cursor:pointer}
 #map .ov{pointer-events:none}
-#map .sl{fill:none;stroke:#2b2d31;stroke-width:.9;pointer-events:none}
-#map .nl{fill:none;stroke:#6b7078;stroke-width:.6;pointer-events:none}
-#map .hl{fill:none;stroke:#fff;stroke-width:1.6;pointer-events:none}
+#map .sl{fill:none;stroke:#f7f5f0;stroke-width:.9;pointer-events:none}
+#map .nl{fill:none;stroke:#9a958a;stroke-width:.6;pointer-events:none}
+#map .hl{fill:none;stroke:#1f2328;stroke-width:1.6;pointer-events:none}
 #map .sl,#map .nl,#map .hl{vector-effect:non-scaling-stroke}
-#map.zoom .c{stroke:#2b2d31;stroke-width:.6;vector-effect:non-scaling-stroke}
+#map.zoom .c{stroke:#f7f5f0;stroke-width:.6;vector-effect:non-scaling-stroke}
 #map .c.out{opacity:.12;cursor:default}
 .seg{display:inline-flex;border:1px solid var(--line2);border-radius:3px;overflow:hidden}
 .seg button{font-family:var(--mono);font-size:12px;padding:7px 10px;background:transparent;border:0;color:var(--muted);cursor:pointer}
-.seg button[aria-pressed=true]{background:var(--accent);color:#111}
+.seg button[aria-pressed=true]{background:var(--accent);color:#fff}
 .stsel{font-family:var(--mono);font-size:13px;background:var(--panel2);color:var(--ink);border:1px solid var(--line2);border-radius:3px;padding:7px 8px}
-.tip{position:fixed;pointer-events:none;background:#1f2124;border:1px solid var(--line2);padding:8px 10px;font-family:var(--mono);font-size:12px;border-radius:4px;display:none;z-index:9;max-width:300px;line-height:1.45}
+.tip{position:fixed;pointer-events:none;background:#fff;box-shadow:0 2px 10px rgba(0,0,0,.12);border:1px solid var(--line2);padding:8px 10px;font-family:var(--mono);font-size:12px;border-radius:4px;display:none;z-index:9;max-width:300px;line-height:1.45}
 .trend h3{font-family:var(--mono);font-size:12px;letter-spacing:.14em;color:var(--muted);font-weight:400;margin:10px 0 4px;text-transform:uppercase}
 #natl{width:100%;height:200px;display:block}
 #natl rect{cursor:pointer}
@@ -83,13 +83,13 @@ input[type=range]{flex:1;accent-color:var(--accent)}
 .rank ol{list-style:none;margin:10px 0 0;padding:0;max-height:420px;overflow:auto}
 .rank li{display:grid;grid-template-columns:26px 1fr 60px 48px;align-items:center;gap:8px;padding:4px 0;font-size:14.5px;cursor:pointer}
 .rank li:hover{background:var(--panel2)}
-.rank li.sel{background:#45494f;box-shadow:inset 3px 0 0 #fff}
+.rank li.sel{background:var(--panel2);box-shadow:inset 3px 0 0 var(--ink)}
 .rank li .n{font-family:var(--mono);font-size:11px;color:var(--muted);text-align:right}
 .rank li .bar{height:6px;border-radius:0 3px 3px 0;background:var(--death)}
 .rank li .val{font-family:var(--mono);font-size:11.5px;color:var(--ink2);text-align:right}
 .help{margin:16px 24px 24px;border:1px solid var(--line2);border-radius:6px;padding:18px}
 .help .t{font-family:var(--mono);color:var(--salmon);letter-spacing:.14em;font-size:13px;font-weight:700}
-.n988{margin:12px 0;background:#3a2c2e;border-left:3px solid var(--salmon);padding:10px 14px}
+.n988{margin:12px 0;background:#f6e3e0;border-left:3px solid var(--salmon);padding:10px 14px}
 .n988 b{font-family:var(--mono);font-size:22px;color:var(--salmon)}
 .n988 div{font-size:13.5px;color:var(--ink2)}
 .help p{font-size:15.5px;line-height:1.5;color:var(--ink2)}
@@ -193,7 +193,7 @@ const FRAMED = (() => { let f; try { f = window.self !== window.top; } catch (e)
 if (FRAMED) document.documentElement.classList.add("framed");
 
 const YEARS = D.years, Y0 = YEARS[0], ix = y => y - Y0;
-const RAMP = ["#fde4e3", "#f7b3b1", "#ee8380", "#dd5553", "#b83536", "#8a2124"];
+const RAMP = ["#f6cdc7", "#efa197", "#e3746a", "#cc4a42", "#a42e2b", "#6e1a1b"];
 const DOM = [0, 60];                     // crude rate per 100,000; 60 and above take the darkest color
 const SMALL = [10, 20];                  // 10 to 19 deaths: rate drawn with a hatch
 const RANK_MIN = 20;                     // ranking lists counties with 20 or more deaths
@@ -230,7 +230,7 @@ const el = (tag, attrs, parent) => { const e = document.createElementNS(NS, tag)
 const map = document.getElementById("map");
 const defs = el("defs", {}, map);
 const pat = el("pattern", {id: "hatch", patternUnits: "userSpaceOnUse", width: 4, height: 4, patternTransform: "rotate(45)"}, defs);
-el("line", {x1: 0, y1: 0, x2: 0, y2: 4, stroke: "#2b2d31", "stroke-width": 1.5, "stroke-opacity": .85}, pat);
+el("line", {x1: 0, y1: 0, x2: 0, y2: 4, stroke: "#f7f5f0", "stroke-width": 1.5, "stroke-opacity": .85}, pat);
 const gC = el("g", {}, map), gO = el("g", {}, map);
 const shapes = {}, overlays = {};
 for (const [f, d] of Object.entries(D.paths)) {
@@ -345,25 +345,25 @@ function renderNatl() {
   const step = [10, 25, 50, 100, 250, 500, 1000, 2500, 5000, 10000, 25000].find(s => max / s <= 4) || 25000;
   const yv = v => H - m.b - v / max * (H - m.t - m.b);
   for (let t = 0; t <= max * 1.02; t += step) {
-    el("line", {x1: m.l, x2: W - m.r, y1: yv(t), y2: yv(t), stroke: "#43464c"}, svg);
-    el("text", {x: m.l - 6, y: yv(t) + 4, "text-anchor": "end", fill: "#7f8792", "font-size": 10, "font-family": "ui-monospace,Menlo,monospace"}, svg).textContent = t >= 1000 ? (t / 1000) + "K" : t;
+    el("line", {x1: m.l, x2: W - m.r, y1: yv(t), y2: yv(t), stroke: "#dcd7cc"}, svg);
+    el("text", {x: m.l - 6, y: yv(t) + 4, "text-anchor": "end", fill: "#6b7078", "font-size": 10, "font-family": "ui-monospace,Menlo,monospace"}, svg).textContent = t >= 1000 ? (t / 1000) + "K" : t;
   }
   YEARS.forEach((y, i) => {
     const v = src.d[i], x = m.l + i * bw;
     if (v == null) return;
     const r = el("rect", {x: x + 1, y: yv(v), width: Math.max(1, bw - 2), height: H - m.b - yv(v), rx: 2,
-      fill: y === S.year ? css("--death") : "#6a4243"}, svg);
+      fill: y === S.year ? css("--death") : "#e3b3ad"}, svg);
     r.addEventListener("click", () => { S.year = y; render(); });
     r.addEventListener("mousemove", e => { tip.innerHTML = `<b>${src.n} · ${y}</b><br>${fmtN(v)} deaths` + (src.r[i] != null ? `<br>${fmtR(src.r[i])} per 100,000` : ""); tip.style.display = "block"; tip.style.left = (e.clientX + 14) + "px"; tip.style.top = (e.clientY + 14) + "px"; });
     r.addEventListener("mouseleave", () => tip.style.display = "none");
   });
   YEARS.forEach((y, i) => {
     const x = m.l + i * bw;
-    if (y % 5 === 0 || y === YEARS.at(-1)) el("text", {x: x + bw / 2, y: H - 6, "text-anchor": "middle", fill: "#7f8792", "font-size": 10, "font-family": "ui-monospace,Menlo,monospace"}, svg).textContent = y;
+    if (y % 5 === 0 || y === YEARS.at(-1)) el("text", {x: x + bw / 2, y: H - 6, "text-anchor": "middle", fill: "#6b7078", "font-size": 10, "font-family": "ui-monospace,Menlo,monospace"}, svg).textContent = y;
   });
   const sx = m.l + ix(SEAM) * bw;
-  el("line", {x1: sx, x2: sx, y1: m.t, y2: H - m.b, stroke: "#7f8792", "stroke-dasharray": "3 3"}, svg);
-  el("text", {x: sx - 4, y: m.t + 10, "text-anchor": "end", fill: "#7f8792", "font-size": 10, "font-family": "ui-monospace,Menlo,monospace"}, svg).textContent = "CDC database change";
+  el("line", {x1: sx, x2: sx, y1: m.t, y2: H - m.b, stroke: "#6b7078", "stroke-dasharray": "3 3"}, svg);
+  el("text", {x: sx - 4, y: m.t + 10, "text-anchor": "end", fill: "#6b7078", "font-size": 10, "font-family": "ui-monospace,Menlo,monospace"}, svg).textContent = "CDC database change";
   document.getElementById("natl-note").textContent = (S.state ? "No bar: fewer than 10 deaths statewide, or total not shown to protect county counts under 10. " : "") + "Click a bar to jump to that year. From 2018 the counts come from CDC's 2018-2024 database; the two databases give identical county counts for 2018-2020.";
 }
 
@@ -406,17 +406,17 @@ function renderPTrend(g, stt) {
   const svg = document.getElementById("ptrend"); svg.innerHTML = "";
   const W = svg.clientWidth || 360, H = svg.clientHeight || 150, m = {l: 30, r: 8, t: 8, b: 18};
   svg.setAttribute("viewBox", `0 0 ${W} ${H}`);
-  const series = [{name: "U.S.", v: D.us.r, c: "#b9bec6"}];
-  if (stt) series.push({name: stt.n, v: stt.r, c: "#5aa9ff"});
+  const series = [{name: "U.S.", v: D.us.r, c: "#7a7f87"}];
+  if (stt) series.push({name: stt.n, v: stt.r, c: "#2563eb"});
   if (g) series.push({name: g.n.replace(/,.*$/, ""), v: YEARS.map((y, i) => st(g, y) === "P" ? g.r[i] : null), c: css("--death")});
   const max = Math.max(10, ...series.flatMap(s => s.v.filter(v => v != null)));
   const xv = i => m.l + i / (YEARS.length - 1) * (W - m.l - m.r), yv = v => H - m.b - v / max * (H - m.t - m.b);
   for (const t of [0, max / 2, max]) {
-    el("line", {x1: m.l, x2: W - m.r, y1: yv(t), y2: yv(t), stroke: "#43464c"}, svg);
-    el("text", {x: m.l - 4, y: yv(t) + 3, "text-anchor": "end", fill: "#7f8792", "font-size": 9.5, "font-family": "ui-monospace,Menlo,monospace"}, svg).textContent = Math.round(t);
+    el("line", {x1: m.l, x2: W - m.r, y1: yv(t), y2: yv(t), stroke: "#dcd7cc"}, svg);
+    el("text", {x: m.l - 4, y: yv(t) + 3, "text-anchor": "end", fill: "#6b7078", "font-size": 9.5, "font-family": "ui-monospace,Menlo,monospace"}, svg).textContent = Math.round(t);
   }
-  [1999, 2010, 2024].forEach(y => el("text", {x: xv(ix(y)), y: H - 4, "text-anchor": y === 1999 ? "start" : y === 2024 ? "end" : "middle", fill: "#7f8792", "font-size": 9.5, "font-family": "ui-monospace,Menlo,monospace"}, svg).textContent = y);
-  el("line", {x1: xv(ix(S.year)), x2: xv(ix(S.year)), y1: m.t, y2: H - m.b, stroke: "#5d6168"}, svg);
+  [1999, 2010, 2024].forEach(y => el("text", {x: xv(ix(y)), y: H - 4, "text-anchor": y === 1999 ? "start" : y === 2024 ? "end" : "middle", fill: "#6b7078", "font-size": 9.5, "font-family": "ui-monospace,Menlo,monospace"}, svg).textContent = y);
+  el("line", {x1: xv(ix(S.year)), x2: xv(ix(S.year)), y1: m.t, y2: H - m.b, stroke: "#b5afa2"}, svg);
   for (const s of series) {
     let d = "", pen = false;
     s.v.forEach((v, i) => { if (v == null) { pen = false; return; } d += (pen ? "L" : "M") + xv(i).toFixed(1) + "," + yv(v).toFixed(1); pen = true; });
