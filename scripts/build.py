@@ -49,7 +49,20 @@ def main():
                 g["d"][i] = g["r"][i] = None
                 g["s"] = g["s"][:i] + "X" + g["s"][i + 1:]
                 withheld += 1
-    print(withheld, "state-years withheld so no county count under 10 can be derived")
+    # Same rule one level up: the U.S. total minus the shown states gives the hidden states' combined deaths.
+    # Where that is under 10, also withhold the smallest shown state that year until it is 10 or more.
+    for i, y in enumerate(YEARS):
+        while True:
+            hidden = [g for g in states.values() if g["d"][i] is None and g["s"][i] in "LX"]
+            rest = us["d"][i] - sum(g["d"][i] or 0 for g in states.values())
+            if not hidden or rest >= 10:
+                break
+            g = min((g for g in states.values() if g["d"][i] is not None), key=lambda g: g["d"][i])
+            g["d"][i] = g["r"][i] = None
+            g["s"] = g["s"][:i] + "X" + g["s"][i + 1:]
+            withheld += 1
+            print(f"  {y}: also withheld {g['n']} so hidden states cannot be derived from the U.S. total")
+    print(withheld, "state-years withheld so no count under 10 can be derived")
     shapes = set(geo["counties"])
     unmatched = sorted(set(counties) - shapes)
     D = {"years": YEARS, "us": us, "states": states,

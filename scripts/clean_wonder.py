@@ -9,7 +9,8 @@ database (D157). Each file holds one row per place and year:
               rates for 10-19 deaths ("Unreliable"); there we compute deaths / population * 100,000
               rounded to 1 decimal, CDC's own crude-rate formula (rate_src = calc)
   small       1 when deaths are 10-19 (hatched on the map in every year)
-County codes renamed by Census are mapped to the current code (46113 -> 46102, 02270 -> 02158).
+County codes renamed by Census are mapped to the current code and name (46113 Shannon -> 46102 Oglala Lakota,
+02270 Wade Hampton -> 02158 Kusilvak).
 """
 import csv, glob, io
 from pathlib import Path
@@ -18,6 +19,8 @@ ROOT = Path(__file__).resolve().parents[1]
 RAW = ROOT / "data/raw/wonder"
 OUT = ROOT / "data/clean"
 RENAME = {"46113": "46102", "02270": "02158"}
+# WONDER still labels both under their old names in every year; use the current names
+NAMES = {"46102": "Oglala Lakota County, SD", "02158": "Kusilvak Census Area, AK"}
 FIELDS = ["code", "name", "year", "deaths", "population", "rate", "rate_lo", "rate_hi", "rate_src", "status", "small",
           "aa_rate"]
 
@@ -38,7 +41,8 @@ def num(s):
 
 def tidy(r, key, name):
     d, pop, cr = r["Deaths"], num(r["Population"]), r["Crude Rate"]
-    out = {"code": RENAME.get(r[key], r[key]) if key else "US", "name": r[name] if name else "United States",
+    code = RENAME.get(r[key], r[key]) if key else "US"
+    out = {"code": code, "name": NAMES.get(code, r[name]) if name else "United States",
            "year": int(r["Year"]), "deaths": "", "population": "" if pop is None else int(pop), "rate": "",
            "rate_lo": "", "rate_hi": "", "rate_src": "", "small": 0, "aa_rate": r.get("Age Adjusted Rate", "")}
     if d in ("Suppressed", "0"):

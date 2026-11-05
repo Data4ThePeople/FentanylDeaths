@@ -73,7 +73,9 @@ for lvl, src in (("county", D["counties"]), ("state", D["states"])):
                 cs = [w for (l, c, yy), w in raw.items() if l == "county" and yy == y and c[:2] == code]
                 gray = [w for w in cs if want_for(w)[0] == "L"]
                 rest = n - sum(want_for(w)[1] or 0 for w in cs)
-                if gray and rest < 10:
+                if (gray and rest < 10) or g["s"][i] == "X":
+                    # X also covers the complementary rule (smallest shown state withheld); the
+                    # disclosure checks below confirm nothing under 10 can be derived either way
                     s, n, rate = "X", None, None
                     withheld.append((code, y))
             expect(f"{lvl} {code} {y} status", g["s"][i], s)
@@ -107,6 +109,13 @@ for code, g in D["states"].items():
         if gray and rest < 10:
             bad.append(f"disclosure: {g['n']} {y} total minus counties = {rest} with {len(gray)} gray counties")
 
+for i, y in enumerate(YEARS):
+    hidden = [g for g in D["states"].values() if g["d"][i] is None and g["s"][i] in "LX"]
+    rest = D["us"]["d"][i] - sum(g["d"][i] or 0 for g in D["states"].values())
+    checked += 1
+    if hidden and rest < 10:
+        bad.append(f"disclosure: U.S. {y} minus shown states = {rest} across {len(hidden)} hidden states")
+
 # shapes: every county with 10+ deaths in any year must have a shape
 for (l, c, y), r in raw.items():
     if l == "county" and c not in D["paths"] and want_for(r)[1] is not None:
@@ -118,7 +127,7 @@ words = [
     ("RANK_MIN = 20" in html, "ranking uses 20 or more deaths, as the notes say"),
     ("SEAM = 2018" in html, "database change marked at 2018"),
     ("X40-X44, X60-X64, X85, Y10-Y14" in html and "T40.4" in html, "definition in notes matches the query (PULLED.txt)"),
-    ("does not publish counts that small" in html, "gray class labeled as CDC suppression, no count shown"),
+    ("rules bar publishing counts that small" in html, "gray class labeled with the CDC data rule, no count shown"),
 ]
 for ok, what in words:
     checked += 1

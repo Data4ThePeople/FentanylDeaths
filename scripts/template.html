@@ -135,7 +135,7 @@ footer{padding:18px 48px 40px;font-family:var(--mono);font-size:12px;color:var(-
 <body>
 <div class="wrap">
 <header>
-  <div class="kicker">Data 4 The People · CDC WONDER · 1999–2024</div>
+  <div class="kicker">Data 4 The People · CDC WONDER · 1999-2024</div>
   <h1>Fentanyl Deaths<span class="l2">County by County, 1999-2024</span></h1>
   <p class="sub">Deaths involving synthetic opioids, mostly fentanyl, in every U.S. county from 1999 to 2024. Press play to step through the years, or click any county to see its numbers and trend.</p>
 </header>
@@ -150,7 +150,7 @@ footer{padding:18px 48px 40px;font-family:var(--mono);font-size:12px;color:var(-
   <button class="play" id="play" aria-label="Play years 1999 to 2024"><svg width="14" height="16" viewBox="0 0 14 16"><path id="playicon" d="M0 0L14 8L0 16Z"/></svg></button>
   <div class="yr" id="yr"></div>
   <div class="slider"><span>1999</span><input type="range" id="year" min="1999" max="2024" step="1" aria-label="Year"><span>2024</span></div>
-  <div class="seg" id="speed" role="group" aria-label="Play speed"><button data-x="1" aria-pressed="true">1x</button><button data-x="2" aria-pressed="false">2x</button><button data-x="5" aria-pressed="false">5x</button></div>
+  <div class="seg" id="speed" role="group" aria-label="Play speed"><button data-x="1" aria-pressed="true">1x</button><button data-x="2" aria-pressed="false">2x</button><button data-x="3" aria-pressed="false">3x</button></div>
   <select class="stsel" id="stsel" aria-label="Show one state"></select>
 </section>
 
@@ -161,7 +161,7 @@ footer{padding:18px 48px 40px;font-family:var(--mono);font-size:12px;color:var(-
   <div class="left">
     <svg id="map" viewBox="0 0 975 610" role="img" aria-label="Map of U.S. counties by death rate involving synthetic opioids"></svg>
     <div class="trend">
-      <h3>U.S. deaths involving synthetic opioids, mostly fentanyl, by year</h3>
+      <h3 id="natl-title">U.S. deaths involving synthetic opioids, mostly fentanyl, by year</h3>
       <svg id="natl" role="img" aria-label="Bar chart of U.S. deaths by year"></svg>
       <div class="note" id="natl-note"></div>
     </div>
@@ -210,7 +210,7 @@ const fmtN = v => v.toLocaleString("en-US");
 const fmtR = v => v.toFixed(1);
 const pct = v => Math.round(v * 100) + "%";
 const st = (g, y) => g.s[ix(y)];
-const LOWTXT = "0 to 9 deaths. CDC does not publish counts this small for a county.";
+const LOWTXT = "0 to 9 deaths. CDC's data rules bar publishing a county count under 10.";
 const WHELD = "Not shown: with the county numbers it would reveal a count under 10";
 
 // ---------- national figures, recomputed from the county rows ----------
@@ -306,7 +306,7 @@ function renderLegend() {
     `<div class="scale"><div class="lab">Deaths per 100,000 residents (crude rate)</div>
       <div class="sr"><span>${DOM[0]}</span><div class="ramp" style="background:${grad}"></div><span>${DOM[1]}+</span></div></div>
      <div class="keys">
-      <span><i class="sw" style="background:var(--low)"></i>0 to 9 deaths (CDC does not publish counts this small)</span>
+      <span><i class="sw" style="background:var(--low)"></i>0 to 9 deaths (CDC's rules bar publishing counts this small)</span>
       <span><i class="sw h"></i>10 to 19 deaths: rate can swing a lot from year to year</span>
       <span><i class="sw" style="background:var(--nodata);border:1px solid var(--line2)"></i>No data or no rate</span></div>`;
 }
@@ -315,7 +315,7 @@ function renderExplain() {
   const rest = 1 - N.share;
   document.getElementById("explain").innerHTML =
     `<b>${y}: ${fmtN(N.tot)} deaths in the U.S.</b> ${fmtN(N.n)} ${N.n === 1 ? "county" : "counties"} had 10 or more deaths, and together they account for ${pct(N.share)} of the U.S. total. ` +
-    `The other ${pct(rest)} happened in counties with fewer than 10 deaths each. CDC does not publish counts that small for any county, so those counties are gray.` +
+    `The other ${pct(rest)} happened in counties with fewer than 10 deaths each. CDC's data rules bar publishing counts that small for any county, so those counties are gray.` +
     (S.state ? "<br>" + stateLine(S.state, y) : "");
 }
 function stateCounties(sf) { return Object.keys(D.counties).filter(f => f.slice(0, 2) === sf && D.paths[f]); }
@@ -339,25 +339,32 @@ function renderNatl() {
   const svg = document.getElementById("natl"); svg.innerHTML = "";
   const W = svg.clientWidth || 600, H = svg.clientHeight || 200, m = {l: 46, r: 8, t: 10, b: 22};
   svg.setAttribute("viewBox", `0 0 ${W} ${H}`);
-  const max = Math.max(...D.us.d), bw = (W - m.l - m.r) / YEARS.length;
+  const src = S.state ? D.states[S.state] : D.us;
+  document.getElementById("natl-title").textContent = (S.state ? src.n : "U.S.") + " deaths involving synthetic opioids, mostly fentanyl, by year";
+  const max = Math.max(10, ...src.d.filter(v => v != null)), bw = (W - m.l - m.r) / YEARS.length;
+  const step = [10, 25, 50, 100, 250, 500, 1000, 2500, 5000, 10000, 25000].find(s => max / s <= 4) || 25000;
   const yv = v => H - m.b - v / max * (H - m.t - m.b);
-  for (const t of [0, 25000, 50000, 75000]) if (t <= max * 1.02) {
+  for (let t = 0; t <= max * 1.02; t += step) {
     el("line", {x1: m.l, x2: W - m.r, y1: yv(t), y2: yv(t), stroke: "#2a3038"}, svg);
-    el("text", {x: m.l - 6, y: yv(t) + 4, "text-anchor": "end", fill: "#7f8792", "font-size": 10, "font-family": "ui-monospace,Menlo,monospace"}, svg).textContent = t ? (t / 1000) + "K" : "0";
+    el("text", {x: m.l - 6, y: yv(t) + 4, "text-anchor": "end", fill: "#7f8792", "font-size": 10, "font-family": "ui-monospace,Menlo,monospace"}, svg).textContent = t >= 1000 ? (t / 1000) + "K" : t;
   }
   YEARS.forEach((y, i) => {
-    const v = D.us.d[i], x = m.l + i * bw;
+    const v = src.d[i], x = m.l + i * bw;
+    if (v == null) return;
     const r = el("rect", {x: x + 1, y: yv(v), width: Math.max(1, bw - 2), height: H - m.b - yv(v), rx: 2,
       fill: y === S.year ? css("--death") : "#5b3536"}, svg);
     r.addEventListener("click", () => { S.year = y; render(); });
-    r.addEventListener("mousemove", e => { tip.innerHTML = `<b>${y}</b><br>${fmtN(v)} deaths<br>${fmtR(D.us.r[i])} per 100,000`; tip.style.display = "block"; tip.style.left = (e.clientX + 14) + "px"; tip.style.top = (e.clientY + 14) + "px"; });
+    r.addEventListener("mousemove", e => { tip.innerHTML = `<b>${src.n} · ${y}</b><br>${fmtN(v)} deaths` + (src.r[i] != null ? `<br>${fmtR(src.r[i])} per 100,000` : ""); tip.style.display = "block"; tip.style.left = (e.clientX + 14) + "px"; tip.style.top = (e.clientY + 14) + "px"; });
     r.addEventListener("mouseleave", () => tip.style.display = "none");
+  });
+  YEARS.forEach((y, i) => {
+    const x = m.l + i * bw;
     if (y % 5 === 0 || y === YEARS.at(-1)) el("text", {x: x + bw / 2, y: H - 6, "text-anchor": "middle", fill: "#7f8792", "font-size": 10, "font-family": "ui-monospace,Menlo,monospace"}, svg).textContent = y;
   });
   const sx = m.l + ix(SEAM) * bw;
   el("line", {x1: sx, x2: sx, y1: m.t, y2: H - m.b, stroke: "#7f8792", "stroke-dasharray": "3 3"}, svg);
   el("text", {x: sx - 4, y: m.t + 10, "text-anchor": "end", fill: "#7f8792", "font-size": 10, "font-family": "ui-monospace,Menlo,monospace"}, svg).textContent = "CDC database change";
-  document.getElementById("natl-note").textContent = "Click a bar to jump to that year. From 2018 the counts come from CDC's 2018-2024 database; the two databases give identical county counts for 2018-2020.";
+  document.getElementById("natl-note").textContent = (S.state ? "No bar: fewer than 10 deaths statewide, or total not shown to protect county counts under 10. " : "") + "Click a bar to jump to that year. From 2018 the counts come from CDC's 2018-2024 database; the two databases give identical county counts for 2018-2020.";
 }
 
 // ---------- side panel ----------
@@ -417,7 +424,7 @@ function renderPTrend(g, stt) {
     s.v.forEach((v, i) => { if (v != null && (s.v[i - 1] == null) && (s.v[i + 1] == null)) el("circle", {cx: xv(i), cy: yv(v), r: 2.5, fill: s.c}, svg); });
   }
   document.getElementById("pkey").innerHTML = series.map(s => `<span><i style="background:${s.c}"></i>${s.name}</span>`).join("") +
-    (g ? '<span style="color:var(--muted)">gaps = fewer than 10 deaths or no data</span>' : "");
+    (g || S.state ? '<span style="color:var(--muted)">gaps = fewer than 10 deaths, not shown, or no rate</span>' : "");
 }
 function rankList(y) {
   const i = ix(y);
@@ -441,12 +448,12 @@ function renderNotes() {
   <li><b>What is counted.</b> Deaths of U.S. residents whose underlying cause was a drug overdose (ICD-10 X40-X44, X60-X64, X85, Y10-Y14) and whose death certificate lists synthetic opioids other than methadone (T40.4) among the causes. CDC uses this group to track fentanyl deaths. Most are illegally made fentanyl, but it also includes tramadol and other synthetic opioids. One death can involve several drugs; each death is counted once.</li>
   <li><b>Where.</b> Deaths are counted in the county where the person lived, not where they died.</li>
   <li><b>Counties with 0 to 9 deaths are gray.</b> CDC does not publish county counts of 1 to 9, and its data use rules bar publishing any count of 9 or fewer, including zero. So the map cannot tell a county with no deaths from one with a few. We never estimate these counts.</li>
-  <li><b>Some state totals are not shown.</b> Where a state's total, minus its published counties, would reveal that its gray counties had fewer than 10 deaths combined, that state's total and rate are left out for that year.</li>
+  <li><b>Some state totals are not shown.</b> Where a state's total, minus its published counties, would reveal that its gray counties had fewer than 10 deaths combined, that state's total and rate are left out for that year. The same applies one level up: where the U.S. total minus the states shown would reveal a state count under 10, the smallest state shown that year is also left out.</li>
   <li><b>Counties with 10 to 19 deaths are hatched.</b> Rates based on few deaths can swing a lot from one year to the next by chance. For 1999-2017, CDC's database does not show rates for 10 to 19 deaths; we calculate them the way CDC does, deaths divided by population times 100,000. CDC's 2018-2024 database shows these rates itself. The ranking lists only counties with ${RANK_MIN} or more deaths.</li>
   <li><b>Crude rates, not age-adjusted.</b> CDC does not provide age-adjusted rates for counties in its 2018-2024 database, so the map uses crude rates in every year. Counties with older populations may show lower rates partly because fewer residents are in the ages most affected.</li>
   <li><b>Early counts are likely low.</b> Some overdose death certificates do not name the drug involved. This was more common in earlier years and in some states, so fentanyl deaths were undercounted more in those places and years.</li>
-  <li><b>Two CDC databases.</b> 1999-2017 come from Multiple Cause of Death, 1999-2020; 2018-2024 from Multiple Cause of Death, 2018-2024, Single Race. Death counts in the overlap years 2018-2020 are identical for every county. Populations, and so rates, can differ slightly between the two.</li>
-  <li><b>County changes.</b> Connecticut: CDC reports deaths for the 8 old counties but has no county populations from 2022, so those counties have no rate. Alaska and Virginia: some county-equivalents were merged or redrawn during the period. Areas without a matching shape on this map: ${unmatched}; none had 10 or more deaths in any year. Renamed counties (Oglala Lakota, SD; Kusilvak, AK) are shown under their current names for all years.</li>
+  <li><b>Two CDC databases.</b> 1999-2017 come from Multiple Cause of Death, 1999-2020; 2018-2024 from Multiple Cause of Death, 2018-2024, Single Race. Death counts in the overlap years 2018-2020 are identical for every county, state and the U.S., and so are the published rates.</li>
+  <li><b>County changes.</b> Connecticut: CDC reports deaths for the 8 old counties but has no county populations from 2022, so those counties have no rate. Alaska and Virginia: some county-equivalents were merged or redrawn during the period. Areas without a matching shape on this map: ${unmatched}; none had 10 or more deaths in any year. Renamed counties (Shannon County, SD, now Oglala Lakota County; Wade Hampton, AK, now Kusilvak) are shown under their current names for all years.</li>
   </ul>
   <h3>Source</h3><ul><li>Centers for Disease Control and Prevention, National Center for Health Statistics. Multiple Cause of Death, 1999-2020 and 2018-2024 (Single Race), on CDC WONDER Online Database, released February 2026 for 2024 final data. Data accessed November 5, 2026. <a href="https://wonder.cdc.gov/mcd.html" target="_blank" rel="noopener">wonder.cdc.gov</a></li>
   <li>Map shapes: U.S. Census Bureau cartographic boundaries (2017) via us-atlas.</li></ul>`;

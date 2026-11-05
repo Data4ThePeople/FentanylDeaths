@@ -2,7 +2,7 @@
 
 Run `python3 scripts/tieout.py`. Recomputes from `data/raw/wonder/*.txt` directly, not from `data/clean/`.
 
-**Result: 250,501 values checked, 0 mismatches.** 43 state-years are withheld under the disclosure rule (state total minus published counties under 10 with at least one gray county), and the check confirms no shown state total allows a county count under 10 to be derived.
+**Result: 250,527 values checked, 0 mismatches.** 43 state-years are withheld under the disclosure rule (state total minus published counties under 10 with at least one gray county), and the check confirms no shown state total allows a county count under 10 to be derived.
 
 Checked for every county (3,147 codes), state and U.S. year, 1999-2024: status class (0 to 9 / published / missing / no rate), deaths, crude rate (WONDER's, or deaths / population x 100,000 for D77 counties with 10 to 19 deaths); the banner, the national explanation and the ranking, recomputed from raw county rows; every county with 10+ deaths has a map shape; the page's fixed thresholds match its wording.
 
