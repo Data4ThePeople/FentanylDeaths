@@ -6,14 +6,14 @@ Process: ~/.claude/d4tp-process/PROCESS.md
 ## Current
 
 Post: none yet
-Step: 1
+Step: 2a (waiting for Eric's go and slug)
 Since: 2026-11-05
 
 ## Steps
 
 | Step | What | Confirmed | Notes |
 |---|---|---|---|
-| 1  | Exploration and analysis | | |
+| 1  | Exploration and analysis | 2026-11-05 | Map live on Pages; beats in BEATS.md |
 | 2a | Draft with brackets resolved | | |
 | 2b | Eric's edit, Claude's look-over | | |
 | 2c | Slice markup | | |
@@ -36,3 +36,8 @@ None.
 - 2026-11-05 Eric: state selector (zooms to one state) and 1x/2x/5x play added. Disclosure fix: state totals and rates withheld for 43 state-years where the state total minus published counties would reveal under 10 deaths in its gray counties; tie-out checks it. Tie-out 250,501 values, 0 mismatches.
 - 2026-11-05 Repo made public with README; GitHub Pages live at https://data4thepeople.github.io/FentanylDeaths/
 - 2026-11-05 Independent tie-out: about 263,000 values, 0 differences (incl. WONDER API re-pull of U.S. totals). Its findings fixed: small counts derivable by subtraction (closed by the 43 withheld state-years plus a U.S.-level check), renamed counties now shown under current names (WONDER uses old names), overlap note corrected (rates match), gray-class wording now cites CDC's data rule (WONDER does publish zeros). Eric: play speeds 1x/2x/3x; bar chart shows the selected state.
+- 2026-11-05 Layout and look: off-white theme; side panel starts under the controls with legend and explanation in the map column; ranking list fills the height the map column leaves; DC inset box with leader line; map zoom buttons, drag to pan, Reset view. Tie-out 250,527 values, 0 mismatches.
+- 2026-11-05 Research: RESEARCH-funding.md (what is credited with the 2024 drop; enacted vs proposed funding). HHS FY2027 Budget in Brief and DEA pages read in Eric's Chrome (hhs.gov and dea.gov refuse plain downloads); PDF in data/raw/funding/. SAMHSA's $753M FY2027 cut is GHAI's figure, not printed by HHS. 2024 final data reached WONDER in February 2026 (WONDER What's New), now confirmed.
+- 2026-11-05 Supply vs programs: 94.5% of counties with 20+ deaths in both years fell in 2024; not a coding change (unnamed-drug overdoses fell too); drop almost all in fentanyl deaths (-34.4% vs -1.8% for others). Evidence leans to the drug supply but is contested (Science Advances 2026). Eric's angle for beat 6: the unknown is the risk.
+- 2026-11-05 Beats laid out in BEATS.md (numbers from scripts/story_numbers.py; Claude's sourced history draft in beat 3). Note: the independent tie-out covered the built page; the beats numbers are new and get checked in the post tie-out.
+- 2026-11-05 Step 1 confirmed by Eric.
