@@ -97,23 +97,28 @@ def chart_overdose():
     assert yrs == list(range(2001, Y[-1] + 1)), "overdose export should cover 2001 to the last map year"
     fig, ax = plt.subplots(figsize=(10, 6.2))
     fig.subplots_adjust(left=0.09, right=0.88, top=0.76, bottom=0.12)
-    ax.plot(yrs, [tot[y] for y in yrs], color=YELLOW, lw=2.2)
-    ax.plot(yrs, [fen[y] for y in yrs], color=BLUE, lw=2.2)
+    # Two published series drawn as overlapping areas: all overdose deaths behind, deaths involving fentanyl
+    # in front. The yellow band left showing is overdose deaths without fentanyl; nothing is subtracted.
+    T, F = [tot[y] for y in yrs], [fen[y] for y in yrs]
+    ax.fill_between(yrs, 0, T, color=YELLOW, lw=0)
+    ax.fill_between(yrs, 0, F, color=BLUE, lw=0)
+    ax.plot(yrs, F, color=SURFACE, lw=2)          # 2px surface gap between the two fills
     for y in (2013, 2022, 2024):
         for s, c in ((tot, YELLOW), (fen, BLUE)):
-            ax.plot(y, s[y], "o", ms=6, color=c, mec=SURFACE, mew=2)
+            ax.plot(y, s[y], "o", ms=6, color=INK, mec=SURFACE, mew=2)
             last = y == yrs[-1]
             ax.annotate(f"{s[y]:,}", (y, s[y]), xytext=(8, 0) if last else (0, 9), textcoords="offset points",
-                        ha="left" if last else "center", va="center" if last else "bottom", fontsize=9.5, color=INK)
+                        ha="left" if last else "center", va="center" if last else "bottom", fontsize=9.5,
+                        color=INK, bbox=dict(boxstyle="round,pad=0.2", fc=SURFACE, ec="none", alpha=0.85))
     ax.set_ylim(0, max(tot.values()) * 1.12)
     ax.set_xlim(yrs[0] - 0.5, yrs[-1] + 0.5)
     ax.yaxis.set_major_formatter(comma)
     ax.grid(axis="y"); ax.set_axisbelow(True); ax.tick_params(length=0); ax.spines["left"].set_visible(False)
     ax.set_xticks(range(yrs[0], yrs[-1] + 1, 3))
     titleblock(fig, "Fentanyl drove the rise in overdose deaths",
-               f"Overdose deaths per year in the U.S., {yrs[0]} to {yrs[-1]}")
-    words(fig, 0.03, 0.855, [("All overdose deaths", YELLOW), ("   and   ", INK_DIM),
-                              ("deaths involving fentanyl", BLUE)])
+               f"Overdose deaths per year in the U.S., {yrs[0]} to {yrs[-1]}. The top edge is all overdose deaths.")
+    words(fig, 0.03, 0.855, [("Deaths involving fentanyl", BLUE), ("   and   ", INK),
+                              ("overdose deaths without fentanyl", YELLOW)])
     credit(fig, SRC + "\n" + FEN_NOTE + " All overdose deaths: state totals summed.")
     save(fig, "01-overdose-vs-fentanyl.png")
 
