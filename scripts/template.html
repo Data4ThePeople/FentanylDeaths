@@ -56,6 +56,8 @@ input[type=range]{flex:1;accent-color:var(--accent)}
 #map .nl{fill:none;stroke:#9a958a;stroke-width:.6;pointer-events:none}
 #map .hl{fill:none;stroke:#1f2328;stroke-width:1.6;pointer-events:none}
 #map .sl,#map .nl,#map .hl{vector-effect:non-scaling-stroke}
+#map .dcbox rect.c{stroke:var(--line2);stroke-width:.8}#map .dcbox rect.c.sel{stroke:var(--ink);stroke-width:1.6}
+#map .dcl{stroke:var(--ink2);stroke-width:.8}#map .dct{font-family:var(--mono);font-size:11px;fill:var(--ink2);pointer-events:none}
 #map.zoom .c{stroke:#f7f5f0;stroke-width:.6;vector-effect:non-scaling-stroke}
 #map .c.out{opacity:.12;cursor:default}
 .seg{display:inline-flex;border:1px solid var(--line2);border-radius:3px;overflow:hidden}
@@ -240,6 +242,12 @@ for (const [f, d] of Object.entries(D.paths)) {
 el("path", {d: D.stateLines, class: "sl"}, map);
 el("path", {d: D.nation, class: "nl"}, map);
 const hl = el("path", {class: "hl", d: ""}, map);
+// DC is a few pixels wide at full size: a box in the Atlantic, joined to it by a leader line, stands in for it
+const DCF = "11001", gDC = el("g", {class: "dcbox"}, map);
+el("line", {x1: 828, y1: 267.5, x2: 885, y2: 300, class: "dcl"}, gDC);
+const dcRect = el("rect", {x: 885, y: 300, width: 20, height: 20, class: "c", "data-f": DCF}, gDC);
+const dcHatch = el("rect", {x: 885, y: 300, width: 20, height: 20, fill: "url(#hatch)", class: "ov", display: "none"}, gDC);
+el("text", {x: 910, y: 314.5, class: "dct"}, gDC).textContent = "DC";
 
 function fillFor(g, y) {
   if (!g) return css("--nodata");
@@ -275,6 +283,11 @@ function renderMap() {
     overlays[f].setAttribute("display", on && d != null && d >= SMALL[0] && d < SMALL[1] && st(g, y) === "P" ? "inline" : "none");
   }
   hl.setAttribute("d", S.sel && D.paths[S.sel] ? D.paths[S.sel] : "");
+  // the box is shown on the national map only; a state view is zoomed in far enough to see DC itself
+  gDC.setAttribute("display", S.state ? "none" : "inline");
+  dcRect.setAttribute("fill", shapes[DCF].getAttribute("fill"));
+  dcHatch.setAttribute("display", overlays[DCF].getAttribute("display"));
+  dcRect.classList.toggle("sel", S.sel === DCF);
 }
 
 // ---------- tooltip ----------
@@ -390,7 +403,7 @@ function renderPanel() {
     h += card("Deaths", s === "P" || s === "N" ? fmtN(d) : "–", s === "L" ? LOWTXT : s === "M" ? "No data this year" : d < SMALL[1] ? "Small count" : "");
     h += card("Death rate", s === "P" ? fmtR(r) : "–", s === "P" ? "per 100,000 residents" + (d < SMALL[1] ? " · can swing a lot" : "") : "Not published");
     if (stt) { const sd = stt.d[i], sr = stt.r[i];
-      h += card(stt.n + " deaths", sd != null ? fmtN(sd) : "–", sd != null ? "statewide" : stt.s[i] === "X" ? WHELD : "Fewer than 10 statewide");
+      h += card(stt.n + " deaths", sd != null ? fmtN(sd) : "–", sd != null ? (stt === D.states["11"] ? "citywide" : "statewide") : stt.s[i] === "X" ? WHELD : "Fewer than 10 statewide");
       h += card(stt.n + " rate", sr != null ? fmtR(sr) : "–", sr != null ? "per 100,000 residents" : stt.s[i] === "X" ? "Not shown, same reason" : "Not published"); }
   } else {
     const N = NAT[i];
