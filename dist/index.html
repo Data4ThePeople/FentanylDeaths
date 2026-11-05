@@ -45,8 +45,9 @@ input[type=range]{flex:1;accent-color:var(--accent)}
 .sw.h{background:repeating-linear-gradient(135deg,#e5736a 0 2px,#f7f5f0 2px 4px)}
 .explain{padding:6px 48px 14px;font-size:15px;line-height:1.55;color:var(--ink2);max-width:1100px}
 .explain b{color:var(--ink)}
-.main{display:grid;grid-template-columns:minmax(0,1fr) 420px;border-top:1px solid var(--line)}
-.left{padding:16px 32px 24px;min-width:0}
+.main{display:grid;grid-template-columns:minmax(0,1fr) 420px}
+.left .legend,.left .explain{padding-left:0;padding-right:0}
+.left{padding:4px 32px 24px;min-width:0}
 .right{background:var(--panel);border-left:1px solid var(--line)}
 #map{width:100%;height:auto;display:block}
 #map .c{stroke:none;cursor:pointer}
@@ -154,11 +155,10 @@ footer{padding:18px 48px 40px;font-family:var(--mono);font-size:12px;color:var(-
   <select class="stsel" id="stsel" aria-label="Show one state"></select>
 </section>
 
-<div class="legend" id="legend"></div>
-<div class="explain" id="explain"></div>
-
 <section class="main">
   <div class="left">
+    <div class="legend" id="legend"></div>
+    <div class="explain" id="explain"></div>
     <svg id="map" viewBox="0 0 975 610" role="img" aria-label="Map of U.S. counties by death rate involving synthetic opioids"></svg>
     <div class="trend">
       <h3 id="natl-title">U.S. deaths involving synthetic opioids, mostly fentanyl, by year</h3>
