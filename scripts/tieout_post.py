@@ -139,6 +139,12 @@ def pub(g, y, m=20):
     return g["s"][i] == "P" and g["d"][i] is not None and g["d"][i] >= m
 
 
+def has_count(g, y, m=20):
+    """For comparisons of counts: any published count, including Connecticut 2022+, which has counts but no rates."""
+    i = ix(y)
+    return g["s"][i] in "PN" and g["d"][i] is not None and g["d"][i] >= m
+
+
 peaks = sorted(((max((C[k]["r"][ix(y)], y) for y in Y if pub(C[k], y)), k) for k in C if any(pub(C[k], y) for y in Y)), reverse=True)
 (mr, my), mk = peaks[0]
 check("McDowell County, West Virginia, had 206.4 fentanyl deaths per 100,000 residents in 2023 (36 deaths)",
@@ -200,26 +206,26 @@ check("The smallest were in Nevada (down 4.9%), Alaska (6.9%), Utah (9.8%), Wash
       *(f"{s[1]}" for s in st[::-1][:5]), *(pct(-s[0], 1) for s in st[::-1][:5]))
 check("West Virginia fell most, 48.4%, then Arkansas, North Dakota, Virginia and Wisconsin. Nevada fell least, 4.9%",
       pct(-st[0][0], 1), pct(-st[-1][0], 1))
-both = [k for k in C if pub(C[k], 2023) and pub(C[k], 2024)]
+both = [k for k in C if has_count(C[k], 2023) and has_count(C[k], 2024)]
 fell = [k for k in both if C[k]["d"][b] < C[k]["d"][a]]
 same = [k for k in both if C[k]["d"][b] == C[k]["d"][a]]
 rose = [k for k in both if C[k]["d"][b] > C[k]["d"][a]]
-check("Of 435 counties with 20 or more fentanyl deaths in both 2023 and 2024, 411 (94.5%) had fewer deaths in 2024. Five were unchanged and 19 rose",
+check("Of 443 counties with 20 or more fentanyl deaths in both 2023 and 2024, 417 (94.1%) had fewer deaths in 2024. Six were unchanged and 20 rose",
       str(len(both)), str(len(fell)), pct(len(fell) / len(both) * 100, 1), str(len(rose)))
-if len(same) != 5:
+if len(same) != 6:
     bad.append(f"{len(same)} unchanged")
-both10 = [k for k in C if pub(C[k], 2023, 10) and pub(C[k], 2024, 10)]
+both10 = [k for k in C if has_count(C[k], 2023, 10) and has_count(C[k], 2024, 10)]
 fell10 = [k for k in both10 if C[k]["d"][b] < C[k]["d"][a]]
-check("639 of 706 counties (90.5%) fell", str(len(fell10)), str(len(both10)), pct(len(fell10) / len(both10) * 100, 1))
+check("645 of 714 counties (90.3%) fell", str(len(fell10)), str(len(both10)), pct(len(fell10) / len(both10) * 100, 1))
 check("All overdose deaths fell 24%", pct((t(2023) - t(2024)) / t(2023) * 100))
-check("from 39,160 to 29,771", n(UNK[2023][0]), n(UNK[2024][0]))
+check("unspecified drug (CDC code T50.9) also fell, from 39,160 to 29,771", n(UNK[2023][0]), n(UNK[2024][0]))
 check("The number of fentanyl deaths fell 34.4%", pct((f(2023) - f(2024)) / f(2023) * 100, 1))
 check("Overdose deaths that did not involve fentanyl fell 1.8%, from 32,231 to 31,649",
       pct(((t(2023) - f(2023)) - (t(2024) - f(2024))) / (t(2023) - f(2023)) * 100, 1), n(t(2023) - f(2023)), n(t(2024) - f(2024)))
 
 # ---- counties that went the other way
-check("Nineteen counties had more fentanyl deaths in 2024 than in 2023", )
-if len(rose) != 19:
+check("Twenty counties with 20 or more fentanyl deaths in both years had more deaths in 2024 than in 2023", )
+if len(rose) != 20:
     bad.append(f"rose {len(rose)}")
 spk = max(rose, key=lambda k: C[k]["d"][b] - C[k]["d"][a])
 check("Spokane County, Washington, had the largest increase, from 176 to 249 deaths (31.9 to 44.8 per 100,000)",

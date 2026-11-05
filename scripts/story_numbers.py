@@ -68,7 +68,8 @@ for f in sorted((f for f in C if C[f]["d"][ix(2024)]), key=lambda f: -C[f]["d"][
 
 # ---- beat 5
 a, b = ix(2023), ix(2024)
-both = [f for f in C if ok(C[f], 2023) and ok(C[f], 2024)]
+cnt = lambda g, y: g["s"][ix(y)] in "PN" and (g["d"][ix(y)] or 0) >= 20   # counts incl. CT 2022+ (no rates)
+both = [f for f in C if cnt(C[f], 2023) and cnt(C[f], 2024)]
 up = sorted((f for f in both if C[f]["d"][b] > C[f]["d"][a]), key=lambda f: C[f]["d"][a] - C[f]["d"][b])
 print(f"\n== beat 5: {len(both)} counties with 20+ deaths in 2023 and 2024; {len(up)} had more deaths in 2024")
 for f in up:

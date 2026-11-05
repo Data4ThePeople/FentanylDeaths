@@ -83,6 +83,12 @@ def pub(g, y, m=20):
     return g["s"][i] == "P" and g["d"][i] is not None and g["d"][i] >= m
 
 
+def has_count(g, y, m=20):
+    """For comparisons of counts: any published count, including Connecticut 2022+, which has counts but no rates."""
+    i = ix(y)
+    return g["s"][i] in "PN" and g["d"][i] is not None and g["d"][i] >= m
+
+
 # ---- 01: all overdose deaths vs deaths involving fentanyl
 def chart_overdose():
     tot = Counter()
@@ -206,7 +212,7 @@ def chart_states():
 # ---- 05: counties with more deaths in 2024
 def chart_rose():
     a, b = ix(2023), ix(2024)
-    up = [C[f] for f in C if pub(C[f], 2023) and pub(C[f], 2024) and C[f]["d"][b] > C[f]["d"][a]]
+    up = [C[f] for f in C if has_count(C[f], 2023) and has_count(C[f], 2024) and C[f]["d"][b] > C[f]["d"][a]]
     up.sort(key=lambda g: -(g["d"][b] - g["d"][a]) / g["d"][a])
     fig, ax = plt.subplots(figsize=(10, 9))
     fig.subplots_adjust(left=0.36, right=0.82, top=0.89, bottom=0.10)

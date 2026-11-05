@@ -40,6 +40,7 @@ Exports are tab-separated text with CDC's query settings and footnotes at the bo
 **Known quirks.**
 - **Unreliable rates.** D77 marks rates based on fewer than 20 deaths "Unreliable" and does not show them. D157, since February 2026, flags a rate only when its 95% confidence interval is wider than 160% of the rate, which in practice shows rates for every county with 10 or more deaths. To treat all years alike, for D77 counties with 10 to 19 deaths we compute the crude rate ourselves with CDC's formula, deaths / population x 100,000, rounded to one decimal (`rate_src = calc` in `data/clean/county.csv`; 815 county-years). Counties with 10 to 19 deaths are hatched on the map in every year and labeled "rate can swing a lot from year to year." This uses counts of 10 or more only, which the data use terms allow.
 - **Rankings** use only counties with 20 or more deaths in that year, so tiny counties with unstable rates do not fill the top of the list.
+- **Comparisons of counts** (for example, counties with more or fewer deaths from 2023 to 2024) use every county with a published count, including Connecticut's counties from 2022 on, which have counts but no rates. Comparisons of rates leave those out.
 
 **Uncertainty.** WONDER gives 95% confidence intervals for each rate, and we show them in the hover. Counts are complete tallies, not samples, but rates in small counties swing from year to year by chance.
 
@@ -54,3 +55,11 @@ Exports are tab-separated text with CDC's query settings and footnotes at the bo
 **Version and vintage.** us-atlas 3.0.1 uses Census 2017 cartographic boundaries at 1:10 million. Valdez-Cordova (02261) is one shape, so Chugach and Copper River are not drawn separately. Connecticut has its 8 old counties. Oglala Lakota County, SD is 46102.
 
 **Known quirks.** Unmatched codes: WONDER codes 02201, 02232, 02280 (old Alaska areas), 51515 (Bedford city, VA) and 51560 (Clifton Forge city, VA) have no 2017 shape; none had 10 or more deaths in any year. 46113 (Shannon County, SD) and 02270 (Wade Hampton, AK) are mapped to their renamed codes 46102 (Oglala Lakota) and 02158 (Kusilvak). Small counties and Virginia's independent cities are very small at this scale. Every WONDER county code is matched to a shape. Any code without a shape is listed in `TIEOUT.md` and in the page notes.
+
+## Series used only in the post's static charts
+
+Built by `scripts/post_charts.py`; checked by `scripts/tieout_post.py` and an independent re-pull of U.S. totals through the WONDER API (they matched the raw files in every year).
+
+- **All drug overdose deaths** (chart 1 and the post's totals): underlying cause X40-X44, X60-X64, X85, Y10-Y14, summed over states from the raw exports in the SUD_V3 project (`ucd_*_state_year_drug.csv`). 2001-2024 only: that export starts in 2001. D77 for 2001-2017, D157 for 2018-2024. The `ucd_*_year.csv` and `ucd_*_state_year.csv` files in that folder also include alcohol-induced deaths and are not used.
+- **Deaths by opioid type** (chart 3): the same overdose deaths with T40.1 (heroin) or T40.2 (natural and semisynthetic opioids, such as oxycodone; labeled "prescription opioids") among the multiple causes, U.S. crude rates per 100,000, from SUD_V3's `mcd_*_year_drugtype.csv`. Methadone (T40.3) is not included in "prescription opioids." A death can involve more than one type.
+- **Unspecified drug** (2024 section): overdose deaths listing T50.9 ("other and unspecified drugs") anywhere among the multiple causes, U.S. totals from `data/raw/wonder/*_us_year_t509.txt`. Many of these deaths also name a specific drug, so this is not the share of certificates that name no drug.
