@@ -77,7 +77,7 @@ Philadelphia, where CDC counted 269 outbreak deaths, shows fewer than 10 on the 
 
 CDC describes the opioid crisis in three waves ([CDC](https://www.cdc.gov/overdose-prevention/about/understanding-the-opioid-overdose-epidemic.html)). The first began with more opioid prescribing in the 1990s. The second began in 2010 with a fast rise in heroin deaths. The third began in 2013, with deaths involving synthetic opioids, "particularly those involving illegally made fentanyl." On the map, the U.S. fentanyl death rate was 1.0 per 100,000 people in 2013 and 22.2 in 2022. From 2014 to 2015 alone it rose 72%, and CDC said that rise was "likely driven primarily by illicitly manufactured fentanyl" ([CDC](https://www.cdc.gov/mmwr/volumes/65/wr/mm655051e1.htm)). The chart below shows the three waves in the death rate for each type of opioid.
 
-![Line chart of U.S. overdose death rates per 100,000 people by type of opioid involved, 2001 to 2024, with CDC's three waves marked above it. Wave 1, prescription opioids, began in the 1990s; wave 2, heroin, in 2010; wave 3, synthetic opioids, in 2013. Prescription opioid and heroin rates stay under 5. The fentanyl rate rises from 1.0 in 2013 to 22.2 in 2022, then falls in 2023 and 2024.](images/06-three-waves.png)
+![Line chart of U.S. overdose death rates per 100,000 people by type of opioid involved, 2001 to 2024, with CDC's three waves marked above it. Wave 1, prescription opioids, began in the 1990s; wave 2, heroin, in 2010; wave 3, synthetic opioids, in 2013. Prescription opioid and heroin rates stay under 5. The fentanyl rate rises from 1.0 in 2013 to 22.2 in 2022, then falls in 2023 and 2024.](images/03-three-waves.png)
 *Source: CDC WONDER, Multiple Cause of Death.*
 
 DEA has described how the supply worked. In 2018 it told Congress that fentanyl and the chemicals used to make it were "often produced in China" and shipped by mail to the U.S., or to groups in Mexico, Canada and the Caribbean. There it was mixed into heroin and other drugs or pressed into pills ([DEA testimony, 2018](https://www.justice.gov/file/1099336/download)). Drug labs reported finding fentanyl 36,061 times in 2016, up from 1,042 in 2013. By 2023, DEA said the Sinaloa and Jalisco cartels bought the chemicals in China, made fentanyl in Mexico, and pressed it into fake pills that look like prescription drugs. It said 6 in 10 of the fake pills it tested held a potentially deadly dose ([DEA testimony, 2023](https://judiciary.house.gov/sites/evo-subsites/republicans-judiciary.house.gov/files/evo-media-document/milgram-testimony.pdf)). DEA counts 2 milligrams of fentanyl as a potentially deadly dose ([DEA](https://www.dea.gov/onepill)).
@@ -92,7 +92,7 @@ Here we count only counties with 20 or more fentanyl deaths in a year, the same 
 
 **Southern West Virginia has the highest rates on record.** McDowell County, West Virginia, had 206.4 fentanyl deaths per 100,000 residents in 2023 (36 deaths), the highest rate for any county in any year. If you rank counties by their worst year, eight of the top ten are in West Virginia: McDowell, Wyoming, Logan, Mercer, Raleigh, Cabell, Mason and Fayette. The other two are Baltimore city and Scioto County, Ohio.
 
-![Bar chart of the ten highest county fentanyl death rates in any year, counties with 20 or more deaths. McDowell County, West Virginia, leads at 206.4 per 100,000 in 2023, followed by Wyoming and Logan counties, West Virginia. Eight of the ten are in West Virginia; the others are Baltimore city (135.6 in 2021) and Scioto County, Ohio (126.4 in 2020).](images/03-highest-county-rates.png)
+![Bar chart of the ten highest county fentanyl death rates in any year, counties with 20 or more deaths. McDowell County, West Virginia, leads at 206.4 per 100,000 in 2023, followed by Wyoming and Logan counties, West Virginia. Eight of the ten are in West Virginia; the others are Baltimore city (135.6 in 2021) and Scioto County, Ohio (126.4 in 2020).](images/04-highest-county-rates.png)
 *Source: CDC WONDER, Multiple Cause of Death.*
 
 **Baltimore stands out among big cities.** Baltimore city had the highest rate in the country in 2024, 95.2 per 100,000 (541 deaths). Its worst year was 2021, at 135.6 per 100,000 (782 deaths). Baltimore city, Cabell County, West Virginia (home to Huntington), and St. Louis city were in the country's top 25 by rate every year from 2016 to 2024.
@@ -109,7 +109,7 @@ Fentanyl deaths fell from 72,776 in 2023 to 47,735 in 2024. The death rate fell 
 
 **Every state with numbers for both years fell.** That is 49 states, counting DC. Hawaii's 2024 total and New Hampshire's 2023 total are not shown, to protect small county counts. The largest drops were in West Virginia (down 48.4%), Arkansas (46.6%), North Dakota (46.1%), Virginia (45.8%) and Wisconsin (45.7%). The smallest were in the West: Nevada (down 4.9%), Alaska (6.9%), Utah (9.8%), Washington (13.5%) and Arizona (16.5%).
 
-![Bar chart of the change in fentanyl deaths from 2023 to 2024 in 49 states, counting DC. Every bar is a decline. West Virginia fell most, 48.4%, then Arkansas, North Dakota, Virginia and Wisconsin. Nevada fell least, 4.9%, then Alaska, Utah, Washington and Arizona. Hawaii and New Hampshire are not shown.](images/04-state-change-2024.png)
+![Bar chart of the change in fentanyl deaths from 2023 to 2024 in 49 states, counting DC. Every bar is a decline. West Virginia fell most, 48.4%, then Arkansas, North Dakota, Virginia and Wisconsin. Nevada fell least, 4.9%, then Alaska, Utah, Washington and Arizona. Hawaii and New Hampshire are not shown.](images/05-state-change-2024.png)
 *Source: CDC WONDER, Multiple Cause of Death.*
 
 **Nearly every county fell too.** Of 435 counties with 20 or more fentanyl deaths in both 2023 and 2024, 411 (94.5%) had fewer deaths in 2024. Five were unchanged and 19 rose. With a lower bar, 10 or more deaths in both years, 639 of 706 counties (90.5%) fell.
@@ -122,7 +122,7 @@ Fentanyl deaths fell from 72,776 in 2023 to 47,735 in 2024. The death rate fell 
 
 Nineteen counties had more fentanyl deaths in 2024 than in 2023. Nine are in Western states, and three of those are in Washington.
 
-![Bar chart of the 19 counties with more fentanyl deaths in 2024 than 2023, counties with 20 or more deaths in both years. Spokane County, Washington, rose most, 41.5% (176 to 249), then Matanuska-Susitna Borough, Alaska, and Mohave County, Arizona. Nine of the 19 are in Western states.](images/05-counties-rose-2024.png)
+![Bar chart of the 19 counties with more fentanyl deaths in 2024 than 2023, counties with 20 or more deaths in both years. Spokane County, Washington, rose most, 41.5% (176 to 249), then Matanuska-Susitna Borough, Alaska, and Mohave County, Arizona. Nine of the 19 are in Western states.](images/06-counties-rose-2024.png)
 *Source: CDC WONDER, Multiple Cause of Death.*
 
 Spokane County, Washington, had the largest increase, from 176 to 249 deaths (31.9 to 44.8 per 100,000). Clark County, Nevada, home to Las Vegas, had the most deaths of the group, 519 in 2024.

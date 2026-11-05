@@ -172,7 +172,7 @@ def chart_peaks(n=10):
                "Each county's highest fentanyl death rate in any year, per 100,000 residents, 1999 to 2024")
     words(fig, 0.03, 0.855, [("West Virginia", BLUE), ("   and   ", INK), ("other states", INK_DIM)])
     credit(fig, SRC + "\n" + FEN_NOTE + "\nCounties with 20 or more deaths in that year only.")
-    save(fig, "03-highest-county-rates.png")
+    save(fig, "04-highest-county-rates.png")
 
 
 # ---- 04: state change 2023 to 2024
@@ -200,7 +200,7 @@ def chart_states():
     titleblock(fig, "Fentanyl deaths fell in every state with data for both years",
                "Change in fentanyl deaths from 2023 to 2024", y=0.985)
     credit(fig, SRC + "\n" + FEN_NOTE + "\nNot shown, to protect small county counts: " + ", ".join(missing) + ".")
-    save(fig, "04-state-change-2024.png")
+    save(fig, "05-state-change-2024.png")
 
 
 # ---- 05: counties with more deaths in 2024
@@ -225,7 +225,7 @@ def chart_rose():
                "Change in fentanyl deaths from 2023 to 2024, deaths in parentheses", y=0.98)
     words(fig, 0.03, 0.905, [("Western states", BLUE), ("   and   ", INK), ("other states", INK_DIM)])
     credit(fig, SRC + "\n" + FEN_NOTE + "\nCounties with 20 or more deaths in both years. West: Census West region.")
-    save(fig, "05-counties-rose-2024.png")
+    save(fig, "06-counties-rose-2024.png")
 
 
 # ---- 06: CDC's three waves, drawn on death rates by opioid type
@@ -286,7 +286,7 @@ def chart_waves():
                y=0.975)
     credit(fig, SRC + "\nPrescription opioids: natural and semisynthetic opioids (T40.2), such as oxycodone. Heroin: T40.1. "
                 "Fentanyl: T40.4.\nA death can involve more than one type. The 72% is CDC's figure (age-adjusted rate, MMWR 2016).")
-    save(fig, "06-three-waves.png")
+    save(fig, "03-three-waves.png")
 
 
 if __name__ == "__main__":
