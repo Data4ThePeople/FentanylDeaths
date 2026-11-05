@@ -87,7 +87,7 @@ Only counties with 20 or more deaths in a year count here, the same rule as the 
 
 ## Beat 6. Looking ahead: funding and the next data
 
-**Eric's angle: the unknown is the risk.** Deaths fell fast, and the people who study it do not agree on why. If the drop came mostly from the drug supply, it could reverse if the supply changes. Cutting programs on the belief that the problem is solved would remove support at the moment no one can say what is holding deaths down. (Eric's argument. The sources below support the pieces of it; none of them predicts a rebound.)
+**Eric's angle: the unknown is the risk.** Deaths fell fast, and the people who study it do not agree on why. If the drop came mostly from the drug supply, it could reverse if the supply changes. Cutting programs on the belief that the problem is solved would remove support while researchers still disagree about what is holding deaths down. (Eric's argument. The sources below support the pieces of it; none of them predicts a rebound.)
 
 What backs each piece:
 - The cause is not settled: see beat 5 (*Science*, preprint, *Science Advances*, CDC's unranked list).
