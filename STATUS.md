@@ -5,8 +5,8 @@ Process: ~/.claude/d4tp-process/PROCESS.md
 
 ## Current
 
-Post: none yet
-Step: 2a (waiting for Eric's go and slug)
+Post: fentanyl-deaths-by-county
+Step: 2a
 Since: 2026-11-05
 
 ## Steps
@@ -41,3 +41,4 @@ None.
 - 2026-11-05 Supply vs programs: 94.5% of counties with 20+ deaths in both years fell in 2024; not a coding change (unnamed-drug overdoses fell too); drop almost all in fentanyl deaths (-34.4% vs -1.8% for others). Evidence leans to the drug supply but is contested (Science Advances 2026). Eric's angle for beat 6: the unknown is the risk.
 - 2026-11-05 Beats laid out in BEATS.md (numbers from scripts/story_numbers.py; Claude's sourced history draft in beat 3). Note: the independent tie-out covered the built page; the beats numbers are new and get checked in the post tie-out.
 - 2026-11-05 Step 1 confirmed by Eric.
+- 2026-11-05 Step 2a opened, slug fentanyl-deaths-by-county. Eric asked Claude to write the full draft from BEATS.md (he may rewrite the intro). Draft in posts/fentanyl-deaths-by-county/POST.md.
