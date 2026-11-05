@@ -485,11 +485,21 @@ document.querySelectorAll("#speed button").forEach(b => b.onclick = () => {
   document.querySelectorAll("#speed button").forEach(x => x.setAttribute("aria-pressed", String(x === b)));
   if (S.playing) start();
 });
-addEventListener("resize", () => { renderNatl(); renderPanel(); });
+addEventListener("resize", () => { renderNatl(); renderPanel(); fitRank(); });
+// when the side panel sits beside the map, the ranking scrolls in whatever height the map column leaves,
+// so both columns end together; stacked on narrow screens it keeps its CSS cap
+function fitRank() {
+  const left = document.querySelector(".left"), right = document.querySelector(".right"), ol = document.getElementById("rank");
+  if (right.offsetTop !== left.offsetTop) { ol.style.maxHeight = ""; return; }
+  ol.style.maxHeight = "0px";
+  const last = right.lastElementChild;
+  const used = last.getBoundingClientRect().bottom + parseFloat(getComputedStyle(last).marginBottom) - right.getBoundingClientRect().top;
+  ol.style.maxHeight = Math.max(150, left.offsetHeight - used) + "px";
+}
 
 function render() {
   document.getElementById("yr").textContent = S.year; slider.value = S.year;
-  renderBanner(); renderExplain(); renderMap(); renderNatl(); renderPanel(); renderRank();
+  renderBanner(); renderExplain(); renderMap(); renderNatl(); renderPanel(); renderRank(); fitRank();
 }
 // optional starting view from the URL, e.g. #y=2016&s=39&c=39035
 {
