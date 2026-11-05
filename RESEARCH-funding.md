@@ -30,6 +30,17 @@ Compiled 2026-11-05. Research notes only, not post copy. Every number below appe
 - Test strips: I found no study that measures their effect on the national decline.
 - Bottom line from the sources: the supply explanation has the most direct support. Naloxone and treatment are named by CDC, but the studies above do not show they explain most of the drop. None of these sources rules out a role for public health programs.
 
+### 1d. Supply or programs? Checks added 2026-11-05 (Eric's question: was the drop real, and was it the programs?)
+
+- **How widespread (our data, `scripts/story_numbers.py` logic):** of 435 counties with 20 or more fentanyl deaths in both 2023 and 2024, 411 (94.5%) had fewer deaths in 2024, 5 were unchanged and 19 rose. Of 706 counties with 10 or more in both years, 639 (90.5%) fell. Every state shown in both years fell (49, counting DC).
+- **Not a coding change (our data):** all overdose deaths fell 26%, whatever drug was named. Overdose deaths that list an unnamed drug (T50.9) also fell, from 39,160 in 2023 to 29,771 in 2024, so fentanyl deaths were not moved into "unspecified."
+- **The drop was almost all in fentanyl deaths (our data):** deaths involving fentanyl fell 34.4% (72,776 to 47,735). Overdose deaths without fentanyl fell 1.8% (32,231 to 31,649).
+- **Busch, medRxiv preprint, not peer-reviewed (posted February 4, 2026), same WONDER data:** fentanyl-involved deaths fell 36.5% and others 5.3%. Other opioid and stimulant deaths without fentanyl rose slightly. He concludes the findings "are most consistent with supply-side changes affecting fentanyl toxicity rather than more uniform effects of infrastructure expansion." https://www.medrxiv.org/content/10.64898/2025.12.04.25341579.full.pdf
+- **Pushback, peer-reviewed:** Dasgupta, Pacula and others, *Science Advances* (USC Schaeffer summary, September 16, 2026): "National fentanyl purity alone does not provide sufficient explanation for the recent decline in overdose deaths." Purity "did not track fatal fentanyl overdose rates in most United States regions," though local purity drops "may influence localized overdose decreases." They name supply changes, public health programs and post-pandemic recovery as other possible causes. https://schaeffer.usc.edu/research/fentanyl-purity-and-overdose-decline-a-reexamination-of-geographic-trends/
+- **The decline has continued:** CDC's provisional count is 67,798 overdose deaths in the 12 months ending March 2026, down 12.3% from a year earlier (CDC, August 31, 2026). The release names no cause. https://www.cdc.gov/media/releases/2026/cdc-launches-new-overdose-prevention-data-channel.html
+- **Risk if the supply changes:** the *Science* authors write "How long the decline will last is uncertain." DEA's 2025 release warns of fentanyl mixed with medetomidine, "a more powerful veterinary anesthetic." https://www.dea.gov/press-releases/2025/05/15/dea-releases-2025-national-drug-threat-assessment
+- **Not verified:** a May 2026 DEA advisory on nitazenes, seen only on a secondary site (civicintelligence.news). Monthly 2026 figures from news aggregators.
+
 ## 2. The main funding streams
 
 - SOR and Tribal Opioid Response (TOR), run by SAMHSA. Formula grants to states and tribes for prevention, overdose reversal drugs, treatment including medications for opioid use disorder, and recovery. FY25 continuation awards: $1,480,500,000 for SOR and $63,000,000 for TOR (September 22, 2025). https://www.samhsa.gov/newsroom/press-announcements/20250922/hhs-state-tribal-opioid-response-grants-2025
