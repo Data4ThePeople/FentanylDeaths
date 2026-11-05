@@ -20,7 +20,10 @@ dividers: false
 
 Earlier this week we published a map of substance use treatment in every state. While building it, we looked at which drugs were behind the rise in overdose deaths. One answer stood out. From 2013 to 2022, yearly overdose deaths in the U.S. went up by 63,959, from 43,982 to 107,941. Over the same years, deaths involving fentanyl went up by 70,733, from 3,105 to 73,838. Overdose deaths that did not involve fentanyl went down by 6,774. In those years, the whole rise was in deaths involving fentanyl.
 
-Over a longer span, 2001 to 2022, deaths involving fentanyl account for 82% of the rise in overdose deaths. Fentanyl was involved in 7% of overdose deaths in 2013, 51% in 2019 and 68% in 2022. When overdose deaths finally fell in 2024, fentanyl was the story again: overdose deaths fell by 25,623, and deaths involving fentanyl fell by 25,041, or 98% of the drop.
+Over a longer span, 2001 to 2022, deaths involving fentanyl account for 82% of the rise in overdose deaths. Fentanyl was involved in 7% of overdose deaths in 2013, 51% in 2019 and 68% in 2022. When overdose deaths finally fell in 2024, fentanyl was the story again: overdose deaths fell by 25,623, and deaths involving fentanyl fell by 25,041, or 98% of the drop. The chart below shows all overdose deaths each year next to deaths involving fentanyl.
+
+![Line chart of U.S. overdose deaths per year, 2001 to 2024. All overdose deaths rose from 43,982 in 2013 to 107,941 in 2022, then fell to 79,384 in 2024. Deaths involving fentanyl rose from 3,105 in 2013 to 73,838 in 2022, then fell to 47,735 in 2024.](images/01-overdose-vs-fentanyl.png)
+*Source: CDC WONDER, Multiple Cause of Death.*
 
 On the drug side, fentanyl is the story, so that is where we started. This post has a map of fentanyl deaths in every U.S. county for every year from 1999 to 2024, a short history of how fentanyl got here, a look at the counties that stand out, and what is known, and not known, about why deaths fell in 2024.
 
@@ -63,9 +66,14 @@ In 1999, only 6 counties had 10 or more fentanyl deaths. In 2013 there were 55. 
 
 ::: spacer 5px
 
-Fentanyl started as a medicine. A Belgian chemist, Paul Janssen, first made it around 1960 ([review, *International Journal of Molecular Sciences*](https://pmc.ncbi.nlm.nih.gov/articles/PMC11765396/)). The FDA approved it as an injected anesthetic called Sublimaze in 1968 ([CDEK](https://cdek.data4thepeople.com/drugs/98141)) and as the Duragesic skin patch in 1990 ([FDA](https://www.accessdata.fda.gov/scripts/cder/daf/index.cfm?event=overview.process&ApplNo=019813)). DEA says it is "approximately 100 times more potent than morphine and 50 times more potent than heroin" as a painkiller ([DEA](https://www.dea.gov/factsheets/fentanyl)).
+Fentanyl started as a medicine. A Belgian chemist, Paul Janssen, first made it around 1960 ([review, *International Journal of Molecular Sciences*](https://pmc.ncbi.nlm.nih.gov/articles/PMC11765396/)). The FDA approved it as an injected anesthetic called Sublimaze in 1968 ([CDEK](https://cdek.data4thepeople.com/drugs/98141); [FDA](https://www.accessdata.fda.gov/scripts/cder/daf/index.cfm?event=overview.process&ApplNo=016619)) and as the Duragesic skin patch in 1990 ([FDA](https://www.accessdata.fda.gov/scripts/cder/daf/index.cfm?event=overview.process&ApplNo=019813)). DEA says it is "approximately 100 times more potent than morphine and 50 times more potent than heroin" as a painkiller ([DEA](https://www.dea.gov/factsheets/fentanyl)).
 
-Illegally made fentanyl showed up long before the recent crisis. In 1979, fentanyl-type drugs sold as "China White" appeared on the streets in California ([*Journal of Forensic Sciences*](https://europepmc.org/article/MED/3286815)). From April 2005 to March 2007, CDC and DEA tied 1,013 deaths to illegally made fentanyl, most of them in the Chicago, Philadelphia and Detroit areas. Deaths peaked in June 2006, a month after police closed a fentanyl lab in Toluca, Mexico ([CDC](https://www.cdc.gov/mmwr/preview/mmwrhtml/mm5729a1.htm)). DEA then put limits on two chemicals used to make fentanyl, in 2007 and 2010 ([DEA](https://www.deadiversion.usdoj.gov/drug_chem_info/fentanyl.pdf)). You can see part of that outbreak on the map in 2006: Cook County, Illinois, had 283 fentanyl deaths and Wayne County, Michigan, had 103. Philadelphia, where CDC counted 269 outbreak deaths, shows fewer than 10 on the map in each of those years. We have not found the reason, and it is one more sign that counts from early years should be read with care.
+Illegally made fentanyl showed up long before the recent crisis. In 1979, fentanyl-type drugs sold as "China White" appeared on the streets in California ([*Journal of Forensic Sciences*](https://europepmc.org/article/MED/3286815)). From April 2005 to March 2007, CDC and DEA tied 1,013 deaths to illegally made fentanyl, most of them in the Chicago, Philadelphia and Detroit areas. Deaths peaked in June 2006, a month after police closed a fentanyl lab in Toluca, Mexico ([CDC](https://www.cdc.gov/mmwr/preview/mmwrhtml/mm5729a1.htm)). DEA then put limits on two chemicals used to make fentanyl, in 2007 and 2010 ([DEA](https://www.deadiversion.usdoj.gov/drug_chem_info/fentanyl.pdf)). You can see part of that outbreak on the map in 2006: Cook County, Illinois, had 283 fentanyl deaths and Wayne County, Michigan, had 103.
+
+![Bar charts of fentanyl deaths per year, 1999 to 2012, in Cook County, Illinois, and Wayne County, Michigan. Most years show 10 to 27 deaths or fewer than 10. In 2006 Cook County had 283 and Wayne County had 103.](images/02-outbreak-2006.png)
+*Source: CDC WONDER, Multiple Cause of Death.*
+
+Philadelphia, where CDC counted 269 outbreak deaths, shows fewer than 10 on the map in each of those years. We have not found the reason, and it is one more sign that counts from early years should be read with care.
 
 CDC describes the opioid crisis in three waves ([CDC](https://www.cdc.gov/overdose-prevention/about/understanding-the-opioid-overdose-epidemic.html)). The first began with more opioid prescribing in the 1990s. The second began in 2010 with a fast rise in heroin deaths. The third began in 2013, with deaths involving synthetic opioids, "particularly those involving illegally made fentanyl." On the map, the U.S. fentanyl death rate was 1.0 per 100,000 people in 2013 and 22.2 in 2022. From 2014 to 2015 alone it rose 72%, and CDC said that rise was "likely driven primarily by illicitly manufactured fentanyl" ([CDC](https://www.cdc.gov/mmwr/volumes/65/wr/mm655051e1.htm)).
 
@@ -81,6 +89,9 @@ Here we count only counties with 20 or more fentanyl deaths in a year, the same 
 
 **Southern West Virginia has the highest rates on record.** McDowell County, West Virginia, had 206.4 fentanyl deaths per 100,000 residents in 2023 (36 deaths), the highest rate for any county in any year. If you rank counties by their worst year, eight of the top ten are in West Virginia: McDowell, Wyoming, Logan, Mercer, Raleigh, Cabell, Mason and Fayette. The other two are Baltimore city and Scioto County, Ohio.
 
+![Bar chart of the ten highest county fentanyl death rates in any year, counties with 20 or more deaths. McDowell County, West Virginia, leads at 206.4 per 100,000 in 2023, followed by Wyoming and Logan counties, West Virginia. Eight of the ten are in West Virginia; the others are Baltimore city (135.6 in 2021) and Scioto County, Ohio (126.4 in 2020).](images/03-highest-county-rates.png)
+*Source: CDC WONDER, Multiple Cause of Death.*
+
 **Baltimore stands out among big cities.** Baltimore city had the highest rate in the country in 2024, 95.2 per 100,000 (541 deaths). Its worst year was 2021, at 135.6 per 100,000 (782 deaths). Baltimore city, Cabell County, West Virginia (home to Huntington), and St. Louis city were in the country's top 25 by rate every year from 2016 to 2024.
 
 **High rates are not only in the East.** In 2024, Rio Arriba County, New Mexico, had the second-highest rate in the country (80.1 per 100,000, 32 deaths). Anchorage, Alaska, was seventh (55.9 per 100,000, 162 deaths).
@@ -95,6 +106,9 @@ Fentanyl deaths fell from 72,776 in 2023 to 47,735 in 2024. The death rate fell 
 
 **Every state with numbers for both years fell.** That is 49 states, counting DC. Hawaii's 2024 total and New Hampshire's 2023 total are not shown, to protect small county counts. The largest drops were in West Virginia (down 48.4%), Arkansas (46.6%), North Dakota (46.1%), Virginia (45.8%) and Wisconsin (45.7%). The smallest were in the West: Nevada (down 4.9%), Alaska (6.9%), Utah (9.8%), Washington (13.5%) and Arizona (16.5%).
 
+![Bar chart of the change in fentanyl deaths from 2023 to 2024 in 49 states, counting DC. Every bar is a decline. West Virginia fell most, 48.4%, then Arkansas, North Dakota, Virginia and Wisconsin. Nevada fell least, 4.9%, then Alaska, Utah, Washington and Arizona. Hawaii and New Hampshire are not shown.](images/04-state-change-2024.png)
+*Source: CDC WONDER, Multiple Cause of Death.*
+
 **Nearly every county fell too.** Of 435 counties with 20 or more fentanyl deaths in both 2023 and 2024, 411 (94.5%) had fewer deaths in 2024. Five were unchanged and 19 rose. With a lower bar, 10 or more deaths in both years, 639 of 706 counties (90.5%) fell.
 
 **It was not a change in how deaths were recorded.** All overdose deaths fell 26%, no matter which drug was named. Overdose deaths where the drug was not named also fell, from 39,160 to 29,771, so fentanyl deaths were not just moved into an "unknown drug" group.
@@ -104,6 +118,9 @@ Fentanyl deaths fell from 72,776 in 2023 to 47,735 in 2024. The death rate fell 
 ### The counties that went the other way
 
 Nineteen counties had more fentanyl deaths in 2024 than in 2023. Nine are in Western states, and three of those are in Washington.
+
+![Bar chart of the 19 counties with more fentanyl deaths in 2024 than 2023, counties with 20 or more deaths in both years. Spokane County, Washington, rose most, 41.5% (176 to 249), then Matanuska-Susitna Borough, Alaska, and Mohave County, Arizona. Nine of the 19 are in Western states.](images/05-counties-rose-2024.png)
+*Source: CDC WONDER, Multiple Cause of Death.*
 
 - Spokane County, Washington: 176 to 249 deaths (31.9 to 44.8 per 100,000), the largest increase.
 - Yakima County, Washington: 87 to 111. Cowlitz County, Washington: 35 to 40.
