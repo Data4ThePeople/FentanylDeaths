@@ -153,7 +153,7 @@ That is why the funding matters. Cutting programs on the belief that the problem
 
 **What has been proposed.** HHS's budget request for fiscal year 2027 would ([HHS](https://www.hhs.gov/sites/default/files/fy-2027-budget-in-brief.pdf)):
 
-- fold SAMHSA, the agency that runs most of these grants, into a new agency
+- fold SAMHSA, the agency that runs most of these grants, into a new agency called the Administration for a Healthy America
 - merge the State Opioid Response grants and two block grants into one $4.621 billion block grant, the same total as today
 - cut SAMHSA's other substance abuse prevention programs from $350 million to $89 million, and its other treatment programs from $564 million to $490 million. These are separate from the State Opioid Response grants.
 - move CDC's injury center, which runs its overdose programs, into that new agency at $588 million, down from $761 million
