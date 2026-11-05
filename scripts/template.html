@@ -104,14 +104,15 @@ footer{padding:18px 48px 40px;font-family:var(--mono);font-size:12px;color:var(-
 }
 /* embed mode (inside an iframe, or #embed=1): the post carries the title, so the header goes;
    notes collapse; map and side panel stay side by side down to 680px */
-.framed header,.framed .help p,.framed .help .ft{display:none}
+/* the explanation line carries the year's U.S. deaths, so the banner goes too */
+.framed header,.framed .banner,.framed .help p,.framed .help .ft{display:none}
 .framed .controls{padding-top:10px;padding-bottom:10px}
 .framed .legend{padding-top:8px}
 .framed .explain{font-size:14px;padding-bottom:10px}
 .framed .left{padding-top:10px;padding-bottom:14px}
 .framed #natl{height:150px}
 .framed .main{grid-template-columns:minmax(0,1fr) 340px}
-.framed .rank ol{max-height:200px}
+.framed .rank ol{max-height:170px}
 .framed .ph{padding:14px 20px 10px}.framed .rank{padding:12px 20px 6px}.framed .ptrend{padding:8px 20px 2px}
 .framed #ptrend{height:120px}
 .framed .card{padding:10px 8px}.framed .card .v{margin:6px 0 4px;font-size:20px}
