@@ -1,6 +1,6 @@
 # Fentanyl Deaths, County by County, 1999-2024
 
-An interactive map from Data 4 The People of deaths involving synthetic opioids, mostly fentanyl, in every U.S. county from 1999 to 2024. Pick a year, press play (at 1x, 2x or 3x speed), choose one state, or click a county to see its deaths, rate and trend next to its state and the U.S.
+An interactive map from Data 4 The People of deaths involving synthetic opioids, mostly fentanyl, in every U.S. county from 1999 to 2024. Pick a year, press play (at 1x, 2x or 3x speed), choose one state, zoom in and drag the map, or click a county to see its deaths, rate and trend next to its state and the U.S.
 
 **Live map:** https://data4thepeople.github.io/FentanylDeaths/
 

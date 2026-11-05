@@ -50,6 +50,11 @@ input[type=range]{flex:1;accent-color:var(--accent)}
 .left{padding:4px 32px 24px;min-width:0}
 .right{background:var(--panel);border-left:1px solid var(--line)}
 #map{width:100%;height:auto;display:block}
+.mapwrap{position:relative}
+.zoomctl{position:absolute;top:6px;right:6px;display:flex;gap:4px}
+.zoomctl button{font-family:var(--mono);font-size:13px;min-width:30px;height:30px;padding:0 9px;background:var(--bg);color:var(--ink);border:1px solid var(--line2);border-radius:3px;cursor:pointer}
+.zoomctl button:hover{background:var(--panel2)}
+#map.pan{cursor:grab}#map.pan.drag{cursor:grabbing}
 #map .c{stroke:none;cursor:pointer}
 #map .ov{pointer-events:none}
 #map .sl{fill:none;stroke:#f7f5f0;stroke-width:.9;pointer-events:none}
@@ -161,7 +166,10 @@ footer{padding:18px 48px 40px;font-family:var(--mono);font-size:12px;color:var(-
   <div class="left">
     <div class="legend" id="legend"></div>
     <div class="explain" id="explain"></div>
-    <svg id="map" viewBox="0 0 975 610" role="img" aria-label="Map of U.S. counties by death rate involving synthetic opioids"></svg>
+    <div class="mapwrap">
+      <svg id="map" viewBox="0 0 975 610" role="img" aria-label="Map of U.S. counties by death rate involving synthetic opioids"></svg>
+      <div class="zoomctl" role="group" aria-label="Map zoom"><button id="zin" aria-label="Zoom in">+</button><button id="zout" aria-label="Zoom out">−</button><button id="zreset">Reset view</button></div>
+    </div>
     <div class="trend">
       <h3 id="natl-title">U.S. deaths involving synthetic opioids, mostly fentanyl, by year</h3>
       <svg id="natl" role="img" aria-label="Bar chart of U.S. deaths by year"></svg>
@@ -223,7 +231,7 @@ const NAT = YEARS.map(y => {
   return {n, sum, tot, share: sum / tot};
 });
 
-const S = {year: 2024, sel: null, state: null, hover: null, playing: null, speed: 1};
+const S = {year: 2024, sel: null, state: null, hover: null, playing: null, speed: 1, view: null};
 const STEP_MS = 900;                     // one year per 0.9 seconds at 1x
 
 // ---------- map ----------
@@ -268,13 +276,41 @@ function stateBox(sfips) {
   w *= 1.08; h *= 1.08; if (w / h > 975 / 610) h = w * 610 / 975; else w = h * 975 / 610;
   return BOX[sfips] = [cx - w / 2, cy - h / 2, w, h].map(v => v.toFixed(1)).join(" ");
 }
+// zoom: the buttons change the viewBox around its center; drag pans while zoomed in
+const FULL = [0, 0, 975, 610];
+const baseBox = () => S.state ? stateBox(S.state).split(" ").map(Number) : FULL;
+const curBox = () => S.view || baseBox();
+function zoomBy(f) {
+  const b = curBox(), w = Math.min(975, Math.max(975 / 16, b[2] / f)), h = w * 610 / 975;
+  const cx = Math.min(975, Math.max(0, b[0] + b[2] / 2)), cy = Math.min(610, Math.max(0, b[1] + b[3] / 2));
+  S.view = w >= 975 ? (S.state ? FULL.slice() : null) : [cx - w / 2, cy - h / 2, w, h];
+  renderMap();
+}
+document.getElementById("zin").onclick = () => zoomBy(1.6);
+document.getElementById("zout").onclick = () => zoomBy(1 / 1.6);
+document.getElementById("zreset").onclick = () => { S.view = null; S.sel = null; setState(null); };
+let drag = null;
+map.addEventListener("pointerdown", e => { if (S.view) drag = {x: e.clientX, y: e.clientY, v: S.view.slice(), moved: false}; });
+addEventListener("pointermove", e => {
+  if (!drag) return;
+  const dx = e.clientX - drag.x, dy = e.clientY - drag.y;
+  if (!drag.moved && Math.hypot(dx, dy) < 4) return;
+  drag.moved = true; map.classList.add("drag"); tip.style.display = "none";
+  const s = drag.v[2] / map.clientWidth;
+  S.view = [drag.v[0] - dx * s, drag.v[1] - dy * s, drag.v[2], drag.v[3]];
+  map.setAttribute("viewBox", S.view.map(v => v.toFixed(1)).join(" "));
+});
+addEventListener("pointerup", () => { if (drag) { map.classList.remove("drag"); if (drag.moved) map.dataset.dragged = "1"; drag = null; } });
 function renderMap() {
   const y = S.year;
-  map.setAttribute("viewBox", S.state ? stateBox(S.state) : "0 0 975 610");
-  const k = S.state ? +stateBox(S.state).split(" ")[2] / 975 : 1;   // keep hatch lines the same size on screen
+  const box = curBox();
+  map.setAttribute("viewBox", box.map(v => v.toFixed(1)).join(" "));
+  const k = box[2] / 975;   // keep hatch lines the same size on screen
   pat.setAttribute("width", 4 * k); pat.setAttribute("height", 4 * k);
   pat.firstChild.setAttribute("y2", 4 * k); pat.firstChild.setAttribute("stroke-width", 1.5 * k);
-  map.classList.toggle("zoom", !!S.state);
+  map.classList.toggle("zoom", k < 1);
+  map.classList.toggle("pan", !!S.view);
+  map.style.touchAction = S.view ? "none" : "";
   for (const f in shapes) {
     const g = D.counties[f], on = inState(f);
     shapes[f].setAttribute("fill", fillFor(g, y));
@@ -310,7 +346,7 @@ map.addEventListener("mousemove", e => {
   tip.style.left = x + "px"; tip.style.top = yy + "px";
 });
 map.addEventListener("mouseleave", () => tip.style.display = "none");
-map.addEventListener("click", e => { const f = e.target.dataset && e.target.dataset.f; if (f && D.counties[f] && inState(f)) { S.sel = S.sel === f ? null : f; render(); } });
+map.addEventListener("click", e => { if (map.dataset.dragged) { delete map.dataset.dragged; return; } const f = e.target.dataset && e.target.dataset.f; if (f && D.counties[f] && inState(f)) { S.sel = S.sel === f ? null : f; render(); } });
 
 // ---------- legend + explanation ----------
 function renderLegend() {
@@ -477,7 +513,7 @@ function renderNotes() {
 const stsel = document.getElementById("stsel");
 stsel.innerHTML = '<option value="">All states</option>' + Object.entries(D.states).sort((a, b) => a[1].n.localeCompare(b[1].n))
   .map(([f, g]) => `<option value="${f}">${g.n}</option>`).join("");
-function setState(sf) { S.state = sf || null; if (S.sel && !inState(S.sel)) S.sel = null; stsel.value = S.state || ""; render(); }
+function setState(sf) { S.state = sf || null; S.view = null; if (S.sel && !inState(S.sel)) S.sel = null; stsel.value = S.state || ""; render(); }
 stsel.onchange = () => setState(stsel.value);
 const slider = document.getElementById("year");
 slider.oninput = () => { S.year = +slider.value; render(); };
