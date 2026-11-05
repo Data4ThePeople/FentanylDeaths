@@ -1,0 +1,437 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fentanyl Deaths, County by County, 1999-2024 | Data 4 The People</title>
+<meta name="description" content="Deaths involving synthetic opioids, mostly fentanyl, in every U.S. county from 1999 to 2024, from CDC WONDER.">
+<style>
+:root{
+  --bg:#13161b; --panel:#191d23; --panel2:#1e232a; --line:#2a3038; --line2:#353c46;
+  --ink:#eef0f3; --ink2:#b9bec6; --muted:#7f8792;
+  --salmon:#f0a29a; --death:#e8605e; --accent:#5aa9ff;
+  --low:#3c424b; --nodata:#1d2127;
+  --serif: Georgia, "Times New Roman", serif;
+  --mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--serif)}
+button{font:inherit;color:inherit}
+.wrap{container-type:inline-size;max-width:1680px;margin:0 auto;overflow-x:clip}
+.kicker{font-family:var(--mono);font-size:12px;letter-spacing:.22em;color:var(--muted);text-transform:uppercase}
+header{padding:40px 48px 28px}
+h1{font-size:clamp(30px,4.2vw,62px);line-height:1.05;margin:14px 0 18px;font-weight:700}
+h1 .l2{color:var(--salmon);display:block}
+.sub{max-width:720px;color:var(--ink2);font-size:17px;line-height:1.6;margin:0}
+.banner{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.banner>div{padding:16px 12px;text-align:center;border-right:1px solid var(--line)}
+.banner>div:last-child{border-right:0}
+.lab{font-family:var(--mono);font-size:11px;letter-spacing:.16em;color:var(--muted);text-transform:uppercase}
+.big{font-family:var(--mono);font-size:26px;font-weight:600;margin:6px 0 4px;color:var(--death)}
+.note{font-family:var(--mono);font-size:11px;color:var(--muted)}
+.controls{display:flex;align-items:center;gap:16px;padding:14px 48px;border-bottom:1px solid var(--line);flex-wrap:wrap}
+.play{width:38px;height:38px;border-radius:50%;border:0;background:var(--accent);cursor:pointer;display:grid;place-items:center;flex:none}
+.play svg{fill:#fff}
+.yr{font-family:var(--mono);font-size:30px;font-weight:700;min-width:84px}
+.slider{flex:1;display:flex;align-items:center;gap:10px;min-width:220px}
+.slider span{font-family:var(--mono);font-size:12px;color:var(--muted)}
+input[type=range]{flex:1;accent-color:var(--accent)}
+.legend{display:flex;align-items:flex-start;gap:22px;padding:12px 48px 4px;flex-wrap:wrap}
+.scale{display:inline-flex;flex-direction:column;gap:4px;width:300px}
+.scale .sr{display:flex;align-items:center;gap:8px;font-family:var(--mono);font-size:11px;color:var(--ink2)}
+.ramp{flex:1;height:10px;border-radius:2px}
+.keys{display:flex;flex-direction:column;gap:5px;font-family:var(--mono);font-size:11px;color:var(--ink2)}
+.sw{display:inline-block;width:14px;height:14px;border-radius:2px;vertical-align:middle;margin-right:7px}
+.sw.h{background:repeating-linear-gradient(135deg,#ee8380 0 2px,#13161b 2px 4px)}
+.explain{padding:6px 48px 14px;font-size:15px;line-height:1.55;color:var(--ink2);max-width:1100px}
+.explain b{color:var(--ink)}
+.main{display:grid;grid-template-columns:minmax(0,1fr) 420px;border-top:1px solid var(--line)}
+.left{padding:16px 32px 24px;min-width:0}
+.right{background:var(--panel);border-left:1px solid var(--line)}
+#map{width:100%;height:auto;display:block}
+#map .c{stroke:none;cursor:pointer}
+#map .ov{pointer-events:none}
+#map .sl{fill:none;stroke:#13161b;stroke-width:.9;pointer-events:none}
+#map .nl{fill:none;stroke:#5b626d;stroke-width:.6;pointer-events:none}
+#map .hl{fill:none;stroke:#fff;stroke-width:1.6;pointer-events:none}
+.tip{position:fixed;pointer-events:none;background:#0d0f12;border:1px solid var(--line2);padding:8px 10px;font-family:var(--mono);font-size:12px;border-radius:4px;display:none;z-index:9;max-width:300px;line-height:1.45}
+.trend h3{font-family:var(--mono);font-size:12px;letter-spacing:.14em;color:var(--muted);font-weight:400;margin:10px 0 4px;text-transform:uppercase}
+#natl{width:100%;height:200px;display:block}
+#natl rect{cursor:pointer}
+.ph{padding:22px 24px 16px;border-bottom:1px solid var(--line)}
+.ph h2{margin:0;font-size:24px}
+.ph .s{font-style:italic;color:var(--ink2);margin-top:2px}
+.ph .s a{color:var(--accent);cursor:pointer;font-style:normal;font-family:var(--mono);font-size:12px;margin-left:8px}
+.cards{display:grid;grid-template-columns:repeat(2,1fr)}
+.card{padding:14px 10px;text-align:center;border-right:1px solid var(--line);border-bottom:1px solid var(--line)}
+.card:nth-child(2n){border-right:0}
+.card .lab{line-height:1.25;min-height:2.5em}
+.card .v{font-family:var(--mono);font-size:22px;font-weight:600;margin:8px 0 4px;color:var(--death)}
+.card .d{font-size:13px;color:var(--ink2);line-height:1.35}
+.ptrend{padding:12px 24px 4px;border-bottom:1px solid var(--line)}
+#ptrend{width:100%;height:150px;display:block}
+.pkey{display:flex;gap:16px;font-family:var(--mono);font-size:11px;color:var(--ink2);margin:4px 0 8px;flex-wrap:wrap}
+.pkey i{display:inline-block;width:16px;height:3px;border-radius:2px;vertical-align:middle;margin-right:6px}
+.rank{padding:16px 24px 8px}
+.rank ol{list-style:none;margin:10px 0 0;padding:0;max-height:420px;overflow:auto}
+.rank li{display:grid;grid-template-columns:26px 1fr 60px 48px;align-items:center;gap:8px;padding:4px 0;font-size:14.5px;cursor:pointer}
+.rank li:hover{background:var(--panel2)}
+.rank li.sel{background:#2a313b;box-shadow:inset 3px 0 0 #fff}
+.rank li .n{font-family:var(--mono);font-size:11px;color:var(--muted);text-align:right}
+.rank li .bar{height:6px;border-radius:0 3px 3px 0;background:var(--death)}
+.rank li .val{font-family:var(--mono);font-size:11.5px;color:var(--ink2);text-align:right}
+.help{margin:16px 24px 24px;border:1px solid var(--line2);border-radius:6px;padding:18px}
+.help .t{font-family:var(--mono);color:var(--salmon);letter-spacing:.14em;font-size:13px;font-weight:700}
+.n988{margin:12px 0;background:#2a1f22;border-left:3px solid var(--salmon);padding:10px 14px}
+.n988 b{font-family:var(--mono);font-size:22px;color:var(--salmon)}
+.n988 div{font-size:13.5px;color:var(--ink2)}
+.help p{font-size:15.5px;line-height:1.5;color:var(--ink2)}
+.ft{display:inline-block;background:#3b82f6;color:#fff;text-decoration:none;padding:10px 18px;border-radius:4px;font-weight:700}
+.ft:hover{background:#2f6fd8}
+.notes{padding:22px 48px 36px;border-top:1px solid var(--line);font-family:var(--mono);font-size:12.5px;line-height:1.65;color:var(--ink2)}
+.notes h3{font-family:var(--serif);font-size:20px;color:var(--ink);margin:18px 0 8px}
+.notes ul{padding-left:18px;margin:0}.notes li{margin:0 0 8px}
+.notes a{color:var(--accent)}
+.nd>summary{cursor:pointer;color:var(--accent);font-family:var(--mono);font-size:12.5px;padding:4px 0}
+footer{padding:18px 48px 40px;font-family:var(--mono);font-size:12px;color:var(--muted)}
+@container (max-width:1100px){ .main{grid-template-columns:1fr}.right{border-left:0;border-top:1px solid var(--line)} }
+@container (max-width:700px){
+  header,.controls,.legend,.explain,.notes,footer{padding-left:16px;padding-right:16px}
+  .left{padding:12px 16px}.banner{grid-template-columns:1fr}.banner>div{border-right:0;border-bottom:1px solid var(--line)}
+  .slider{min-width:0;flex-basis:100%;order:3}
+  .rank,.ph,.ptrend{padding-left:16px;padding-right:16px}.help{margin:16px}
+  h1{font-size:30px}.sub{font-size:16px}.scale{width:100%}
+}
+/* embed mode (inside an iframe, or #embed=1): the post carries the title, so the header goes;
+   notes collapse; map and side panel stay side by side down to 680px */
+.framed header,.framed .help p,.framed .help .ft{display:none}
+.framed .controls{padding-top:10px;padding-bottom:10px}
+.framed .legend{padding-top:8px}
+.framed .explain{font-size:14px;padding-bottom:10px}
+.framed .left{padding-top:10px;padding-bottom:14px}
+.framed #natl{height:150px}
+.framed .main{grid-template-columns:minmax(0,1fr) 340px}
+.framed .rank ol{max-height:200px}
+.framed .ph{padding:14px 20px 10px}.framed .rank{padding:12px 20px 6px}.framed .ptrend{padding:8px 20px 2px}
+.framed #ptrend{height:120px}
+.framed .card{padding:10px 8px}.framed .card .v{margin:6px 0 4px;font-size:20px}
+.framed .help{margin:10px 20px 14px;padding:12px 14px}.framed .n988{margin:8px 0 4px}
+.framed .notes{padding-top:14px;padding-bottom:14px}
+.framed footer{padding-top:8px;padding-bottom:16px}
+@container (max-width:1100px){ .framed .main{grid-template-columns:minmax(0,1fr) 340px}.framed .right{border-left:1px solid var(--line);border-top:0} }
+@container (max-width:900px){ .framed .main{grid-template-columns:minmax(0,1fr) 290px}.framed .ph h2{font-size:20px}
+  .framed .rank li{grid-template-columns:20px 1fr 44px 40px;gap:6px;font-size:13.5px} }
+@container (max-width:680px){ .framed .main{grid-template-columns:1fr}.framed .right{border-left:0;border-top:1px solid var(--line)} }
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <div class="kicker">Data 4 The People · CDC WONDER · 1999–2024</div>
+  <h1>Fentanyl Deaths<span class="l2">County by County, 1999-2024</span></h1>
+  <p class="sub">Deaths involving synthetic opioids, mostly fentanyl, in every U.S. county from 1999 to 2024. Press play to step through the years, or click any county to see its numbers and trend.</p>
+</header>
+
+<section class="banner" aria-label="National totals">
+  <div><div class="lab">U.S. deaths</div><div class="big" id="b-d"></div><div class="note" id="b-d-n"></div></div>
+  <div><div class="lab">U.S. death rate</div><div class="big" id="b-r"></div><div class="note">per 100,000 residents · crude rate</div></div>
+  <div><div class="lab">Counties with 10+ deaths</div><div class="big" id="b-c"></div><div class="note" id="b-c-n"></div></div>
+</section>
+
+<section class="controls">
+  <button class="play" id="play" aria-label="Play years 1999 to 2024"><svg width="14" height="16" viewBox="0 0 14 16"><path id="playicon" d="M0 0L14 8L0 16Z"/></svg></button>
+  <div class="yr" id="yr"></div>
+  <div class="slider"><span>1999</span><input type="range" id="year" min="1999" max="2024" step="1" aria-label="Year"><span>2024</span></div>
+</section>
+
+<div class="legend" id="legend"></div>
+<div class="explain" id="explain"></div>
+
+<section class="main">
+  <div class="left">
+    <svg id="map" viewBox="0 0 975 610" role="img" aria-label="Map of U.S. counties by death rate involving synthetic opioids"></svg>
+    <div class="trend">
+      <h3>U.S. deaths involving synthetic opioids, mostly fentanyl, by year</h3>
+      <svg id="natl" role="img" aria-label="Bar chart of U.S. deaths by year"></svg>
+      <div class="note" id="natl-note"></div>
+    </div>
+  </div>
+  <aside class="right">
+    <div class="ph"><h2 id="p-name"></h2><div class="s" id="p-sub"></div></div>
+    <div class="cards" id="cards"></div>
+    <div class="ptrend"><div class="lab" id="pt-title">Death rate per 100,000, 1999-2024</div><svg id="ptrend" role="img"></svg><div class="pkey" id="pkey"></div></div>
+    <div class="rank"><div class="lab" id="r-title"></div><div class="note" id="r-cov" style="margin-top:4px"></div><ol id="rank"></ol></div>
+    <div class="help">
+      <div class="t">NEED HELP NOW?</div>
+      <div class="n988"><b>988</b><div>Call or text the Suicide &amp; Crisis Lifeline. Free and confidential, 24 hours a day, 7 days a week.</div></div>
+      <p>Find substance use and mental health treatment near you. FindTreatment.gov is SAMHSA's treatment locator; enter your ZIP code to see facilities nearby.</p>
+      <a class="ft" href="https://findtreatment.gov/" target="_blank" rel="noopener">Find Treatment Near You →</a>
+    </div>
+  </aside>
+</section>
+
+<section class="notes" id="notes"></section>
+<footer>Built by Data 4 The People · data4thepeople.org</footer>
+</div>
+<div class="tip" id="tip"></div>
+
+<script>
+const D = /*DATA*/null;
+// embed mode: framed by default inside an iframe; #embed=1 forces it, #embed=0 turns it off
+const FRAMED = (() => { let f; try { f = window.self !== window.top; } catch (e) { f = true; }
+  const e = new URLSearchParams(location.hash.slice(1)).get("embed"); return e === "1" ? true : e === "0" ? false : f; })();
+if (FRAMED) document.documentElement.classList.add("framed");
+
+const YEARS = D.years, Y0 = YEARS[0], ix = y => y - Y0;
+const RAMP = ["#fde4e3", "#f7b3b1", "#ee8380", "#dd5553", "#b83536", "#8a2124"];
+const DOM = [0, 60];                     // crude rate per 100,000; 60 and above take the darkest color
+const SMALL = [10, 20];                  // 10 to 19 deaths: rate drawn with a hatch
+const RANK_MIN = 20;                     // ranking lists counties with 20 or more deaths
+const SEAM = 2018;                       // first year from the 2018-2024 Single Race database
+const css = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+const hex2rgb = h => [1, 3, 5].map(i => parseInt(h.slice(i, i + 2), 16));
+function rampColor(t) {
+  t = Math.max(0, Math.min(1, t));
+  const p = t * (RAMP.length - 1), i = Math.min(Math.floor(p), RAMP.length - 2), f = p - i;
+  const a = hex2rgb(RAMP[i]), b = hex2rgb(RAMP[i + 1]);
+  return "rgb(" + a.map((x, k) => Math.round(x + (b[k] - x) * f)).join(",") + ")";
+}
+const fmtN = v => v.toLocaleString("en-US");
+const fmtR = v => v.toFixed(1);
+const pct = v => Math.round(v * 100) + "%";
+const st = (g, y) => g.s[ix(y)];
+const LOWTXT = "0 to 9 deaths. CDC does not publish counts this small for a county.";
+
+// ---------- national figures, recomputed from the county rows ----------
+const NAT = YEARS.map(y => {
+  let n = 0, sum = 0;
+  for (const g of Object.values(D.counties)) { const d = g.d[ix(y)]; if (d != null) { n++; sum += d; } }
+  const tot = D.us.d[ix(y)];
+  return {n, sum, tot, share: sum / tot};
+});
+
+const S = {year: 2024, sel: null, hover: null, playing: null};
+
+// ---------- map ----------
+const NS = "http://www.w3.org/2000/svg";
+const el = (tag, attrs, parent) => { const e = document.createElementNS(NS, tag); for (const k in attrs) e.setAttribute(k, attrs[k]); if (parent) parent.appendChild(e); return e; };
+const map = document.getElementById("map");
+const defs = el("defs", {}, map);
+const pat = el("pattern", {id: "hatch", patternUnits: "userSpaceOnUse", width: 4, height: 4, patternTransform: "rotate(45)"}, defs);
+el("line", {x1: 0, y1: 0, x2: 0, y2: 4, stroke: "#13161b", "stroke-width": 1.5, "stroke-opacity": .85}, pat);
+const gC = el("g", {}, map), gO = el("g", {}, map);
+const shapes = {}, overlays = {};
+for (const [f, d] of Object.entries(D.paths)) {
+  shapes[f] = el("path", {d, class: "c", "data-f": f}, gC);
+  overlays[f] = el("path", {d, class: "ov", fill: "url(#hatch)", display: "none"}, gO);
+}
+el("path", {d: D.stateLines, class: "sl"}, map);
+el("path", {d: D.nation, class: "nl"}, map);
+const hl = el("path", {class: "hl", d: ""}, map);
+
+function fillFor(g, y) {
+  if (!g) return css("--nodata");
+  const s = st(g, y);
+  if (s === "L") return css("--low");
+  if (s === "P") return rampColor((g.r[ix(y)] - DOM[0]) / (DOM[1] - DOM[0]));
+  return css("--nodata");
+}
+function renderMap() {
+  const y = S.year;
+  for (const f in shapes) {
+    const g = D.counties[f];
+    shapes[f].setAttribute("fill", fillFor(g, y));
+    const d = g ? g.d[ix(y)] : null;
+    overlays[f].setAttribute("display", d != null && d >= SMALL[0] && d < SMALL[1] && st(g, y) === "P" ? "inline" : "none");
+  }
+  hl.setAttribute("d", S.sel && D.paths[S.sel] ? D.paths[S.sel] : "");
+}
+
+// ---------- tooltip ----------
+const tip = document.getElementById("tip");
+function countyLines(g, y) {
+  const s = st(g, y), d = g.d[ix(y)], r = g.r[ix(y)];
+  if (s === "L") return [LOWTXT];
+  if (s === "M") return ["No data for this county this year (boundary change)."];
+  if (s === "N") return [fmtN(d) + " deaths", "No rate: CDC has no county population for Connecticut from 2022."];
+  const out = [fmtN(d) + " deaths", fmtR(r) + " per 100,000"];
+  if (d < SMALL[1]) out.push("Small count: this rate can swing a lot from year to year.");
+  return out;
+}
+map.addEventListener("mousemove", e => {
+  const f = e.target.dataset && e.target.dataset.f; if (!f) { tip.style.display = "none"; return; }
+  const g = D.counties[f];
+  tip.innerHTML = "<b>" + (g ? g.n : f) + "</b> · " + S.year + "<br>" + (g ? countyLines(g, S.year) : ["No data"]).join("<br>");
+  tip.style.display = "block";
+  const x = Math.min(e.clientX + 14, innerWidth - tip.offsetWidth - 8), yy = Math.min(e.clientY + 14, innerHeight - tip.offsetHeight - 8);
+  tip.style.left = x + "px"; tip.style.top = yy + "px";
+});
+map.addEventListener("mouseleave", () => tip.style.display = "none");
+map.addEventListener("click", e => { const f = e.target.dataset && e.target.dataset.f; if (f && D.counties[f]) { S.sel = S.sel === f ? null : f; render(); } });
+
+// ---------- legend + explanation ----------
+function renderLegend() {
+  const grad = "linear-gradient(90deg," + RAMP.join(",") + ")";
+  document.getElementById("legend").innerHTML =
+    `<div class="scale"><div class="lab">Deaths per 100,000 residents (crude rate)</div>
+      <div class="sr"><span>${DOM[0]}</span><div class="ramp" style="background:${grad}"></div><span>${DOM[1]}+</span></div></div>
+     <div class="keys">
+      <span><i class="sw" style="background:var(--low)"></i>0 to 9 deaths (CDC does not publish counts this small)</span>
+      <span><i class="sw h"></i>10 to 19 deaths: rate can swing a lot from year to year</span>
+      <span><i class="sw" style="background:var(--nodata);border:1px solid var(--line2)"></i>No data or no rate</span></div>`;
+}
+function renderExplain() {
+  const y = S.year, N = NAT[ix(y)];
+  const rest = 1 - N.share;
+  document.getElementById("explain").innerHTML =
+    `<b>${y}: ${fmtN(N.tot)} deaths in the U.S.</b> ${fmtN(N.n)} ${N.n === 1 ? "county" : "counties"} had 10 or more deaths, and together they account for ${pct(N.share)} of the U.S. total. ` +
+    `The other ${pct(rest)} happened in counties with fewer than 10 deaths each. CDC does not publish counts that small for any county, so those counties are gray.`;
+}
+function renderBanner() {
+  const y = S.year, i = ix(y), N = NAT[i];
+  document.getElementById("b-d").textContent = fmtN(D.us.d[i]);
+  document.getElementById("b-d-n").textContent = "deaths involving synthetic opioids, " + y;
+  document.getElementById("b-r").textContent = fmtR(D.us.r[i]);
+  document.getElementById("b-c").textContent = fmtN(N.n);
+  document.getElementById("b-c-n").textContent = pct(N.share) + " of U.S. deaths were in these counties";
+}
+
+// ---------- national bars ----------
+function renderNatl() {
+  const svg = document.getElementById("natl"); svg.innerHTML = "";
+  const W = svg.clientWidth || 600, H = svg.clientHeight || 200, m = {l: 46, r: 8, t: 10, b: 22};
+  svg.setAttribute("viewBox", `0 0 ${W} ${H}`);
+  const max = Math.max(...D.us.d), bw = (W - m.l - m.r) / YEARS.length;
+  const yv = v => H - m.b - v / max * (H - m.t - m.b);
+  for (const t of [0, 25000, 50000, 75000]) if (t <= max * 1.02) {
+    el("line", {x1: m.l, x2: W - m.r, y1: yv(t), y2: yv(t), stroke: "#2a3038"}, svg);
+    el("text", {x: m.l - 6, y: yv(t) + 4, "text-anchor": "end", fill: "#7f8792", "font-size": 10, "font-family": "ui-monospace,Menlo,monospace"}, svg).textContent = t ? (t / 1000) + "K" : "0";
+  }
+  YEARS.forEach((y, i) => {
+    const v = D.us.d[i], x = m.l + i * bw;
+    const r = el("rect", {x: x + 1, y: yv(v), width: Math.max(1, bw - 2), height: H - m.b - yv(v), rx: 2,
+      fill: y === S.year ? css("--death") : "#5b3536"}, svg);
+    r.addEventListener("click", () => { S.year = y; render(); });
+    r.addEventListener("mousemove", e => { tip.innerHTML = `<b>${y}</b><br>${fmtN(v)} deaths<br>${fmtR(D.us.r[i])} per 100,000`; tip.style.display = "block"; tip.style.left = (e.clientX + 14) + "px"; tip.style.top = (e.clientY + 14) + "px"; });
+    r.addEventListener("mouseleave", () => tip.style.display = "none");
+    if (y % 5 === 0 || y === YEARS.at(-1)) el("text", {x: x + bw / 2, y: H - 6, "text-anchor": "middle", fill: "#7f8792", "font-size": 10, "font-family": "ui-monospace,Menlo,monospace"}, svg).textContent = y;
+  });
+  const sx = m.l + ix(SEAM) * bw;
+  el("line", {x1: sx, x2: sx, y1: m.t, y2: H - m.b, stroke: "#7f8792", "stroke-dasharray": "3 3"}, svg);
+  el("text", {x: sx - 4, y: m.t + 10, "text-anchor": "end", fill: "#7f8792", "font-size": 10, "font-family": "ui-monospace,Menlo,monospace"}, svg).textContent = "CDC database change";
+  document.getElementById("natl-note").textContent = "Click a bar to jump to that year. From 2018 the counts come from CDC's 2018-2024 database; the two databases give identical county counts for 2018-2020.";
+}
+
+// ---------- side panel ----------
+function card(lab, v, d) { return `<div class="card"><div class="lab">${lab}</div><div class="v">${v}</div><div class="d">${d}</div></div>`; }
+function renderPanel() {
+  const y = S.year, i = ix(y);
+  const g = S.sel ? D.counties[S.sel] : null;
+  const stt = g ? D.states[S.sel.slice(0, 2)] : null;
+  document.getElementById("p-name").textContent = g ? g.n : "United States";
+  document.getElementById("p-sub").innerHTML = g ? y + ' · <a id="unpin">show United States</a>' : y + " · hover or click a county";
+  const u = document.getElementById("unpin"); if (u) u.onclick = () => { S.sel = null; render(); };
+  let h = "";
+  if (g) {
+    const s = st(g, y), d = g.d[i], r = g.r[i];
+    h += card("Deaths", s === "P" || s === "N" ? fmtN(d) : "–", s === "L" ? LOWTXT : s === "M" ? "No data this year" : d < SMALL[1] ? "Small count" : "");
+    h += card("Death rate", s === "P" ? fmtR(r) : "–", s === "P" ? "per 100,000 residents" + (d < SMALL[1] ? " · can swing a lot" : "") : "Not published");
+    if (stt) { const sd = stt.d[i], sr = stt.r[i];
+      h += card(stt.n + " deaths", sd != null ? fmtN(sd) : "–", sd != null ? "statewide" : "Fewer than 10 statewide");
+      h += card(stt.n + " rate", sr != null ? fmtR(sr) : "–", sr != null ? "per 100,000 residents" : "Not published"); }
+  } else {
+    const N = NAT[i];
+    h += card("Deaths", fmtN(D.us.d[i]), "U.S. total, " + y);
+    h += card("Death rate", fmtR(D.us.r[i]), "per 100,000 residents");
+    h += card("Counties with 10+ deaths", fmtN(N.n), pct(N.share) + " of U.S. deaths");
+    h += card("Counties with 20+ deaths", fmtN(rankList(y).length), "listed in the ranking below");
+  }
+  document.getElementById("cards").innerHTML = h;
+  renderPTrend(g, stt);
+}
+function renderPTrend(g, stt) {
+  const svg = document.getElementById("ptrend"); svg.innerHTML = "";
+  const W = svg.clientWidth || 360, H = svg.clientHeight || 150, m = {l: 30, r: 8, t: 8, b: 18};
+  svg.setAttribute("viewBox", `0 0 ${W} ${H}`);
+  const series = [{name: "U.S.", v: D.us.r, c: "#b9bec6"}];
+  if (stt) series.push({name: stt.n, v: stt.r, c: "#5aa9ff"});
+  if (g) series.push({name: g.n.replace(/,.*$/, ""), v: YEARS.map((y, i) => st(g, y) === "P" ? g.r[i] : null), c: css("--death")});
+  const max = Math.max(10, ...series.flatMap(s => s.v.filter(v => v != null)));
+  const xv = i => m.l + i / (YEARS.length - 1) * (W - m.l - m.r), yv = v => H - m.b - v / max * (H - m.t - m.b);
+  for (const t of [0, max / 2, max]) {
+    el("line", {x1: m.l, x2: W - m.r, y1: yv(t), y2: yv(t), stroke: "#2a3038"}, svg);
+    el("text", {x: m.l - 4, y: yv(t) + 3, "text-anchor": "end", fill: "#7f8792", "font-size": 9.5, "font-family": "ui-monospace,Menlo,monospace"}, svg).textContent = Math.round(t);
+  }
+  [1999, 2010, 2024].forEach(y => el("text", {x: xv(ix(y)), y: H - 4, "text-anchor": y === 1999 ? "start" : y === 2024 ? "end" : "middle", fill: "#7f8792", "font-size": 9.5, "font-family": "ui-monospace,Menlo,monospace"}, svg).textContent = y);
+  el("line", {x1: xv(ix(S.year)), x2: xv(ix(S.year)), y1: m.t, y2: H - m.b, stroke: "#4a515b"}, svg);
+  for (const s of series) {
+    let d = "", pen = false;
+    s.v.forEach((v, i) => { if (v == null) { pen = false; return; } d += (pen ? "L" : "M") + xv(i).toFixed(1) + "," + yv(v).toFixed(1); pen = true; });
+    el("path", {d, fill: "none", stroke: s.c, "stroke-width": 2}, svg);
+    s.v.forEach((v, i) => { if (v != null && (s.v[i - 1] == null) && (s.v[i + 1] == null)) el("circle", {cx: xv(i), cy: yv(v), r: 2.5, fill: s.c}, svg); });
+  }
+  document.getElementById("pkey").innerHTML = series.map(s => `<span><i style="background:${s.c}"></i>${s.name}</span>`).join("") +
+    (g ? '<span style="color:var(--muted)">gaps = fewer than 10 deaths or no data</span>' : "");
+}
+function rankList(y) {
+  const i = ix(y);
+  return Object.entries(D.counties).filter(([f, g]) => D.paths[f] && st(g, y) === "P" && g.d[i] >= RANK_MIN)
+    .sort((a, b) => b[1].r[i] - a[1].r[i]);
+}
+function renderRank() {
+  const y = S.year, i = ix(y), list = rankList(y);
+  document.getElementById("r-title").textContent = "Highest death rates · " + y;
+  document.getElementById("r-cov").textContent = list.length ? `${list.length} ${list.length === 1 ? "county" : "counties"} with ${RANK_MIN} or more deaths, highest rate first` : `No county had ${RANK_MIN} or more deaths in ${y}`;
+  const max = list.length ? list[0][1].r[i] : 1;
+  document.getElementById("rank").innerHTML = list.map(([f, g], k) =>
+    `<li data-f="${f}" class="${f === S.sel ? "sel" : ""}"><span class="n">${k + 1}</span><span>${g.n}</span><span class="bar" style="width:${Math.max(4, g.r[i] / max * 100)}%"></span><span class="val">${fmtR(g.r[i])}</span></li>`).join("");
+  document.querySelectorAll("#rank li").forEach(li => li.onclick = () => { S.sel = li.dataset.f; render(); });
+}
+
+// ---------- notes ----------
+function renderNotes() {
+  const unmatched = D.unmatched.map(f => D.counties[f].n).join("; ");
+  const body = `<h3>About these numbers</h3><ul>
+  <li><b>What is counted.</b> Deaths of U.S. residents whose underlying cause was a drug overdose (ICD-10 X40-X44, X60-X64, X85, Y10-Y14) and whose death certificate lists synthetic opioids other than methadone (T40.4) among the causes. CDC uses this group to track fentanyl deaths. Most are illegally made fentanyl, but it also includes tramadol and other synthetic opioids. One death can involve several drugs; each death is counted once.</li>
+  <li><b>Where.</b> Deaths are counted in the county where the person lived, not where they died.</li>
+  <li><b>Counties with 0 to 9 deaths are gray.</b> CDC does not publish county counts of 1 to 9, and its data use rules bar publishing any count of 9 or fewer, including zero. So the map cannot tell a county with no deaths from one with a few. We never estimate these counts.</li>
+  <li><b>Counties with 10 to 19 deaths are hatched.</b> Rates based on few deaths can swing a lot from one year to the next by chance. For 1999-2017, CDC's database does not show rates for 10 to 19 deaths; we calculate them the way CDC does, deaths divided by population times 100,000. CDC's 2018-2024 database shows these rates itself. The ranking lists only counties with ${RANK_MIN} or more deaths.</li>
+  <li><b>Crude rates, not age-adjusted.</b> CDC does not provide age-adjusted rates for counties in its 2018-2024 database, so the map uses crude rates in every year. Counties with older populations may show lower rates partly because fewer residents are in the ages most affected.</li>
+  <li><b>Early counts are likely low.</b> Some overdose death certificates do not name the drug involved. This was more common in earlier years and in some states, so fentanyl deaths were undercounted more in those places and years.</li>
+  <li><b>Two CDC databases.</b> 1999-2017 come from Multiple Cause of Death, 1999-2020; 2018-2024 from Multiple Cause of Death, 2018-2024, Single Race. Death counts in the overlap years 2018-2020 are identical for every county. Populations, and so rates, can differ slightly between the two.</li>
+  <li><b>County changes.</b> Connecticut: CDC reports deaths for the 8 old counties but has no county populations from 2022, so those counties have no rate. Alaska and Virginia: some county-equivalents were merged or redrawn during the period. Areas without a matching shape on this map: ${unmatched}; none had 10 or more deaths in any year. Renamed counties (Oglala Lakota, SD; Kusilvak, AK) are shown under their current names for all years.</li>
+  </ul>
+  <h3>Source</h3><ul><li>Centers for Disease Control and Prevention, National Center for Health Statistics. Multiple Cause of Death, 1999-2020 and 2018-2024 (Single Race), on CDC WONDER Online Database, released February 2026 for 2024 final data. Data accessed November 5, 2026. <a href="https://wonder.cdc.gov/mcd.html" target="_blank" rel="noopener">wonder.cdc.gov</a></li>
+  <li>Map shapes: U.S. Census Bureau cartographic boundaries (2017) via us-atlas.</li></ul>`;
+  document.getElementById("notes").innerHTML = `<details class="nd"${FRAMED ? "" : " open"}><summary>Show notes and sources</summary>${body}</details>`;
+}
+
+// ---------- controls ----------
+const slider = document.getElementById("year");
+slider.oninput = () => { S.year = +slider.value; render(); };
+document.getElementById("play").onclick = () => {
+  if (S.playing) { clearInterval(S.playing); S.playing = null; document.getElementById("playicon").setAttribute("d", "M0 0L14 8L0 16Z"); return; }
+  if (S.year === YEARS.at(-1)) S.year = Y0;
+  document.getElementById("playicon").setAttribute("d", "M0 0H5V16H0ZM9 0H14V16H9Z");
+  render();
+  S.playing = setInterval(() => {
+    if (S.year >= YEARS.at(-1)) { clearInterval(S.playing); S.playing = null; document.getElementById("playicon").setAttribute("d", "M0 0L14 8L0 16Z"); return; }
+    S.year++; render();
+  }, 900);
+};
+addEventListener("resize", () => { renderNatl(); renderPanel(); });
+
+function render() {
+  document.getElementById("yr").textContent = S.year; slider.value = S.year;
+  renderBanner(); renderExplain(); renderMap(); renderNatl(); renderPanel(); renderRank();
+}
+// optional starting view from the URL, e.g. #y=2016&c=39035
+{
+  const h = new URLSearchParams(location.hash.slice(1));
+  if (+h.get("y") >= Y0 && +h.get("y") <= YEARS.at(-1)) S.year = +h.get("y");
+  if (D.counties[h.get("c")] && D.paths[h.get("c")]) S.sel = h.get("c");
+}
+renderLegend(); renderNotes(); render();
+</script>
+</body>
+</html>

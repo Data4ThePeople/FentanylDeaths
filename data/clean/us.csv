@@ -1,0 +1,27 @@
+code,name,year,deaths,population,rate,rate_lo,rate_hi,rate_src,status,small,aa_rate
+US,United States,1999,730,279040168,0.3,0.2,0.3,wonder,pub,0,0.3
+US,United States,2000,782,281421906,0.3,0.3,0.3,wonder,pub,0,0.3
+US,United States,2001,957,284968955,0.3,0.3,0.4,wonder,pub,0,0.3
+US,United States,2002,1295,287625193,0.5,0.4,0.5,wonder,pub,0,0.4
+US,United States,2003,1400,290107933,0.5,0.5,0.5,wonder,pub,0,0.5
+US,United States,2004,1664,292805298,0.6,0.5,0.6,wonder,pub,0,0.6
+US,United States,2005,1742,295516599,0.6,0.6,0.6,wonder,pub,0,0.6
+US,United States,2006,2707,298379912,0.9,0.9,0.9,wonder,pub,0,0.9
+US,United States,2007,2213,301231207,0.7,0.7,0.8,wonder,pub,0,0.7
+US,United States,2008,2306,304093966,0.8,0.7,0.8,wonder,pub,0,0.8
+US,United States,2009,2946,306771529,1.0,0.9,1.0,wonder,pub,0,1.0
+US,United States,2010,3007,308745538,1.0,0.9,1.0,wonder,pub,0,1.0
+US,United States,2011,2666,311591917,0.9,0.8,0.9,wonder,pub,0,0.8
+US,United States,2012,2628,313914040,0.8,0.8,0.9,wonder,pub,0,0.8
+US,United States,2013,3105,316128839,1.0,0.9,1.0,wonder,pub,0,1.0
+US,United States,2014,5544,318857056,1.7,1.7,1.8,wonder,pub,0,1.8
+US,United States,2015,9580,321418820,3.0,2.9,3.0,wonder,pub,0,3.1
+US,United States,2016,19413,323127513,6.0,5.9,6.1,wonder,pub,0,6.2
+US,United States,2017,28466,325719178,8.7,8.6,8.8,wonder,pub,0,9.0
+US,United States,2018,31335,327167434,9.6,9.5,9.7,wonder,pub,0,9.9
+US,United States,2019,36359,328239523,11.1,11.0,11.2,wonder,pub,0,11.4
+US,United States,2020,56516,329484123,17.2,17.0,17.3,wonder,pub,0,17.8
+US,United States,2021,70601,331893745,21.3,21.1,21.4,wonder,pub,0,21.8
+US,United States,2022,73838,333287557,22.2,22.0,22.3,wonder,pub,0,22.7
+US,United States,2023,72776,334914895,21.7,21.6,21.9,wonder,pub,0,22.2
+US,United States,2024,47735,340110988,14.0,13.9,14.2,wonder,pub,0,14.3
