@@ -42,3 +42,4 @@ None.
 - 2026-11-05 Beats laid out in BEATS.md (numbers from scripts/story_numbers.py; Claude's sourced history draft in beat 3). Note: the independent tie-out covered the built page; the beats numbers are new and get checked in the post tie-out.
 - 2026-11-05 Step 1 confirmed by Eric.
 - 2026-11-05 Step 2a opened, slug fentanyl-deaths-by-county. Eric asked Claude to write the full draft from BEATS.md (he may rewrite the intro). Draft in posts/fentanyl-deaths-by-county/POST.md.
+- 2026-11-05 2a: CDEK source added beside the FDA link for the 1968 approval (CDEK page has data errors, flagged to Eric). Five post charts from scripts/post_charts.py placed; chart 1 is an area chart. Explored whether high-rate counties fell most in 2024 (scripts/explore_level_vs_drop.py): somewhat, but the same pattern shows in 2022 and 2023 and not across states; Eric chose not to add it to the post. West Virginia funding research in progress.
