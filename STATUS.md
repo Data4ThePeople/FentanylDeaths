@@ -6,7 +6,7 @@ Process: ~/.claude/d4tp-process/PROCESS.md
 ## Current
 
 Post: fentanyl-deaths-by-county
-Step: 2a
+Step: 2b
 Since: 2026-11-05
 
 ## Steps
@@ -14,7 +14,7 @@ Since: 2026-11-05
 | Step | What | Confirmed | Notes |
 |---|---|---|---|
 | 1  | Exploration and analysis | 2026-11-05 | Map live on Pages; beats in BEATS.md |
-| 2a | Draft with brackets resolved | | |
+| 2a | Draft with brackets resolved | 2026-11-05 | Six charts; post tie-out 48 passages, 0 mismatches |
 | 2b | Eric's edit, Claude's look-over | | |
 | 2c | Slice markup | | |
 | 2d | Hero 1680x1080 + alt text | | |
@@ -43,3 +43,5 @@ None.
 - 2026-11-05 Step 1 confirmed by Eric.
 - 2026-11-05 Step 2a opened, slug fentanyl-deaths-by-county. Eric asked Claude to write the full draft from BEATS.md (he may rewrite the intro). Draft in posts/fentanyl-deaths-by-county/POST.md.
 - 2026-11-05 2a: CDEK source added beside the FDA link for the 1968 approval (CDEK page has data errors, flagged to Eric). Five post charts from scripts/post_charts.py placed; chart 1 is an area chart. Explored whether high-rate counties fell most in 2024 (scripts/explore_level_vs_drop.py): somewhat, but the same pattern shows in 2022 and 2023 and not across states; Eric chose not to add it to the post. West Virginia funding research in progress.
+- 2026-11-05 2a edits: overdose drop corrected to 24%; three-waves chart and peak-rate comparison; West comparison removed from text and charts; SAMHSA budget lines clarified; Administration for a Healthy America named. Post tie-out (scripts/tieout_post.py) 0 mismatches. Independent tie-out of the post numbers running at close; its findings go to 2b.
+- 2026-11-05 Step 2a confirmed by Eric. Step 2b opened.
