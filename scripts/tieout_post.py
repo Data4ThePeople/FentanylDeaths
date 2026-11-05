@@ -81,14 +81,10 @@ f, t = lambda y: FEN[y][0], lambda y: TOT[y]
 n = lambda v: f"{v:,}"
 
 # ---- intro and subtitle
-check("from 2013 to 2022, yearly overdose deaths in the U.S. went up by 63,959, from 43,982 to 107,941".replace("from 2013", "From 2013"),
-      n(t(2022) - t(2013)), n(t(2013)), n(t(2022)))
-check("deaths involving fentanyl went up by 70,733, from 3,105 to 73,838", n(f(2022) - f(2013)), n(f(2013)), n(f(2022)))
+check("from 2013 to 2022, yearly overdose deaths in the U.S. went up by 63,959", n(t(2022) - t(2013)))
+check("deaths involving fentanyl went up by 70,733", n(f(2022) - f(2013)))
 check("Overdose deaths that did not involve fentanyl went down by 6,774", n(-((t(2022) - f(2022)) - (t(2013) - f(2013)))))
-check("deaths involving fentanyl account for 82% of the rise", pct((f(2022) - f(2001)) / (t(2022) - t(2001)) * 100))
-check("Fentanyl was involved in 7% of overdose deaths in 2013, 51% in 2019 and 68% in 2022",
-      *(pct(f(y) / t(y) * 100) for y in (2013, 2019, 2022)))
-check("overdose deaths fell by 25,623, and deaths involving fentanyl fell by 25,041, or 98% of the drop",
+check("Overdose deaths fell by 25,623, and deaths involving fentanyl fell by 25,041, or 98% of the drop",
       n(t(2023) - t(2024)), n(f(2023) - f(2024)), pct((f(2023) - f(2024)) / (t(2023) - t(2024)) * 100))
 check("Deaths involving fentanyl rose from 3,105 in 2013 to 73,838 in 2022, then fell to 47,735 in 2024",
       n(f(2013)), n(f(2022)), n(f(2024)))
@@ -224,7 +220,7 @@ check("Overdose deaths that did not involve fentanyl fell 1.8%, from 32,231 to 3
       pct(((t(2023) - f(2023)) - (t(2024) - f(2024))) / (t(2023) - f(2023)) * 100, 1), n(t(2023) - f(2023)), n(t(2024) - f(2024)))
 
 # ---- counties that went the other way
-check("Twenty counties with 20 or more fentanyl deaths in both years had more deaths in 2024 than in 2023", )
+check("twenty counties with 20 or more fentanyl deaths in both years had more deaths in 2024 than in 2023", )
 if len(rose) != 20:
     bad.append(f"rose {len(rose)}")
 spk = max(rose, key=lambda k: C[k]["d"][b] - C[k]["d"][a])
@@ -237,6 +233,20 @@ check("Clark County, Nevada, home to Las Vegas, had the most deaths of the group
 if C[clk]["n"] != "Clark County, NV":
     bad.append("Clark County is not the most deaths among the 19")
 check("Spokane County, Washington, rose most, 41.5% (176 to 249)", pct((C[spk]["d"][b] - C[spk]["d"][a]) / C[spk]["d"][a] * 100, 1))
+
+# ---- HHS fiscal 2027 proposal: the merged block grant (HHS Budget in Brief, FY2026 column)
+bib = (ROOT / "data/raw/funding/fy-2027-budget-in-brief.txt").read_text()
+def bib_fy26(pattern):   # FY2025, FY2026, FY2027 columns; take FY2026 (the text extract splits "4, 621")
+    return int(re.search(pattern + r" [\d,]+ ([\d, ]+?) (?:--|[\d,]+) ", bib).group(1).replace(",", "").replace(" ", ""))
+sor26 = bib_fy26(r"State Opioid Response \(non-add\)")
+subg26 = bib_fy26(r"Recovery Block Grant \n\(non-add\)")
+mhbg26 = bib_fy26(r"Community Mental Health Block Grant \(non-add\)")
+bhig26 = int(re.search(r"Behavioral Health Innovation Block Grant63 [\d,]+ (\d+, ?\d{3}) ", bib).group(1).replace(",", "").replace(" ", ""))
+b = lambda m: f"${m / 1000:.3f} billion"
+check("merge the State Opioid Response grants ($1.595 billion), the substance use block grant ($2.013 billion) and the mental health block grant ($1.012 billion) into one $4.621 billion block grant",
+      b(sor26), b(subg26), b(mhbg26), b(bhig26))
+if abs(sor26 + subg26 + mhbg26 - bhig26) > 1:
+    bad.append(f"block grant parts {sor26 + subg26 + mhbg26:,} vs total {bhig26:,} (more than $1 million rounding)")
 
 # ---- method
 tie = (ROOT / "TIEOUT.md").read_text()

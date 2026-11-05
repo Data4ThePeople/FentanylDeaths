@@ -18,16 +18,24 @@ dividers: false
 
 # Fentanyl Deaths, County by County: An Interactive Map, 1999 to 2024
 
-Earlier this week we published a map of substance use treatment in every state. While building it, we looked at which drugs were behind the rise in overdose deaths. One answer stood out. From 2013 to 2022, yearly overdose deaths in the U.S. went up by 63,959, from 43,982 to 107,941. Over the same years, deaths involving fentanyl went up by 70,733, from 3,105 to 73,838. Overdose deaths that did not involve fentanyl went down by 6,774. In those years, the whole rise was in deaths involving fentanyl.
+Yesterday we published a map of substance use treatment in every state. While building it, we looked at which drugs were behind the rise in overdose deaths. One drug stood out. 
 
-Over a longer span, 2001 to 2022, deaths involving fentanyl account for 82% of the rise in overdose deaths. Fentanyl was involved in 7% of overdose deaths in 2013, 51% in 2019 and 68% in 2022. When overdose deaths fell sharply in 2024, fentanyl was the story again: overdose deaths fell by 25,623, and deaths involving fentanyl fell by 25,041, or 98% of the drop. The chart below shows overdose deaths each year, split into deaths that involved fentanyl and deaths that did not.
+Fentanyl.
+
+To put how deadly fentanyl is in context, consider that from 2013 to 2022, yearly overdose deaths in the U.S. went up by 63,959. Over the same years, deaths involving fentanyl went up by 70,733. Overdose deaths that did not involve fentanyl went down by 6,774.
+
+Given the media attention around prescription opioids over this decade, this was surprising to me. But the data is clear: deaths involving fentanyl rose by more than all overdose deaths combined.
+
+And then in 2024, overdose deaths in America fell sharply. Why? Fentanyl deaths fell sharply. Overdose deaths fell by 25,623, and deaths involving fentanyl fell by 25,041, or 98% of the drop. In short, since 2013, the rise and fall in drug overdoses has simply been a story of the rise and fall of fentanyl overdoses.
+
+The chart below shows overdose deaths each year, split into deaths that involved fentanyl and deaths that did not.
 
 ![Area chart of U.S. overdose deaths per year, 2001 to 2024, split into deaths involving fentanyl and deaths without it. All overdose deaths rose from 43,982 in 2013 to 107,941 in 2022, then fell to 79,384 in 2024. Deaths involving fentanyl rose from 3,105 in 2013 to 73,838 in 2022, then fell to 47,735 in 2024.](images/01-overdose-vs-fentanyl.png)
 *Source: CDC WONDER, Multiple Cause of Death.*
 
-On the drug side, fentanyl is the story, so that is where we started. This post has a map of fentanyl deaths in every U.S. county for every year from 1999 to 2024, a short history of how fentanyl got here, a look at the counties that stand out, and what is known, and not known, about why deaths fell in 2024.
+If understanding drug overdoses means understanding fentanyl, we need to understand fentanyl. So, today we are publishing an interactive map of fentanyl deaths in every U.S. county for every year from 1999 to 2024, a short history of how fentanyl came to America, a look at the counties that stand out, and what is known, and not known, about why deaths fell in 2024.
 
-A note on words. In this post, "fentanyl deaths" means CDC's count of overdose deaths that involve synthetic opioids other than methadone. Most of these are illegally made fentanyl. The group also includes tramadol and a few other drugs. Many of these deaths involve more than one drug, so "involving fentanyl" does not mean fentanyl was the only drug.
+A short note on terminology. In this post, "fentanyl deaths" means CDC's count of overdose deaths that involve synthetic opioids other than methadone. Most of these are illegally made fentanyl. But this group also includes tramadol and a few other drugs. Many of these deaths involve more than one drug, so "involving fentanyl" does not mean fentanyl was the only drug.
 
 <iframe src="https://data4thepeople.github.io/FentanylDeaths/?v=20261106a#embed=1" width="100%" height="1080" loading="lazy" style="border:0" title="Fentanyl Deaths, County by County: interactive map, 1999 to 2024"></iframe>
 
@@ -57,7 +65,7 @@ A note on words. In this post, "fentanyl deaths" means CDC's count of overdose d
 
 - **Darker red** means a higher death rate, per 100,000 residents.
 - **Gray counties had 0 to 9 deaths.** CDC's data rules bar publishing counts that small, so the map cannot show which of these counties had none.
-- **Hatched counties had 10 to 19 deaths.** Rates based on so few deaths can swing a lot from year to year by chance.
+- **Hatched counties had 10 to 19 deaths.** Rates based on so few deaths can swing a lot from year to year, so we call these out for you.
 - **DC** has its own small box, east of the coast, with a line pointing to it.
 
 In 1999, only 6 counties had 10 or more fentanyl deaths. In 2013 there were 55. By 2022 there were 991, and those counties held 94% of the country's fentanyl deaths.
@@ -88,7 +96,7 @@ Fentanyl is also mixed into other drugs. DEA says it "is often mixed with other 
 
 ::: spacer 5px
 
-Here we count only counties with 20 or more fentanyl deaths in a year, the same rule the map's ranking uses. Small counties can post very high rates from a handful of deaths.
+In this section we count only counties with 20 or more fentanyl deaths in a year, the same rule the map's ranking uses. Small counties can post very high rates from a handful of deaths.
 
 **Southern West Virginia has the highest rates on record.** McDowell County, West Virginia, had 206.4 fentanyl deaths per 100,000 residents in 2023 (36 deaths), the highest rate for any county in any year. If you rank counties by their worst year, eight of the top ten are in West Virginia: McDowell, Wyoming, Logan, Mercer, Raleigh, Cabell, Mason and Fayette. The other two are Baltimore city and Scioto County, Ohio.
 
@@ -120,7 +128,7 @@ Fentanyl deaths fell from 72,776 in 2023 to 47,735 in 2024. The death rate fell 
 
 ### The counties that went the other way
 
-Twenty counties with 20 or more fentanyl deaths in both years had more deaths in 2024 than in 2023. The chart below shows each of them.
+Only twenty counties with 20 or more fentanyl deaths in both years had more deaths in 2024 than in 2023. The chart below shows each of them.
 
 ![Bar chart of the 20 counties with more fentanyl deaths in 2024 than 2023, counties with 20 or more deaths in both years. Spokane County, Washington, rose most, 41.5% (176 to 249), then Matanuska-Susitna Borough, Alaska, and Mohave County, Arizona.](images/06-counties-rose-2024.png)
 *Source: CDC WONDER, Multiple Cause of Death.*
@@ -136,25 +144,27 @@ Researchers have tested some of these ideas:
 - **The drug supply.** A paper in *Science* argues that a disruption in the fentanyl supply in 2023 was most likely the main driver ([University of Maryland summary](https://today.umd.edu/study-global-fentanyl-supply-disruption-led-to-drop-in-opioid-overdose-deaths)). DEA reports that 29% of the fentanyl pills it tested in fiscal year 2025 held a potentially deadly dose, down from 76% two years earlier ([DEA](https://www.justice.gov/jmd/media/1434526/dl)).
 - **Only fentanyl deaths fell.** A study of the same CDC data we use found the same split we did, with fentanyl deaths falling sharply and other overdose deaths barely moving. The author says this fits a change in the fentanyl supply better than broad program effects. That study has not been peer-reviewed ([medRxiv](https://www.medrxiv.org/content/10.64898/2025.12.04.25341579.full.pdf)).
 - **Drug seizures.** A study in *JAMA Health Forum* tied about 9% of the drop to fentanyl's falling share of drug seizures, and its authors say other factors are likely at work ([study](https://pmc.ncbi.nlm.nih.gov/articles/PMC12811803/)).
-- **Naloxone.** A study in *JAMA* found that emergency crews gave naloxone at about the same rate per overdose as before the drop ([Brown University](https://www.brown.edu/news/2026-10-21/naloxone-overdose-deaths-trend)).
+- **Naloxone.** A study in *JAMA* found that emergency crews gave naloxone at about the same rate per overdose as before the drop. Nonfatal opioid overdoses seen by emergency crews were 32.7% below what earlier trends predicted. The authors say this suggests fewer overdoses were happening, not that more people were being revived. The study did not count overdoses reversed without a 911 call ([Brown University](https://www.brown.edu/news/2026-10-21/naloxone-overdose-deaths-trend)).
 - **Pushback on the supply idea.** A peer-reviewed paper in *Science Advances* found that national fentanyl purity "did not track fatal fentanyl overdose rates in most United States regions" and does not explain the drop on its own ([USC Schaeffer](https://schaeffer.usc.edu/research/fentanyl-purity-and-overdose-decline-a-reexamination-of-geographic-trends/)).
 
-In our view, the evidence leans toward changes in the drug supply. We did not find a study that measures how much treatment, naloxone or prevention programs added.
+In our view, the evidence leans most strongly toward changes in the drug supply (for example, less fentanyl in each pill). We could not find a study that measures how much treatment, naloxone or prevention programs added.
 
 ## Looking ahead
 
 ::: spacer 5px
 
-What worries us is the unknown. Deaths fell fast, and the people who study it do not agree on why. If the drop came mostly from changes in the drug supply, it could reverse if the supply changes again. The authors of the *Science* paper write that "How long the decline will last is uncertain" and that "Treatment, prevention and harm-reduction efforts remain essential" ([University of Maryland summary](https://today.umd.edu/study-global-fentanyl-supply-disruption-led-to-drop-in-opioid-overdose-deaths)). The supply is still changing. DEA warns that medetomidine, "a more powerful veterinary anesthetic," has started to show up in fentanyl ([DEA](https://www.dea.gov/press-releases/2025/05/15/dea-releases-2025-national-drug-threat-assessment)). And deaths are still high: CDC's early count is 67,798 overdose deaths in the 12 months ending in March 2026 ([CDC](https://www.cdc.gov/media/releases/2026/cdc-launches-new-overdose-prevention-data-channel.html)).
+What worries us is the unknown. Deaths fell fast in 2024, but the people who study it do not agree on why. If the drop came mostly from changes in the drug supply, it could reverse if the supply changes again, resulting in many more deaths. The authors of the *Science* paper write that "How long the decline will last is uncertain" and that "Treatment, prevention and harm-reduction efforts remain essential" ([University of Maryland summary](https://today.umd.edu/study-global-fentanyl-supply-disruption-led-to-drop-in-opioid-overdose-deaths)). The supply is still changing. DEA warns that medetomidine, "a more powerful veterinary anesthetic," has started to show up in fentanyl ([DEA](https://www.dea.gov/press-releases/2025/05/15/dea-releases-2025-national-drug-threat-assessment)). And deaths are still high: CDC's early count is 67,798 overdose deaths in the 12 months ending in March 2026 ([CDC](https://www.cdc.gov/media/releases/2026/cdc-launches-new-overdose-prevention-data-channel.html)).
 
 That is why the funding matters. Cutting programs on the belief that the problem is solved would remove support while researchers still disagree about what is holding deaths down.
 
-**What Congress has done.** For fiscal year 2026, Congress kept the main programs about level. The State Opioid Response grants, which pay for treatment, naloxone and recovery services in every state, are $1.595 billion. The substance use block grant to states is $2.013 billion ([GHAI](https://assets.advocacyincubator.org/uploads/2026/FY-2027-Appropriations-Crosswalk-SAMHSA-Funding-1.pdf)). Funding for fiscal year 2027 has not passed. For now, programs run at 2026 levels through December 11, 2026 ([Congressional Research Service](https://www.everycrsreport.com/reports/R49344.html)).
+That said, let's look at funding.
+
+**What Congress has done.** For fiscal year 2026, Congress kept funding of the main programs stable. The State Opioid Response grants, which pay for treatment, naloxone and recovery services in every state, are $1.595 billion. The substance use block grant to states is $2.013 billion ([GHAI](https://assets.advocacyincubator.org/uploads/2026/FY-2027-Appropriations-Crosswalk-SAMHSA-Funding-1.pdf)). Funding for fiscal year 2027 has not passed. For now, programs run at 2026 levels through December 11, 2026 ([Congressional Research Service](https://www.everycrsreport.com/reports/R49344.html)).
 
 **What has been proposed.** HHS's budget request for fiscal year 2027 would ([HHS](https://www.hhs.gov/sites/default/files/fy-2027-budget-in-brief.pdf)):
 
 - fold SAMHSA, the agency that runs most of these grants, into a new agency called the Administration for a Healthy America. HHS also proposed this agency for fiscal year 2026, and Congress did not create it ([GHAI](https://assets.advocacyincubator.org/uploads/2026/FY-2027-Appropriations-Crosswalk-SAMHSA-Funding-1.pdf))
-- merge the State Opioid Response grants and two block grants into one $4.621 billion block grant, the same total as today
+- merge the State Opioid Response grants ($1.595 billion), the substance use block grant ($2.013 billion) and the mental health block grant ($1.012 billion) into one $4.621 billion block grant, the same total as today ([HHS](https://www.hhs.gov/sites/default/files/fy-2027-budget-in-brief.pdf))
 - cut SAMHSA's other substance abuse prevention programs from $350 million to $89 million, and its other treatment programs from $564 million to $490 million. These are separate from the State Opioid Response grants.
 - move CDC's injury center, which runs its overdose programs, into that new agency at $588 million, down from $761 million
 
@@ -162,7 +172,7 @@ These are proposals. Congress decides the final amounts.
 
 **Grants cut and then restored.** In January 2026, SAMHSA ended about $2 billion in grants and reversed the decision the next evening ([NACo](https://www.counties.org/news-and-media-article/samhsa-terminates-2-billion-grant-funding-quickly-rescinds-terminations/)). In mid-2025, about $140 million in Overdose Data to Action money was held back, and CDC staff later said they expected it to be paid in full ([KAXE/NPR](https://www.kaxe.org/news/2025-08-05/cdc-to-disburse-delayed-funds-for-fighting-fentanyl-and-more-staffers-say)).
 
-**Medicaid.** Medicaid covers about one-fifth of adults with a substance use disorder ([KFF](https://www.kff.org/medicaid/implications-of-medicaid-work-and-reporting-requirements-for-adults-with-mental-health-or-substance-use-disorders)). The 2025 budget law adds work requirements and eligibility checks every six months, starting around the end of 2026. People in substance use treatment are exempt from the work requirements ([KFF](https://www.kff.org/medicaid/health-provisions-in-the-2025-federal-budget-reconciliation-law/)).
+**Medicaid.** This may be the biggest concern, in my view. Medicaid covers about one-fifth of adults with a substance use disorder ([KFF](https://www.kff.org/medicaid/implications-of-medicaid-work-and-reporting-requirements-for-adults-with-mental-health-or-substance-use-disorders)). The 2025 budget law adds work requirements and eligibility checks every six months, starting by December 31, 2026, though some states may get until the end of 2028. While people in substance use treatment are exempt from the work requirements ([KFF](https://www.kff.org/medicaid/health-provisions-in-the-2025-federal-budget-reconciliation-law/)), talks I have had in my community have made me very concerned that staffing at the state and county offices that handle Medicaid eligibility may not be able to keep up with the new, more complex eligibility checks, leading to people who should still qualify for Medicaid not receiving it. We plan to investigate this further as it won't just impact people living with a substance use disorder, but all people who rely on Medicaid for health care and social assistance.
 
 ### When the next data comes out
 
