@@ -212,7 +212,7 @@ if len(same) != 5:
 both10 = [k for k in C if pub(C[k], 2023, 10) and pub(C[k], 2024, 10)]
 fell10 = [k for k in both10 if C[k]["d"][b] < C[k]["d"][a]]
 check("639 of 706 counties (90.5%) fell", str(len(fell10)), str(len(both10)), pct(len(fell10) / len(both10) * 100, 1))
-check("All overdose deaths fell 26%", pct((t(2023) - t(2024)) / t(2023) * 100))
+check("All overdose deaths fell 24%", pct((t(2023) - t(2024)) / t(2023) * 100))
 check("from 39,160 to 29,771", n(UNK[2023][0]), n(UNK[2024][0]))
 check("The number of fentanyl deaths fell 34.4%", pct((f(2023) - f(2024)) / f(2023) * 100, 1))
 check("Overdose deaths that did not involve fentanyl fell 1.8%, from 32,231 to 31,649",

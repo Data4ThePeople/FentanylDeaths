@@ -114,7 +114,7 @@ Fentanyl deaths fell from 72,776 in 2023 to 47,735 in 2024. The death rate fell 
 
 **Nearly every county fell too.** Of 435 counties with 20 or more fentanyl deaths in both 2023 and 2024, 411 (94.5%) had fewer deaths in 2024. Five were unchanged and 19 rose. With a lower bar, 10 or more deaths in both years, 639 of 706 counties (90.5%) fell.
 
-**It was not a change in how deaths were recorded.** All overdose deaths fell 26%, no matter which drug was named. Overdose deaths where the drug was not named also fell, from 39,160 to 29,771, so fentanyl deaths were not just moved into an "unknown drug" group.
+**It was not a change in how deaths were recorded.** All overdose deaths fell 24%. Overdose deaths where the drug was not named also fell, from 39,160 to 29,771, so fentanyl deaths were not just moved into an "unknown drug" group.
 
 **The drop was almost all fentanyl.** The number of fentanyl deaths fell 34.4%. Overdose deaths that did not involve fentanyl fell 1.8%, from 32,231 to 31,649.
 
@@ -168,7 +168,7 @@ These are proposals. Congress decides the final amounts.
 
 ### When the next data comes out
 
-CDC added final 2024 death data to its WONDER database in February 2026 ([CDC WONDER](https://wonder.cdc.gov/whatsnew.html)). It has not announced a date for final 2025 data. If it follows last year's timing, that would be early 2027. CDC's early count for 2025 is 69,973 overdose deaths, down almost 14% from 2024, but that count does not break out fentanyl ([CDC](https://www.cdc.gov/nchs/pressroom/releases/20260513.html)).
+CDC added final 2024 death data to its WONDER database in February 2026 ([CDC WONDER](https://wonder.cdc.gov/whatsnew.html)). It has not announced a date for final 2025 data. If it follows last year's timing, that would be early 2027. CDC's early count for 2025 is 69,973 overdose deaths, down almost 14% from its early count for 2024, but that count does not break out fentanyl ([CDC](https://www.cdc.gov/nchs/pressroom/releases/20260513.html)).
 
 When the final 2025 county data comes out, we will add it to the map and update this post.
 
