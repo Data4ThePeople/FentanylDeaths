@@ -122,11 +122,7 @@ Nineteen counties had more fentanyl deaths in 2024 than in 2023. Nine are in Wes
 ![Bar chart of the 19 counties with more fentanyl deaths in 2024 than 2023, counties with 20 or more deaths in both years. Spokane County, Washington, rose most, 41.5% (176 to 249), then Matanuska-Susitna Borough, Alaska, and Mohave County, Arizona. Nine of the 19 are in Western states.](images/05-counties-rose-2024.png)
 *Source: CDC WONDER, Multiple Cause of Death.*
 
-- Spokane County, Washington: 176 to 249 deaths (31.9 to 44.8 per 100,000), the largest increase.
-- Yakima County, Washington: 87 to 111. Cowlitz County, Washington: 35 to 40.
-- Clark County, Nevada (Las Vegas): 493 to 519.
-- Mohave County, Arizona: 40 to 53. Matanuska-Susitna Borough, Alaska: 32 to 43. Monterey County, California: 45 to 57.
-- Outside the West: Richland County, Ohio (35 to 43), Wayne County, Indiana (24 to 29) and Aroostook County, Maine (28 to 31).
+Spokane County, Washington, had the largest increase, from 176 to 249 deaths (31.9 to 44.8 per 100,000). Clark County, Nevada, home to Las Vegas, had the most deaths of the group, 519 in 2024.
 
 We did not find a source that explains why these counties, or the West as a whole, fell less.
 
