@@ -22,7 +22,6 @@ html = (ROOT / "dist/index.html").read_text()
 D = json.loads(re.search(r"const D = (\{.*?\});\n", html, re.S).group(1))
 Y = D["years"]; ix = Y.index
 C = {f: g for f, g in D["counties"].items() if f in D["paths"]}
-WEST = {"AK", "AZ", "CA", "CO", "HI", "ID", "MT", "NM", "NV", "OR", "UT", "WA", "WY"}
 
 
 def table(p, delim):
@@ -197,7 +196,7 @@ big = ", ".join(f"{s[1]} ({pct(-s[0], 1)})" for s in st[:5])
 small = ", ".join(f"{s[1]} ({pct(-s[0], 1)})" for s in st[::-1][:5])
 check("The largest drops were in West Virginia (down 48.4%), Arkansas (46.6%), North Dakota (46.1%), Virginia (45.8%) and Wisconsin (45.7%)",
       *(f"{s[1]}" for s in st[:5]), *(pct(-s[0], 1) for s in st[:5]))
-check("The smallest were in the West: Nevada (down 4.9%), Alaska (6.9%), Utah (9.8%), Washington (13.5%) and Arizona (16.5%)",
+check("The smallest were in Nevada (down 4.9%), Alaska (6.9%), Utah (9.8%), Washington (13.5%) and Arizona (16.5%)",
       *(f"{s[1]}" for s in st[::-1][:5]), *(pct(-s[0], 1) for s in st[::-1][:5]))
 check("West Virginia fell most, 48.4%, then Arkansas, North Dakota, Virginia and Wisconsin. Nevada fell least, 4.9%",
       pct(-st[0][0], 1), pct(-st[-1][0], 1))
@@ -219,10 +218,9 @@ check("Overdose deaths that did not involve fentanyl fell 1.8%, from 32,231 to 3
       pct(((t(2023) - f(2023)) - (t(2024) - f(2024))) / (t(2023) - f(2023)) * 100, 1), n(t(2023) - f(2023)), n(t(2024) - f(2024)))
 
 # ---- counties that went the other way
-west = [k for k in rose if C[k]["n"][-2:] in WEST]
-check("Nineteen counties had more fentanyl deaths in 2024 than in 2023. Nine are in Western states, and three of those are in Washington")
-if (len(rose), len(west), sum(C[k]["n"].endswith(", WA") for k in west)) != (19, 9, 3):
-    bad.append(f"rose {len(rose)}, west {len(west)}")
+check("Nineteen counties had more fentanyl deaths in 2024 than in 2023", )
+if len(rose) != 19:
+    bad.append(f"rose {len(rose)}")
 spk = max(rose, key=lambda k: C[k]["d"][b] - C[k]["d"][a])
 check("Spokane County, Washington, had the largest increase, from 176 to 249 deaths (31.9 to 44.8 per 100,000)",
       str(C[spk]["d"][a]), str(C[spk]["d"][b]), f"{C[spk]['r'][a]:.1f}", f"{C[spk]['r'][b]:.1f}")
@@ -233,7 +231,6 @@ check("Clark County, Nevada, home to Las Vegas, had the most deaths of the group
 if C[clk]["n"] != "Clark County, NV":
     bad.append("Clark County is not the most deaths among the 19")
 check("Spokane County, Washington, rose most, 41.5% (176 to 249)", pct((C[spk]["d"][b] - C[spk]["d"][a]) / C[spk]["d"][a] * 100, 1))
-check("Nine of the 19 are in Western states")
 
 # ---- method
 tie = (ROOT / "TIEOUT.md").read_text()

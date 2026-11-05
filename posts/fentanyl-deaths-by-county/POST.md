@@ -107,9 +107,9 @@ Here we count only counties with 20 or more fentanyl deaths in a year, the same 
 
 Fentanyl deaths fell from 72,776 in 2023 to 47,735 in 2024. The death rate fell 35.6%, more than for any other drug group CDC tracks ([CDC](https://www.cdc.gov/nchs/products/databriefs/db549.htm)).
 
-**Every state with numbers for both years fell.** That is 49 states, counting DC. Hawaii's 2024 total and New Hampshire's 2023 total are not shown, to protect small county counts. The largest drops were in West Virginia (down 48.4%), Arkansas (46.6%), North Dakota (46.1%), Virginia (45.8%) and Wisconsin (45.7%). The smallest were in the West: Nevada (down 4.9%), Alaska (6.9%), Utah (9.8%), Washington (13.5%) and Arizona (16.5%).
+**Every state with numbers for both years fell.** That is 49 states, counting DC. Hawaii's 2024 total and New Hampshire's 2023 total are not shown, to protect small county counts. The largest drops were in West Virginia (down 48.4%), Arkansas (46.6%), North Dakota (46.1%), Virginia (45.8%) and Wisconsin (45.7%). The smallest were in Nevada (down 4.9%), Alaska (6.9%), Utah (9.8%), Washington (13.5%) and Arizona (16.5%).
 
-![Bar chart of the change in fentanyl deaths from 2023 to 2024 in 49 states, counting DC. Every bar is a decline. Western states are in blue. West Virginia fell most, 48.4%, then Arkansas, North Dakota, Virginia and Wisconsin. Nevada fell least, 4.9%, then Alaska, Utah, Washington and Arizona, all Western states. Hawaii and New Hampshire are not shown.](images/05-state-change-2024.png)
+![Bar chart of the change in fentanyl deaths from 2023 to 2024 in 49 states, counting DC. Every bar is a decline. West Virginia fell most, 48.4%, then Arkansas, North Dakota, Virginia and Wisconsin. Nevada fell least, 4.9%, then Alaska, Utah, Washington and Arizona. Hawaii and New Hampshire are not shown.](images/05-state-change-2024.png)
 *Source: CDC WONDER, Multiple Cause of Death.*
 
 **Nearly every county fell too.** Of 435 counties with 20 or more fentanyl deaths in both 2023 and 2024, 411 (94.5%) had fewer deaths in 2024. Five were unchanged and 19 rose. With a lower bar, 10 or more deaths in both years, 639 of 706 counties (90.5%) fell.
@@ -120,14 +120,12 @@ Fentanyl deaths fell from 72,776 in 2023 to 47,735 in 2024. The death rate fell 
 
 ### The counties that went the other way
 
-Nineteen counties had more fentanyl deaths in 2024 than in 2023. Nine are in Western states, and three of those are in Washington.
+Nineteen counties had more fentanyl deaths in 2024 than in 2023. The chart below shows each of them.
 
-![Bar chart of the 19 counties with more fentanyl deaths in 2024 than 2023, counties with 20 or more deaths in both years. Spokane County, Washington, rose most, 41.5% (176 to 249), then Matanuska-Susitna Borough, Alaska, and Mohave County, Arizona. Nine of the 19 are in Western states.](images/06-counties-rose-2024.png)
+![Bar chart of the 19 counties with more fentanyl deaths in 2024 than 2023, counties with 20 or more deaths in both years. Spokane County, Washington, rose most, 41.5% (176 to 249), then Matanuska-Susitna Borough, Alaska, and Mohave County, Arizona.](images/06-counties-rose-2024.png)
 *Source: CDC WONDER, Multiple Cause of Death.*
 
 Spokane County, Washington, had the largest increase, from 176 to 249 deaths (31.9 to 44.8 per 100,000). Clark County, Nevada, home to Las Vegas, had the most deaths of the group, 519 in 2024.
-
-We did not find a source that explains why these counties, or the West as a whole, fell less.
 
 ### What may explain the drop
 

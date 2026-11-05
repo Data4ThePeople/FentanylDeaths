@@ -30,8 +30,6 @@ BLUE, YELLOW, MAGENTA = "#3987e5", "#c98500", "#d55181"  # the validated dark tr
 CREDIT = "Built by Data 4 The People"
 SRC = "Source: CDC WONDER, Multiple Cause of Death, 1999-2020 and 2018-2024 Single Race."
 FEN_NOTE = "Fentanyl deaths: overdose deaths involving synthetic opioids other than methadone (T40.4)."
-WEST_FIPS = {"02", "04", "06", "08", "15", "16", "30", "32", "35", "41", "49", "53", "56"}  # same states as WEST
-WEST = {"AK", "AZ", "CA", "CO", "HI", "ID", "MT", "NM", "NV", "OR", "UT", "WA", "WY"}  # Census West region
 
 mpl.rcParams.update({
     "figure.facecolor": SURFACE, "axes.facecolor": SURFACE, "savefig.facecolor": SURFACE,
@@ -179,14 +177,14 @@ def chart_peaks(n=10):
 # ---- 04: state change 2023 to 2024
 def chart_states():
     a, b = ix(2023), ix(2024)
-    st = sorted((((g["d"][b] - g["d"][a]) / g["d"][a] * 100, g["n"], fips in WEST_FIPS) for fips, g in D["states"].items()
+    st = sorted((((g["d"][b] - g["d"][a]) / g["d"][a] * 100, g["n"], None) for g in D["states"].values()
                  if g["d"][a] and g["d"][b]), reverse=True)
     missing = sorted(g["n"] for g in D["states"].values() if not (g["d"][a] and g["d"][b]))
     fig, ax = plt.subplots(figsize=(10, 13))
     fig.subplots_adjust(left=0.24, right=0.95, top=0.905, bottom=0.06)
     lo = min(p for p, _, _ in st)
     for k, (p, n, w) in enumerate(st):
-        ax.barh(k, p, height=0.7, color=BLUE if w else INK_DIM)
+        ax.barh(k, p, height=0.7, color=BLUE)
         ax.text(p - 0.8, k, f"{p:.1f}%", va="center", ha="right", fontsize=9, color=INK)
     ax.set_yticks(range(len(st)), [n for _, n, _ in st], fontsize=9.5, color=INK)
     ax.yaxis.tick_right(); ax.tick_params(axis="y", pad=4)
@@ -197,11 +195,10 @@ def chart_states():
     ax.axvline(0, color=INK_DIM, lw=0.8)
     ax.set_xticks([]); ax.spines["bottom"].set_visible(False); ax.spines["left"].set_visible(False)
     ax.tick_params(length=0)
-    fig.subplots_adjust(left=0.05, right=0.80, top=0.915, bottom=0.07)
+    fig.subplots_adjust(left=0.05, right=0.80, top=0.93, bottom=0.07)
     titleblock(fig, "Fentanyl deaths fell in every state with data for both years",
                "Change in fentanyl deaths from 2023 to 2024", y=0.985)
-    words(fig, 0.03, 0.935, [("Western states", BLUE), ("   and   ", INK), ("other states", INK_DIM)])
-    credit(fig, SRC + "\n" + FEN_NOTE + " West: Census West region.\nNot shown, to protect small county counts: "
+    credit(fig, SRC + "\n" + FEN_NOTE + "\nNot shown, to protect small county counts: "
            + ", ".join(missing) + ".")
     save(fig, "05-state-change-2024.png")
 
@@ -212,11 +209,11 @@ def chart_rose():
     up = [C[f] for f in C if pub(C[f], 2023) and pub(C[f], 2024) and C[f]["d"][b] > C[f]["d"][a]]
     up.sort(key=lambda g: -(g["d"][b] - g["d"][a]) / g["d"][a])
     fig, ax = plt.subplots(figsize=(10, 9))
-    fig.subplots_adjust(left=0.36, right=0.82, top=0.86, bottom=0.10)
+    fig.subplots_adjust(left=0.36, right=0.82, top=0.89, bottom=0.10)
     hi = max((g["d"][b] - g["d"][a]) / g["d"][a] * 100 for g in up)
     for k, g in enumerate(up):
         p = (g["d"][b] - g["d"][a]) / g["d"][a] * 100
-        ax.barh(k, p, height=0.68, color=BLUE if g["n"][-2:] in WEST else INK_DIM)
+        ax.barh(k, p, height=0.68, color=BLUE)
         ax.text(p + hi * 0.015, k, f"+{p:.1f}%   ({g['d'][a]:,} to {g['d'][b]:,})", va="center", fontsize=9.5,
                 color=INK)
     ax.set_yticks(range(len(up)), [g["n"] for g in up], fontsize=10, color=INK)
@@ -226,8 +223,7 @@ def chart_rose():
     ax.tick_params(length=0)
     titleblock(fig, f"{len(up)} counties had more fentanyl deaths in 2024",
                "Change in fentanyl deaths from 2023 to 2024, deaths in parentheses", y=0.98)
-    words(fig, 0.03, 0.905, [("Western states", BLUE), ("   and   ", INK), ("other states", INK_DIM)])
-    credit(fig, SRC + "\n" + FEN_NOTE + "\nCounties with 20 or more deaths in both years. West: Census West region.")
+    credit(fig, SRC + "\n" + FEN_NOTE + "\nCounties with 20 or more deaths in both years.")
     save(fig, "06-counties-rose-2024.png")
 
 
