@@ -30,6 +30,7 @@ BLUE, YELLOW, MAGENTA = "#3987e5", "#c98500", "#d55181"  # the validated dark tr
 CREDIT = "Built by Data 4 The People"
 SRC = "Source: CDC WONDER, Multiple Cause of Death, 1999-2020 and 2018-2024 Single Race."
 FEN_NOTE = "Fentanyl deaths: overdose deaths involving synthetic opioids other than methadone (T40.4)."
+WEST_FIPS = {"02", "04", "06", "08", "15", "16", "30", "32", "35", "41", "49", "53", "56"}  # same states as WEST
 WEST = {"AK", "AZ", "CA", "CO", "HI", "ID", "MT", "NM", "NV", "OR", "UT", "WA", "WY"}  # Census West region
 
 mpl.rcParams.update({
@@ -178,28 +179,30 @@ def chart_peaks(n=10):
 # ---- 04: state change 2023 to 2024
 def chart_states():
     a, b = ix(2023), ix(2024)
-    st = sorted((((g["d"][b] - g["d"][a]) / g["d"][a] * 100, g["n"]) for g in D["states"].values()
+    st = sorted((((g["d"][b] - g["d"][a]) / g["d"][a] * 100, g["n"], fips in WEST_FIPS) for fips, g in D["states"].items()
                  if g["d"][a] and g["d"][b]), reverse=True)
     missing = sorted(g["n"] for g in D["states"].values() if not (g["d"][a] and g["d"][b]))
     fig, ax = plt.subplots(figsize=(10, 13))
     fig.subplots_adjust(left=0.24, right=0.95, top=0.905, bottom=0.06)
-    lo = min(p for p, _ in st)
-    for k, (p, n) in enumerate(st):
-        ax.barh(k, p, height=0.7, color=BLUE)
+    lo = min(p for p, _, _ in st)
+    for k, (p, n, w) in enumerate(st):
+        ax.barh(k, p, height=0.7, color=BLUE if w else INK_DIM)
         ax.text(p - 0.8, k, f"{p:.1f}%", va="center", ha="right", fontsize=9, color=INK)
-    ax.set_yticks(range(len(st)), [n for _, n in st], fontsize=9.5, color=INK)
+    ax.set_yticks(range(len(st)), [n for _, n, _ in st], fontsize=9.5, color=INK)
     ax.yaxis.tick_right(); ax.tick_params(axis="y", pad=4)
     ax.set_yticks(range(len(st)))
-    ax.set_yticklabels([n for _, n in st])
+    ax.set_yticklabels([n for _, n, _ in st])
     ax.set_ylim(len(st) - 0.4, -0.6)
     ax.set_xlim(lo * 1.18, 0)
     ax.axvline(0, color=INK_DIM, lw=0.8)
     ax.set_xticks([]); ax.spines["bottom"].set_visible(False); ax.spines["left"].set_visible(False)
     ax.tick_params(length=0)
-    fig.subplots_adjust(left=0.05, right=0.80, top=0.93, bottom=0.07)
+    fig.subplots_adjust(left=0.05, right=0.80, top=0.915, bottom=0.07)
     titleblock(fig, "Fentanyl deaths fell in every state with data for both years",
                "Change in fentanyl deaths from 2023 to 2024", y=0.985)
-    credit(fig, SRC + "\n" + FEN_NOTE + "\nNot shown, to protect small county counts: " + ", ".join(missing) + ".")
+    words(fig, 0.03, 0.935, [("Western states", BLUE), ("   and   ", INK), ("other states", INK_DIM)])
+    credit(fig, SRC + "\n" + FEN_NOTE + " West: Census West region.\nNot shown, to protect small county counts: "
+           + ", ".join(missing) + ".")
     save(fig, "05-state-change-2024.png")
 
 
