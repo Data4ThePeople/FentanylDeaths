@@ -2,7 +2,9 @@
 title: "Fentanyl Deaths, County by County: An Interactive Map, 1999 to 2024"
 subtitle: Deaths involving fentanyl rose from 3,105 in 2013 to 73,838 in 2022, then fell to 47,735 in 2024. A county-by-county map of every year, how fentanyl got here, and why the drop is not yet explained.
 slug: fentanyl-deaths-by-county
-date: 2026-11-06
+date: 2026-11-05
+time: 20:00:00-05:00
+prismic_id: au0gUxEAACgAUu2i
 section: Data 4 Thought
 hero: images/fentanyl-deaths-by-county-hero-1680x1080.png
 hero_alt: A 3D ball-and-stick model of one fentanyl molecule on a dark background, drawn from PubChem's 3D structure. Gray spheres are carbon atoms, the two blue spheres are nitrogen, the one magenta sphere is oxygen, and the small dark spheres are hydrogen. Two six-sided rings of carbon atoms, at the lower left and the right, are joined through a central ring that holds one of the nitrogen atoms.

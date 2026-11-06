@@ -52,3 +52,4 @@ None.
 - 2026-11-05 Step 2d confirmed by Eric. Step 2e opened.
 - 2026-11-05 2e: meta title, description, 8 keywords, dataset schema (CDC WONDER T40.4, counties, 1999/2024). Accepted: link to the treatment map post, "free, interactive map", FAQ heading "What may explain the drop?".
 - 2026-11-05 Step 2e confirmed by Eric.
+- 2026-11-05 2f: pushed to Prismic as a draft in the Migration Release, document au0gUxEAACgAUu2i, 62 slices, 6 charts and hero uploaded. Tags and author empty. Eric: publication date 2026-11-05, 8:00 pm Eastern (EST after November 1, so 20:00-05:00); pushed again with that date.
