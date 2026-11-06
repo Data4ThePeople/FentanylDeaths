@@ -5,7 +5,7 @@ slug: fentanyl-deaths-by-county
 date: 2026-11-06
 section: Data 4 Thought
 hero: images/fentanyl-deaths-by-county-hero-1680x1080.png
-hero_alt:
+hero_alt: A 3D ball-and-stick model of one fentanyl molecule on a dark background, drawn from PubChem's 3D structure. Gray spheres are carbon atoms, the two blue spheres are nitrogen, the one magenta sphere is oxygen, and the small dark spheres are hydrogen. Two six-sided rings of carbon atoms, at the lower left and the right, are joined through a central ring that holds one of the nitrogen atoms.
 meta_title:
 description:
 keywords:
