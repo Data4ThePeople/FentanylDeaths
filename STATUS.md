@@ -6,7 +6,7 @@ Process: ~/.claude/d4tp-process/PROCESS.md
 ## Current
 
 Post: fentanyl-deaths-by-county
-Step: 2c
+Step: 2d
 Since: 2026-11-05
 
 ## Steps
@@ -16,7 +16,7 @@ Since: 2026-11-05
 | 1  | Exploration and analysis | 2026-11-05 | Map live on Pages; beats in BEATS.md |
 | 2a | Draft with brackets resolved | 2026-11-05 | Six charts; post tie-out 48 passages, 0 mismatches |
 | 2b | Eric's edit, Claude's look-over | 2026-11-05 | Intro rewritten; Medicaid evidence added; post tie-out 47 passages, 0 mismatches |
-| 2c | Slice markup | | |
+| 2c | Slice markup | 2026-11-05 | Four blurbs, none back to back; divider before How we built it; 101 blocks |
 | 2d | Hero 1680x1080 + alt text | | |
 | 2e | SEO | | |
 | 2f | Pushed to Prismic (draft) | | |
@@ -47,3 +47,5 @@ None.
 - 2026-11-05 Step 2a confirmed by Eric. Step 2b opened.
 - 2026-11-05 2b: Eric rewrote the intro and parts of the closing sections. Look-over fixes accepted (typos, 98% of the 2024 drop restored, chart 1 intro sentence, Medicaid start date by December 31, 2026, KFF link moved, eligibility-office wording, purity claim narrowed). Block grant parts added to the $4.621B line with the HHS source. Medicaid section gains Arkansas 2018 (Harvard/NEJM) and unwinding (KFF) evidence. Post tie-out updated to the new wording: 47 passages, 0 mismatches.
 - 2026-11-05 Step 2b confirmed by Eric.
+- 2026-11-05 2c: blurbs for the terminology note, Using the map, When the next data comes out, and Limits; Open the full map is now a plain bold link; divider above How we built it. Importer convert-only: 101 blocks, warnings only for the hero.
+- 2026-11-05 Step 2c confirmed by Eric. Step 2d opened (hero: 3D fentanyl molecule, Eric's idea).
