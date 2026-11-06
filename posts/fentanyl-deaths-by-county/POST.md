@@ -35,22 +35,21 @@ The chart below shows overdose deaths each year, split into deaths that involved
 
 If understanding drug overdoses means understanding fentanyl, we need to understand fentanyl. So, today we are publishing an interactive map of fentanyl deaths in every U.S. county for every year from 1999 to 2024, a short history of how fentanyl came to America, a look at the counties that stand out, and what is known, and not known, about why deaths fell in 2024.
 
+::: blurb
 A short note on terminology. In this post, "fentanyl deaths" means CDC's count of overdose deaths that involve synthetic opioids other than methadone. Most of these are illegally made fentanyl. But this group also includes tramadol and a few other drugs. Many of these deaths involve more than one drug, so "involving fentanyl" does not mean fentanyl was the only drug.
+:::
+
+::: spacer
 
 <iframe src="https://data4thepeople.github.io/FentanylDeaths/?v=20261106a#embed=1" width="100%" height="1080" loading="lazy" style="border:0" title="Fentanyl Deaths, County by County: interactive map, 1999 to 2024"></iframe>
 
 ::: spacer 40px
 
-::: blurb
 **[Open the full map](https://data4thepeople.github.io/FentanylDeaths/)** **for the title and the full notes.**
-:::
 
 ::: spacer
 
-## Using the map
-
-::: spacer 5px
-
+::: blurb Using the map
 **1. Pick a year.** Drag the slider, or press play to move through every year from 1999 to 2024. Play runs at 1x, 2x or 3x speed.
 
 **2. Click a county.** The panel beside the map shows its deaths and death rate, with a trend line next to its state and the U.S.
@@ -60,6 +59,7 @@ A short note on terminology. In this post, "fentanyl deaths" means CDC's count o
 **4. Zoom and move.** Use + and − to zoom in, drag to move around, and Reset view to go back to the whole country.
 
 **5. Jump to a year.** Click a bar in the bar chart.
+:::
 
 ### How to read it
 
@@ -181,11 +181,13 @@ Two earlier cases point the same way:
 
 We plan to investigate this further as it won't just impact people living with a substance use disorder, but all people who rely on Medicaid for health care and social assistance.
 
-### When the next data comes out
-
+::: blurb When the next data comes out
 CDC added final 2024 death data to its WONDER database in February 2026 ([CDC WONDER](https://wonder.cdc.gov/whatsnew.html)). It has not announced a date for final 2025 data. If it follows last year's timing, that would be early 2027. CDC's early count for 2025 is 69,973 overdose deaths, down almost 14% from its early count for 2024, but that count does not break out fentanyl ([CDC](https://www.cdc.gov/nchs/pressroom/releases/20260513.html)).
 
 When the final 2025 county data comes out, we will add it to the map and update this post.
+:::
+
+::: divider
 
 ## How we built it
 
@@ -200,16 +202,16 @@ Every number on the map can be checked and rebuilt. The full method is in [DATAS
 - **Small counts.** CDC does not publish county counts of 1 to 9, and its data rules bar publishing any count of 9 or fewer. Those counties are gray. Where a state's total would let a reader work out a small county count by subtraction, we leave the state's total out for that year (43 state-years).
 - **Checks.** A script recomputes every number on the map from CDC's files, about 250,000 values, with no differences. A separate check, written from scratch, pulled the data again and found no differences.
 
-## Limits
-
-::: spacer 5px
-
+::: blurb Limits
 - **T40.4 is not only fentanyl.** It also includes tramadol and other synthetic opioids. CDC uses it as its measure of fentanyl deaths.
 - **Early years are likely undercounted.** From 1999 through 2013, 21% to 25% of overdose death certificates did not name any drug ([CDC](https://www.cdc.gov/nchs/products/databriefs/db329.htm)). By 2023, 4% did not ([CDC](https://www.cdc.gov/nchs/products/databriefs/db522.htm)). Fentanyl deaths in early years, and in places that named drugs less often, are likely higher than the map shows.
 - **Gray does not mean zero.** A gray county had somewhere from 0 to 9 deaths.
 - **Small-county rates swing.** Rates based on fewer than 20 deaths can change a lot from year to year by chance.
 - **Crude rates are not adjusted for age.** Counties with older residents may show lower rates partly because fewer residents are in the ages most affected.
 - **County lines changed.** Some Alaska and Virginia areas were merged or redrawn. Connecticut has no county rates from 2022, because Census no longer makes county population estimates there.
+:::
+
+::: spacer
 
 ## Reproduce it yourself
 
