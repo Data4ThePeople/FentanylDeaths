@@ -6,7 +6,7 @@ Process: ~/.claude/d4tp-process/PROCESS.md
 ## Current
 
 Post: fentanyl-deaths-by-county
-Step: 2e
+Step: 2f
 Since: 2026-11-05
 
 ## Steps
@@ -18,7 +18,7 @@ Since: 2026-11-05
 | 2b | Eric's edit, Claude's look-over | 2026-11-05 | Intro rewritten; Medicaid evidence added; post tie-out 47 passages, 0 mismatches |
 | 2c | Slice markup | 2026-11-05 | Four blurbs, none back to back; divider before How we built it; 101 blocks |
 | 2d | Hero 1680x1080 + alt text | 2026-11-05 | 3D fentanyl from PubChem CID 3345 (scripts/hero_molecule.py); alt 367 chars |
-| 2e | SEO | | |
+| 2e | SEO | 2026-11-05 | Dataset schema; FAQ from What may explain the drop?; treatment map linked |
 | 2f | Pushed to Prismic (draft) | | |
 | 2g | Mailchimp teaser | | |
 
@@ -50,3 +50,5 @@ None.
 - 2026-11-05 2c: blurbs for the terminology note, Using the map, When the next data comes out, and Limits; Open the full map is now a plain bold link; divider above How we built it. Importer convert-only: 101 blocks, warnings only for the hero.
 - 2026-11-05 Step 2c confirmed by Eric. Step 2d opened (hero: 3D fentanyl molecule, Eric's idea).
 - 2026-11-05 Step 2d confirmed by Eric. Step 2e opened.
+- 2026-11-05 2e: meta title, description, 8 keywords, dataset schema (CDC WONDER T40.4, counties, 1999/2024). Accepted: link to the treatment map post, "free, interactive map", FAQ heading "What may explain the drop?".
+- 2026-11-05 Step 2e confirmed by Eric.

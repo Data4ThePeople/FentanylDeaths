@@ -6,10 +6,18 @@ date: 2026-11-06
 section: Data 4 Thought
 hero: images/fentanyl-deaths-by-county-hero-1680x1080.png
 hero_alt: A 3D ball-and-stick model of one fentanyl molecule on a dark background, drawn from PubChem's 3D structure. Gray spheres are carbon atoms, the two blue spheres are nitrogen, the one magenta sphere is oxygen, and the small dark spheres are hydrogen. Two six-sided rings of carbon atoms, at the lower left and the right, are joined through a central ring that holds one of the nitrogen atoms.
-meta_title:
-description:
-keywords:
-schema_type: article
+meta_title: "Fentanyl Deaths by County: Interactive Map, 1999-2024"
+description: "Free interactive map of fentanyl overdose deaths and death rates in every U.S. county, 1999 to 2024, and what may explain the sharp drop in 2024."
+keywords: fentanyl deaths by county, fentanyl overdose deaths map, fentanyl deaths by state, fentanyl death rate by year, why did overdose deaths drop in 2024, overdose deaths 2024, West Virginia fentanyl deaths, CDC WONDER fentanyl data
+schema_type: dataset
+dataset_name: Fentanyl overdose deaths and death rates, U.S. counties, 1999 to 2024
+dataset_description: "CDC WONDER Multiple Cause of Death counts of drug overdose deaths (underlying cause X40-X44, X60-X64, X85, Y10-Y14) that involve synthetic opioids other than methadone (ICD-10 T40.4), by county of residence and year, 1999 to 2024, with crude death rates per 100,000 residents. Counts of 0 to 9 are not published, under CDC's data rules."
+temporal: 1999/2024
+spatial: United States
+measured: Fentanyl overdose deaths|count; Fentanyl overdose death rate|deaths per 100,000 residents
+sources: https://wonder.cdc.gov/mcd.html
+distribution: text/html|https://data4thepeople.github.io/FentanylDeaths/
+measurement_technique: CDC WONDER county counts by year from the 1999-2020 database (1999 to 2017) and the 2018-2024 Single Race database (2018 to 2024). Crude rates per 100,000 residents; for 1999 to 2017, rates for counties with 10 to 19 deaths are computed as deaths divided by population, times 100,000. State totals are withheld for 43 state-years where subtraction would reveal a county count under 10.
 drop_cap: true
 heading_spacer: 20px
 caption_spacer: 20px
@@ -18,7 +26,7 @@ dividers: false
 
 # Fentanyl Deaths, County by County: An Interactive Map, 1999 to 2024
 
-Yesterday we published a map of substance use treatment in every state. While building it, we looked at which drugs were behind the rise in overdose deaths. One drug stood out. 
+Yesterday we published a [map of substance use treatment in every state](https://www.data4thepeople.com/p/substance-use-treatment-viz). While building it, we looked at which drugs were behind the rise in overdose deaths. One drug stood out. 
 
 Fentanyl.
 
@@ -33,7 +41,7 @@ The chart below shows overdose deaths each year, split into deaths that involved
 ![Area chart of U.S. overdose deaths per year, 2001 to 2024, split into deaths involving fentanyl and deaths without it. All overdose deaths rose from 43,982 in 2013 to 107,941 in 2022, then fell to 79,384 in 2024. Deaths involving fentanyl rose from 3,105 in 2013 to 73,838 in 2022, then fell to 47,735 in 2024.](images/01-overdose-vs-fentanyl.png)
 *Source: CDC WONDER, Multiple Cause of Death.*
 
-If understanding drug overdoses means understanding fentanyl, we need to understand fentanyl. So, today we are publishing an interactive map of fentanyl deaths in every U.S. county for every year from 1999 to 2024, a short history of how fentanyl came to America, a look at the counties that stand out, and what is known, and not known, about why deaths fell in 2024.
+If understanding drug overdoses means understanding fentanyl, we need to understand fentanyl. So, today we are publishing a free, interactive map of fentanyl deaths in every U.S. county for every year from 1999 to 2024, a short history of how fentanyl came to America, a look at the counties that stand out, and what is known, and not known, about why deaths fell in 2024.
 
 ::: blurb
 A short note on terminology. In this post, "fentanyl deaths" means CDC's count of overdose deaths that involve synthetic opioids other than methadone. Most of these are illegally made fentanyl. But this group also includes tramadol and a few other drugs. Many of these deaths involve more than one drug, so "involving fentanyl" does not mean fentanyl was the only drug.
@@ -135,7 +143,7 @@ Only twenty counties with 20 or more fentanyl deaths in both years had more deat
 
 Spokane County, Washington, had the largest increase, from 176 to 249 deaths (31.9 to 44.8 per 100,000). Clark County, Nevada, home to Las Vegas, had the most deaths of the group, 519 in 2024.
 
-### What may explain the drop
+### What may explain the drop?
 
 The short answer is that it is not settled. CDC named several possible reasons: wider use of naloxone (the overdose-reversal drug), better access to treatment, changes in the illegal drug supply, and prevention programs such as Overdose Data to Action. CDC did not rank them or measure how much each one did ([CDC](https://www.cdc.gov/media/releases/2025/2025-cdc-reports-decline-in-us-drug-overdose-deaths.html)).
 
